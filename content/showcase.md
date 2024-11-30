@@ -44,8 +44,9 @@ by 50%
 **Scripting**: `Python`, `Bash`, `Powershell`
 ## Monitoring & Security*
 - **Network Monitoring**: `Nagios`, `Wireshark`
-- **Security Tools**: `Snort`, `Suricata`, `Kismet` - - **Firewall Configuration Management** `Web Appliction firewalls`, `Next Generation Firewalls`, `Netowork Firewalls`
-- IDS/IPS Implementation
+- **Security Tools**: `Snort`, `Suricata`, `Kismet` - 
+- **Firewall Configuration Management** `Web Appliction firewalls`, `Next Generation Firewalls`, `Netowork Firewalls`
+- **IDS/IPS Implementation**
 
 ## Systems & Networking*
 - **Operating Systems**: `Linux`, `Windows`, `MacOS`, `Unix`
@@ -79,6 +80,7 @@ Developed web scraping API for price comparison
 (2017 - 2021)
 # Languages
 English (C1, Advanced)
+Swahili (fluent)
 
 # Key Competencies
 - Strong problem-solving and analytical abilities

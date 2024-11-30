@@ -23,6 +23,7 @@ paginate = 5
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
+      # scheme = "Matrix"
       logoText = "Was Removed"
       logoHomeLink = "/"
 

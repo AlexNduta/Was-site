@@ -1,7 +1,7 @@
 +++
 title = "Resume"
 date = "2019-01-25"
-author = "Radek"
+author = "Alex Kinyanjui"
 +++
 
 

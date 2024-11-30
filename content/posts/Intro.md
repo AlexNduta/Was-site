@@ -2,11 +2,11 @@
 title = "Intro: DevOps Zero to hero"
 date = "2024-11-30T15:31:14+03:00"
 #dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
-author = ""
+author = "Alex Kinyajui"
 authorTwitter = "" #do not include @
 cover = ""
-tags = ["", ""]
-keywords = ["", ""]
+tags = ["#DevOPs", "#SystemsEngineering"]
+keywords = ["DevOps", "Netwoking", "Proxmox", "DevOps", "Automation"]
 description = ""
 showFullContent = false
 readingTime = false

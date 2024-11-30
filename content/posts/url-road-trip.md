@@ -2,7 +2,7 @@
 title = "The exciting Roadtrip of a URL"
 date = "2024-11-30T20:57:09+03:00"
 #dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
-author = ""
+author = "Alex Kinyanjui"
 authorTwitter = "" #do not include @
 cover = ""
 tags = ["", ""]

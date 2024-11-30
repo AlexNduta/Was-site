@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "https://was-site.netlify.app/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5

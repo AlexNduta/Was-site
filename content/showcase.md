@@ -44,7 +44,7 @@ by 50%
 **Scripting**: `Python`, `Bash`, `Powershell`
 ## Monitoring & Security*
 - **Network Monitoring**: `Nagios`, `Wireshark`
-- **Security Tools**: `Snort`, `Suricata`, `Kismet` - 
+- **Security Tools**: `Snort`, `Suricata`, `Kismet`
 - **Firewall Configuration Management** `Web Appliction firewalls`, `Next Generation Firewalls`, `Netowork Firewalls`
 - **IDS/IPS Implementation**
 

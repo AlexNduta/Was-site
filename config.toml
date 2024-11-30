@@ -23,7 +23,7 @@ paginate = 5
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "Was Removed"
       logoHomeLink = "/"
 
     [languages.en.menu]
@@ -33,5 +33,5 @@ paginate = 5
         url = "/about"
       [[languages.en.menu.main]]
         identifier = "showcase"
-        name = "Showcase"
+        name = "Resume"
         url = "/showcase"

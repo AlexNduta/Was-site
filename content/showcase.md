@@ -33,15 +33,15 @@ by 50%
 - Provided guidance on cloud platforms (AWS, GCP) and security best practices
 # Technical Skills
 ## Infrastructure & Cloud
-**Cloud Platforms**: `AWS`, `GCP`, `Proxmox`
-**Containerization**: Docker, LXD, Containerd runtimes
-**Infrastructure Management**: `Type 1 hypervisors`, `Linux administration`
+- **Cloud Platforms**: `AWS`, `GCP`, `Proxmox`
+- **Containerization**: Docker, LXD, Containerd runtimes
+- **Infrastructure Management**: `Type 1 hypervisors`, `Linux administration`
 ## DevOps & Automation
 
-**Version Control**: `Git`, `GitHub`, `GitLab`
-**CI/CD**: `GitHub Actions`, `Jenkins`
-**Configuration Management*:* `Ansible`, `Puppet`, `Terraform`
-**Scripting**: `Python`, `Bash`, `Powershell`
+- **Version Control**: `Git`, `GitHub`, `GitLab`
+- **CI/CD**: `GitHub Actions`, `Jenkins`
+- **Configuration Management*:* `Ansible`, `Puppet`, `Terraform`
+- **Scripting**: `Python`, `Bash`, `Powershell`
 ## Monitoring & Security*
 - **Network Monitoring**: `Nagios`, `Wireshark`
 - **Security Tools**: `Snort`, `Suricata`, `Kismet`

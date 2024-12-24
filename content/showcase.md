@@ -20,7 +20,7 @@ threat detection
 -  Implemented comprehensive security monitoring and threat mitigation strategies
 ## Network Support / Systems Administrator
 **St Christopher's International School** | *Feb 2022 - Sept 2024*
--  Led implementation of Proxmox-based private cloud infrastructure(PC hosted)
+-  Led implementation of Proxmox-based private cloud infrastructure(PC hosted)[bog](https://alexnduta.netlify.app/)
 -  Reduced network issue resolution time by 80% through Nagios monitoring
 implementation
 -  Automated routine tasks using Bash and Python scripts, improving operational efficiency

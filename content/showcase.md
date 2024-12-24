@@ -3,7 +3,7 @@
 - [*Email*](alex.k.nduta@gmail.com)
 - *Phone*: --------
 - [*LinkedIn*](https://tinyurl.com/3te7pk9p)
-- [*Github*]https://github.com/AlexNduta
+- [*Github*](https://github.com/AlexNduta)
 - *Location*: Kenya
 - [*Blog*](https://alexnduta.netlify.app/)
 ## Professional Summary

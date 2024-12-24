@@ -1,16 +1,17 @@
 # Alex Kinyanjui Nduta
 ### DevOps & IT Systems Engineer
 - [*Email*](alex.k.nduta@gmail.com)
-- *Phone*: --------
+- *Phone*: +254702795563
 - [*LinkedIn*](https://tinyurl.com/3te7pk9p)
 - [*Github*](https://github.com/AlexNduta)
 - *Location*: Kenya
 - [*Blog*](https://alexnduta.netlify.app/)
+
 ## Professional Summary
 Highly motivated IT professional with 2+ years of experience in infrastructure management,
 system administration, and DevOps practices. Proven track record in implementing automation
 solutions, managing cloud infrastructure, and ensuring system security and reliability.
-Professional Experience
+## Professional Experience
 ## Network Security Engineer / Lead Infrastructure Engineer
 **St Christopher's International School** | *Oct 2024 - Present*
 

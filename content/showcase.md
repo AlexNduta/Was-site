@@ -8,17 +8,20 @@
 - [*Blog*](https://alexnduta.netlify.app/)
 
 ## Professional Summary
-Highly motivated IT professional with 2+ years of experience in infrastructure management,
-system administration, and DevOps practices. Proven track record in implementing automation
-solutions, managing cloud infrastructure, and ensuring system security and reliability.
+Highly motivated IT security professional with 5+ years of combined experience in IT operations and
+cybersecurity, specializing in implementing and maintaining robust security controls, vulnerability
+management, and system hardening. Proven track record in deploying and managing security
+technologies while ensuring compliance with industry standards and best practices.
 ## Professional Experience
 ## Network Security Engineer / Lead Infrastructure Engineer
 **St Christopher's International School** | *Oct 2024 - Present*
-
+- Automated security patches and updates using Terraform and Ansible, improving efficiency and
+consistency by 80%.
 - Deployed and managed on-premise Intrusion Detection System (Snort) for proactive
 threat detection
 -  Led infrastructure security initiatives and incident response protocols
 -  Implemented comprehensive security monitoring and threat mitigation strategies
+- Collaborated with cross-functional teams to enhance overall security posture.
 ## Network Support / Systems Administrator
 **St Christopher's International School** | *Feb 2022 - Sept 2024*
 -  Led implementation of Proxmox-based private cloud infrastructure(PC hosted)[bog](https://alexnduta.netlify.app/)
@@ -57,14 +60,14 @@ by 50%
 - **Traffic Analysis and Optimization**
 
 # Projects
-### Dev-Ops Playground
-Developed suite of automation scripts for Linux environment management
-*Technologies* : `Bash, Python, Powershell`
-- Focus on dotfiles management and development environment setup
-### Budgetlify (Backend-as-a-Service)
+### [Dev-Ops Playground](https://github.com/AlexNduta/DevOps-playground)
+Developed a suite of my day to day automation scripts for Linux environment management
+*Technologies* : `Bash, Python, Powershell, Ansible, Terraform, YAML, JSON`
+- Focus on dotfiles management and development robust environment setup
+### [Budgetlify (Backend-as-a-Service)](https://github.com/AlexNduta/Budgetlify-API-SQL-)
 Built API for expense tracking and budget management
 *Technologies*: `Python, FastAPI, MySQL, Azure cloud, Linux`
-#### Kibandaski_API
+### [Kibandaski_API](https://github.com/AlexNduta/Kibandaski_API)
 Developed web scraping API for price comparison
 *Technologies*: `Python(Flask), MySQL, Redis, Beautiful Soup, GCP`
 # Certifications
@@ -84,9 +87,14 @@ Developed web scraping API for price comparison
 English (C1, Advanced)
 Swahili (fluent)
 
-# Key Competencies
-- Strong problem-solving and analytical abilities
-- Excellent written and verbal communication skills
-- Experience in Site Reliability Engineering (SRE)
+## KEY COMPETENCIES
+- Strong understanding of cybersecurity frameworks (NIST CSF, ISO 27001)
+- Experience in security incident response and threat mitigation
+- Expertise in implementing and maintaining security controls
+- Strong analytical and problem-solving abilities
+- Excellent documentation and technical writing skills
+- Effective communication with technical and non-technical stakeholders
+- Adaptable to dynamic, high-pressure environments
+- Commitment to continuous learning and staying current with security trends
 - Proactive approach to continuous learning and improvement
 - Strong understanding of DevOps methodologies and best practices

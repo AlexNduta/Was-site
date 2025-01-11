@@ -28,3 +28,4 @@ While many would suggest migrating to the cloud and using EC2 instances, complia
 
 The main purpose of this blog is to document my learning journey as I set up the servers, make mistakes, and learn from them. I'm preparing for a DevOps role, so I'll document everything from hardware setup to using Terraform for VM and container deployment, as well as other DevOps tools. I'll also provide in-depth tutorials on concepts I learn along the way, which will serve as future reference points.
 
+[Hardware Review](https://alexnduta.netlify.app/posts/1-hardware-review/)

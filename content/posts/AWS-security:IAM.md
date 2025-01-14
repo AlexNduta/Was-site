@@ -1,3 +1,19 @@
++++
+title = "AWS: Identity and Access Management(IAM)"
+date = "2024-12-03T12:42:47+03:00"
+#dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
+author = "Alex Kinyanjui"
+authorTwitter = "" #do not include @
+cover = ""
+tags = ["", ""]
+keywords = ["", ""]
+description = ""
+showFullContent = false
+readingTime = false
+hideComments = false
++++
+
+
 # AWS: Identity and Access Management
 **What is IAM?**
 

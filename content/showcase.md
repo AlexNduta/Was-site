@@ -37,7 +37,7 @@ by 50%
 ** HostNoma (Freelance/Self-Employed)** | *Jan 2024 -persent*
 - *SaaS Provisioning*:
     Developed and managed a cloud-based Odoo ERP SaaS platform, providing businesses with accessible and scalable ERP solutions. Implemented and maintained secure and         reliable Odoo hosting environments, ensuring optimal performance and uptime. Managed customer Odoo instances, including upgrades and maintenance. 
-  - *Implementation & Setup*:
+- *Implementation & Setup*:
       Conducted thorough business analysis to understand client requirements and tailored Odoo configurations accordingly.Successfully implemented and configured Odoo modules       for various industries, including POS, Inverntory, HR, Manufacturing and Accounting.Migrated data from legacy systems to Odoo, ensuring data integrity and accuracy.
 
 - *Custom Module Development*:

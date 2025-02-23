@@ -32,6 +32,33 @@ implementation
 - Deployed self-hosted ticketing system, reducing resolution time by 15%
 -  Architected and deployed RAG LLM system for staff onboarding, reducing process time
 by 50%
+
+## Odoo ERP SaaS Provider/Freelance Odoo Developer
+** HostNoma (Freelance/Self-Employed)** | *Jan 2024 -persent*
+- *SaaS Provisioning*:
+    Developed and managed a cloud-based Odoo ERP SaaS platform, providing businesses with accessible and scalable ERP solutions. Implemented and maintained secure and         reliable Odoo hosting environments, ensuring optimal performance and uptime. Managed customer Odoo instances, including upgrades and maintenance. 
+  - *Implementation & Setup*:
+      Conducted thorough business analysis to understand client requirements and tailored Odoo configurations accordingly.Successfully implemented and configured Odoo modules       for various industries, including POS, Inverntory, HR, Manufacturing and Accounting.Migrated data from legacy systems to Odoo, ensuring data integrity and accuracy.
+
+- *Custom Module Development*:
+        Designed and developed custom Odoo modules to meet specific client needs, enhancing functionality and automating processes.
+        Utilized Python and Odoo framework to create efficient and scalable custom solutions.
+        Maintained and updated custom modules, ensuring compatibility with new Odoo versions.
+
+- *Training & Support*:
+        Provided comprehensive Odoo training to end-users, empowering them to effectively utilize the system.
+        Offered ongoing technical support and troubleshooting, resolving client issues promptly.
+        Created and maintained documentation for Odoo configurations and custom modules.
+
+- *DevOps*:
+        Implemented DevOps practices to automate deployments, testing, and monitoring of Odoo instances.
+        Utilized containerization and orchestration tools (e.g., Docker, Kubernetes) to ensure consistent and scalable deployments.
+        Managed server infrastructure and cloud resources, optimizing performance and cost-effectiveness.
+
+- *Business Development*:
+        Acquired and managed client relationships, understanding their needs and creating solutions.
+        Developed and maintained the HostNoma brand and online presence.
+  
 ## Lead Technical Mentor | Cyber Security Track
 **Mentor Me Collective** | *Oct 2024 - Present*
 - Led team of mentors in developing cyber security training materials

@@ -87,6 +87,8 @@ by 50%
 - **Traffic Analysis and Optimization**
 
 # Projects
+### [Odoo-project setup script](https://github.com/AlexNduta/Odoo-Setup/blob/main/README.md)
+*Technologies* : Docker, Odoo, Python, Bash, Postgres
 ### [Dev-Ops Playground](https://github.com/AlexNduta/DevOps-playground)
 Developed a suite of my day to day automation scripts for Linux environment management
 *Technologies* : `Bash, Python, Powershell, Ansible, Terraform, YAML, JSON`

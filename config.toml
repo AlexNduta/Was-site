@@ -8,10 +8,9 @@ paginate = 5
 
 [params]
   contentTypeName = "posts"
-  showMenuItems = 2
+  showMenuItems = 4
   fullWidthTheme = false
   centerTheme = false
-  customCSS= ["css/terminal.css"]
 [languages]
   [languages.en]
     title = "Terminal"
@@ -23,8 +22,8 @@ paginate = 5
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      # scheme = "Matrix"
-      logoText = "Home"
+      scheme = "Matrix"
+      logoText = "Blog"
       logoHomeLink = "/"
 
     [languages.en.menu]
@@ -40,3 +39,8 @@ paginate = 5
         identifier = "projects"
         name = "Projects"
         url = "/projects"
+
+      [[languages.en.menu.main]]
+        identifier = "Articles"
+        name = "Articles"
+        url = "/Articles"

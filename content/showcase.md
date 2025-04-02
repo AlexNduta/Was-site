@@ -2,13 +2,13 @@
 ### DevOps & IT Systems Engineer
 - [*Email*](alex.k.nduta@gmail.com)
 - *Phone*: +254702795563
-- [*LinkedIn*](https://tinyurl.com/3te7pk9p)
+- [*LinkedIn*](https://www.linkedin.com/in/alex-n-66851418a/)
 - [*Github*](https://github.com/AlexNduta)
 - *Location*: Kenya
 - [*Blog*](https://alexnduta.netlify.app/)
 
 ## Professional Summary
-Highly motivated IT security professional with 5+ years of combined experience in IT operations and
+Highly motivated IT security professional with 3+ years of combined experience in IT operations and
 cybersecurity, specializing in implementing and maintaining robust security controls, vulnerability
 management, and system hardening. Proven track record in deploying and managing security
 technologies while ensuring compliance with industry standards and best practices.

@@ -24,7 +24,7 @@ threat detection
 - Collaborated with cross-functional teams to enhance overall security posture.
 ## Network Support / Systems Administrator
 **St Christopher's International School** | *Feb 2022 - Sept 2024*
--  Led implementation of Proxmox-based private cloud infrastructure(PC hosted)[bog](https://alexnduta.netlify.app/)
+-  Led implementation of Proxmox-based private cloud infrastructure(PC hosted)[blog](https://alexnduta.netlify.app/)
 -  Reduced network issue resolution time by 80% through Nagios monitoring
 implementation
 -  Automated routine tasks using Bash and Python scripts, improving operational efficiency
@@ -34,7 +34,7 @@ implementation
 by 50%
 
 ## Odoo ERP SaaS Provider/Freelance Odoo Developer
-** HostNoma (Freelance/Self-Employed)** | *Jan 2024 -persent*
+**HostNoma (Freelance/Self-Employed)** | *Jan 2024 -persent*
 - *SaaS Provisioning*:
     Developed and managed a cloud-based Odoo ERP SaaS platform, providing businesses with accessible and scalable ERP solutions. Implemented and maintained secure and         reliable Odoo hosting environments, ensuring optimal performance and uptime. Managed customer Odoo instances, including upgrades and maintenance. 
 - *Implementation & Setup*:

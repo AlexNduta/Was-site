@@ -18,4 +18,10 @@ Let's connect
 
 [Github](https://github.com/AlexNduta)
 
+[Articles](https://alexnduta.netlify.app/articles/)
+
+[Projects](tps://alexnduta.netlify.app/projects/)
+
+[CV](https://alexnduta.netlify.app/showcase/)
+
 [Want to work with me?](aleckskin1@gmail.com)

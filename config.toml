@@ -23,7 +23,7 @@ paginate = 5
 
     [languages.en.params.logo]
       scheme = "Matrix"
-      logoText = "Blog"
+      logoText = "Alex Nduta"
       logoHomeLink = "/"
 
     [languages.en.menu]

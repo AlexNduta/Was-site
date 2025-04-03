@@ -6,7 +6,7 @@ cover= "al.png"
 +++
 
 ![alex](/img/al.png)
-**I love building stuff**
+**`I love building stuff`**
 
 I help organizations protect critical data, reduce security risks, and streamline IT operations for efficiency and cost savings. 
 With over 3 years of experience in IT operations and cybersecurity, I specialize in DevOps automation, cloud and on-premise infrastructure, and systems security. 

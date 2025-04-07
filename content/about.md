@@ -5,7 +5,7 @@ author = "Alex Kinyanjui"
 cover= "al.png"
 +++
 
-![alex](/img/al.png)
+![alex](/img/al.png?width=200&height=100)
 **`I love building stuff`**
 
 I help organizations protect critical data, reduce security risks, and streamline IT operations for efficiency and cost savings. 

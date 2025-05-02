@@ -1,3 +1,18 @@
++++
+title = "Incident Report Procedure"
+#dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
+author = "Alex Kinyanjui"
+authorTwitter = "" #do not include @
+cover = ""
+tags = ["", ""]
+keywords = ["", ""]
+description = ""
+showFullContent = false
+readingTime = false
+hideComments = false
++++
+
+
 Linux Based Environment
 
 Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it.

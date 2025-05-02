@@ -130,3 +130,6 @@ Check network interface statistics ip -s link show or `netstat -i`
 - If the issue is beyond your scope, this is the best time to escalate it to a higher manager or another team(eg developers, networking team)
 - This could also be as a result of an issue that require reboot and might affect other services in the same server, this might require authorisation
 - When escalating the issue, make sure you have gathered enough data(evidence) to point out the exact issue with the server, do not escalate issues with vague diagnosis statement like(server X is broken)
+
+**Reference**
+[Security Incident survery cheat sheet for server Administrators](https://zeltser.com/media/docs/security-incident-survey-cheat-sheet.pdf?msc=Cheat+Sheet+Blog)

@@ -19,7 +19,8 @@ author = "Alex Kinyanjui"
 
 
 ### How it works
-![gitflow.png](:static/img)
+![alex](/img/al.png?width=200&height=100)
+
 - instead of having one `main` branch, the workflow uses two branches to record the workflow of the project i.e the `main` and the `develop`
 - The `main` branch stores the official release histoty versioned by number and the `develop` branch serves as the integration branch for features.
 - we initially start with an empty `develop` branch  localy which is later pushed to the server

@@ -14,6 +14,9 @@
 ### Containerization
 [Introduction to Containerization](https://alexnduta.netlify.app/posts/containerrisation/)
 
+## Kubernetes
+
+
 # Cloud(AWS)
 [AWS: Identity and Access Management(IAM)](https://alexnduta.netlify.app/posts/aws-securityiam/)
 

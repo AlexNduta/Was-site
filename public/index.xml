@@ -1,0 +1,1371 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terminal</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Terminal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 03 Dec 2025 12:42:47 +0300</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title> How to upgrade a kubernetes node in a cluster</title>
+      <link>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</guid>
+      <description>&lt;h1 id=&#34;context&#34;&gt;context&lt;/h1&gt;
+&lt;p&gt;we have 3 major nodes running
+- &lt;code&gt;control&lt;/code&gt;
+- &lt;code&gt;node0&lt;/code&gt;
+- &lt;code&gt;node1&lt;/code&gt;
+upon running the command &lt;code&gt;kubectl get nodes&lt;/code&gt;, we realise that the two worker nodes are on kuberntes v1.30 and the controlplan is on kubentes v1.34.
+Our main tasks is to upgrade the two nodes.&lt;/p&gt;
+&lt;p&gt;When upgrading a node in a cluster, you need to work on one node at a time for high availability. This means that systems do not have to go down because of an upgrade.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;context&#34;&gt;context&lt;/h1&gt;
+&lt;p&gt;we have 3 major nodes running
+- &lt;code&gt;control&lt;/code&gt;
+- &lt;code&gt;node0&lt;/code&gt;
+- &lt;code&gt;node1&lt;/code&gt;
+upon running the command &lt;code&gt;kubectl get nodes&lt;/code&gt;, we realise that the two worker nodes are on kuberntes v1.30 and the controlplan is on kubentes v1.34.
+Our main tasks is to upgrade the two nodes.&lt;/p&gt;
+&lt;p&gt;When upgrading a node in a cluster, you need to work on one node at a time for high availability. This means that systems do not have to go down because of an upgrade.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;step 1: drain the target node&lt;/strong&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>1 Hardware Review</title>
+      <link>http://localhost:1313/posts/1-hardware-review/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/1-hardware-review/</guid>
+      <description>&lt;h1 id=&#34;devops-zero-to-hero--1-hardware-review&#34;&gt;DevOps Zero to Hero: # 1 Hardware Review&lt;/h1&gt;
+&lt;p&gt;So, the hardware landed two weeks after the order. The specs were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Lenovo&lt;/code&gt; ThinkSystem SR650 V3 (2U Rack Server)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Processor&lt;/code&gt;: Intel Xeon Silver 4410Y (12C 2.0GHz)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Memory&lt;/code&gt;: 1 x 64GB DDR5 RDIMM&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Disk Bay&lt;/code&gt;: 8 SAS/SATA SFF&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Storage&lt;/code&gt;: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NIC&lt;/code&gt;: 4-port 1GbE RJ45, 2-port 10GbE SFP28&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Power Supply&lt;/code&gt;: 2 x 1100W Titanium&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Fans&lt;/code&gt;: 5 x Standard Fans&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;processor&#34;&gt;Processor&lt;/h2&gt;
+&lt;p&gt;Coming from the world of regular CPUs, you might not be familiar with &lt;code&gt;Intel Xeon&lt;/code&gt; CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;devops-zero-to-hero--1-hardware-review&#34;&gt;DevOps Zero to Hero: # 1 Hardware Review&lt;/h1&gt;
+&lt;p&gt;So, the hardware landed two weeks after the order. The specs were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Lenovo&lt;/code&gt; ThinkSystem SR650 V3 (2U Rack Server)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Processor&lt;/code&gt;: Intel Xeon Silver 4410Y (12C 2.0GHz)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Memory&lt;/code&gt;: 1 x 64GB DDR5 RDIMM&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Disk Bay&lt;/code&gt;: 8 SAS/SATA SFF&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Storage&lt;/code&gt;: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NIC&lt;/code&gt;: 4-port 1GbE RJ45, 2-port 10GbE SFP28&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Power Supply&lt;/code&gt;: 2 x 1100W Titanium&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Fans&lt;/code&gt;: 5 x Standard Fans&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;processor&#34;&gt;Processor&lt;/h2&gt;
+&lt;p&gt;Coming from the world of regular CPUs, you might not be familiar with &lt;code&gt;Intel Xeon&lt;/code&gt; CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.&lt;/p&gt;
+&lt;p&gt;Intel Xeon CPUs are designed with lower clock speeds compared to Intel i-series CPUs, which helps reduce heat generation and improve stability over long periods of time. Despite the lower clock speeds, they are designed for power efficiency, especially during intensive workload operations. The architecture allows them to achieve this.&lt;/p&gt;
+&lt;p&gt;The CPU in question is a 12-core server-grade processor ideal for enterprise data center environments. The 12 cores make it ideal for multitasking and parallel processing. The 30MB Layer 3 cache improves data retrieval speeds for frequently accessed data. Regular Intel i-series CPUs have a Layer 3 cache that ranges between 3-8MB for i3 to i7, respectively. This clearly shows that the Xeon CPU is not your average CPU.&lt;/p&gt;
+&lt;p&gt;The CPU architecture is based on &lt;code&gt;Sapphire Rapids&lt;/code&gt; architecture, which enhances performance and efficiency compared to previous generations. Sapphire Rapids is the fourth generation of Intel Xeon Scalable processors and is based on the Golden Cove microarchitecture.&lt;/p&gt;
+&lt;p&gt;The CPU supports DDR5-4000 memory with a maximum of 4TB across 8 channels, facilitating high-speed data access and processing. With such killer features, the beast is optimized for workloads such as virtualization, data analytics, and general server functions like web hosting and file serving.&lt;/p&gt;
+&lt;h2 id=&#34;memory&#34;&gt;Memory&lt;/h2&gt;
+&lt;p&gt;With 64GB of memory, I have more than enough for my workloads. My plan is to run Windows Server as the main VM, a couple of Linux VMs for system hosting, and a ton of containers. This is more memory than I need.&lt;/p&gt;
+&lt;h2 id=&#34;storage&#34;&gt;Storage&lt;/h2&gt;
+&lt;p&gt;This was the hardest decision. With two 480GB SSDs as primary drives, I was stuck between using RAID 0 and RAID 1 for my setup. For the four 1.2TB SAS HDDs, I also had to do a lot of research to settle on the ideal drive setup. I&amp;rsquo;ll write a comprehensive article on RAID and ZFS and how I arrived at the final decision.&lt;/p&gt;
+&lt;h2 id=&#34;network-interface-cards&#34;&gt;Network Interface Cards&lt;/h2&gt;
+&lt;p&gt;My main intent is to create an aggregated link for redundancy, and having two 10GbE SFPs is the ideal solution. I still need to figure out how to pass multiple VLANs through the two aggregated links, as my Windows server will require multiple VLANs. My network architecture is subdivided into multiple VLANs, and Active Directory needs to serve each VLAN. Four 1GbE Ethernet ports are more than enough but I have future use cases in mind.&lt;/p&gt;
+&lt;p&gt;The setup was assembled at the freight station as an after-sales service, which really ruined the fun of figuring out where each component fits. This still saved me time and allowed me to focus on getting the system up and running. The following series of articles will build upon this one as I share my learning and re-learning in the process of getting the system fully operational.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>1 Hardware Review</title>
+      <link>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The control plane contains the following:
+&lt;ul&gt;
+&lt;li&gt;Apiserver&lt;/li&gt;
+&lt;li&gt;Etcd&lt;/li&gt;
+&lt;li&gt;kubelet&lt;/li&gt;
+&lt;li&gt;kube-scheduler&lt;/li&gt;
+&lt;li&gt;kubectl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
+&lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
+&lt;li&gt;If a request is sent to create a pod &lt;code&gt;kubectl run nginx --image nginx&lt;/code&gt;, the request is sent to the &lt;code&gt;kube-scheduler&lt;/code&gt; which comunicates with the &lt;code&gt;kubelets&lt;/code&gt; to know which node is going to process the workload&lt;/li&gt;
+&lt;li&gt;The kubelets are found in every node and is the gateway between the nodes and the control plane&lt;/li&gt;
+&lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
+the main intention is to create a kubentes cluster&lt;/p&gt;</description>
+      <content>&lt;ul&gt;
+&lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The control plane contains the following:
+&lt;ul&gt;
+&lt;li&gt;Apiserver&lt;/li&gt;
+&lt;li&gt;Etcd&lt;/li&gt;
+&lt;li&gt;kubelet&lt;/li&gt;
+&lt;li&gt;kube-scheduler&lt;/li&gt;
+&lt;li&gt;kubectl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
+&lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
+&lt;li&gt;If a request is sent to create a pod &lt;code&gt;kubectl run nginx --image nginx&lt;/code&gt;, the request is sent to the &lt;code&gt;kube-scheduler&lt;/code&gt; which comunicates with the &lt;code&gt;kubelets&lt;/code&gt; to know which node is going to process the workload&lt;/li&gt;
+&lt;li&gt;The kubelets are found in every node and is the gateway between the nodes and the control plane&lt;/li&gt;
+&lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
+the main intention is to create a kubentes cluster&lt;/p&gt;
+&lt;h1 id=&#34;the-process&#34;&gt;The process&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;There are four phases to this process:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;prerequisites&lt;/strong&gt;: preparing all of the three vms&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Control plane setup&lt;/strong&gt;: initialising the cluster brain on the &lt;code&gt;control&lt;/code&gt; node&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;worker node setup&lt;/strong&gt;: &lt;code&gt;nodde0&lt;/code&gt; and &lt;code&gt;node1&lt;/code&gt; joing the cluster&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Network Setup&lt;/strong&gt;: Installing a network pluging so that the pods in the cluster can communicate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-prerequisites-this-is-to-be-done-on-all-three-nodes&#34;&gt;1. Prerequisites: This is to be done on all three nodes&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Intsall a container runtime&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;k8s never runs containes by itself, it depends on a container runtie to do this. K8s communictates with a container runtime via the  Container Runtime Interface&lt;code&gt;CRI&lt;/code&gt;. This gives us the freedom to work with whichever runtime we want as long as it is compatible with the CRI.&lt;/li&gt;
+&lt;li&gt;examples of &lt;a href=&#34;https://landscapeapp.cncf.io/cncf/card-mode?category=container-runtime&amp;amp;grouping=category&#34;&gt;container rutimes supported by kubentes include&lt;/a&gt; include containerd, cri-o,  firecaker, kata&lt;/li&gt;
+&lt;li&gt;Containerd is the industry standard container runtime that k8s uses to manage containers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# install containerd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get install -y containerd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create the default configuration file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# sudo mkdir -p /etc/containerd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ containerd config default | sudo tee /etc/containerd/config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# configure containerd to use the system cgroup driver which helps in proper resource management&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# this command basically just edits the file `config.toml` and converts the value to `true`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo set -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/SystemdCgroup = false/SystemdCgroup = true/&amp;#39;&lt;/span&gt; /etc/contained/config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# restart the containerd service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl restart containerd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Disable swapp memory&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;swap gives the system an illusion that there is more memory than the system has which could lead to underperfomance in context of kubernetes.&lt;/li&gt;
+&lt;li&gt;We are required to disable swapp as the &lt;code&gt;kubenetes scheduler&lt;/code&gt; needs a predictable and stable measure of memory on every node.&lt;/li&gt;
+&lt;li&gt;By design, the &lt;code&gt;kubelet&lt;/code&gt; fails if the swapp is turned on on a node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# disable swap for the current session&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo swapoff -a
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# permanetly disable swap by commentin the line swap in the fstab file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo set -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/ swap / s/^\(.*\)$/#\1/g&amp;#39;&lt;/span&gt; /etc/fstab
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;configure critical kernel parameters&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;we need to tell the linux kernel to allow IP traffic to be forwarded and let the &lt;code&gt;ip tables&lt;/code&gt; to see the bridged network traffic.&lt;/li&gt;
+&lt;li&gt;k8s CNI plugins create a virtual network and the &lt;code&gt;bridge&lt;/code&gt; is like a virtual swicth that every node gets to plugin to enable the communication between pods on diffrent nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;loading kernel modules&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# create a config file for these settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt; EOF | sudo tee /etc/modules-load.d/k8s.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;overlay
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# load these modules into the kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo modprobe overlay
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo modeprobe br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# confirm if the modules has been loaded succesfully&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ lsmod | grep overlay
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ lsmod | grep br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;overlay&lt;/code&gt; module is an ideal docker overlay filesytem which kubernetes uses to manage container layer. without it docker cannot funtion properly and kubernetes cannot ochestrate  containers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;br_netfilter module&lt;/code&gt;: this module is crucial for networking in k8s. It enables briding and filtering capabilities allowing k8s to manage network traffic between pods and services effectively&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;configuring systcl parameters&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# These paramaters are required for CNI plugins to work&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.bridge.bridge-nf-call-iptables  = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.bridge.bridge-nf-call-ip6tables = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.ipv4.ip_forward                 = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# apply the parameters without having to reboot&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo sysctl --system
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;4. Install &lt;code&gt;kubeadm&lt;/code&gt;, &lt;code&gt;kubelet&lt;/code&gt;  and &lt;code&gt;kubectl&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;kubeadm&lt;/code&gt; use to manage cluster operations with commands such as &lt;code&gt;init&lt;/code&gt; and &lt;code&gt;join&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubelet&lt;/code&gt; This is the agent that runs on every node and listents to instructions from the control plane and manages the pods inside the nodes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubectl&lt;/code&gt; The commandline tool to interact with the cluster&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# update the package index and install packages required to install kubernetes apt repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Download the public siging key for the k8s package repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34.0/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Add the approprite kubernets apt repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /&amp;#39;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/kubernetes.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# update packages and install kubelet, kubead and kubectl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get install -y kubeadm kubelet kubectl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# pin the package version to prevent accidental upgrade&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-mark hold kubelet kubeadm kubectl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-initialise-the-control-plane--this-is-done-on-the-control-plane-alone&#34;&gt;2. Initialise the control plane &amp;gt; this is done on the control plane alone&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Considering that we have multiple nodes, w need to choose the node that will operate as the &lt;code&gt;control plane&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Running &lt;code&gt;kubeadm init&lt;/code&gt; bootstraps the control plane and setsup:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;etcd -&amp;gt; the cluster db&lt;/li&gt;
+&lt;li&gt;ApI server&lt;/li&gt;
+&lt;li&gt;scheduler&lt;/li&gt;
+&lt;li&gt;and control manger&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;we use the flag &lt;code&gt;--pod-network-cidr=192.168.0.0/16&lt;/code&gt;   to prelocate IP address range for our pod network&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The ip address range should not conflict with the VM Ip address&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;The command might take a while, when done, it will print:
+&lt;ul&gt;
+&lt;li&gt;command to configure kubectl for your user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubeadm join&lt;/code&gt; hash with a unique token and hash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;you are required to copy the kubeadm join command as you will use it in your worker nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is given as a response, use to to configure kubectl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p $HOME/.kube
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chown &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;id -u&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;:&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;id -g&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; $HOME/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-join-the-worker-nodes--run-on-the-worker-nodes-only&#34;&gt;3. Join the worker nodes &amp;gt; run on the worker nodes only&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is how we tell our worker nodes how and where to fine the control plane and authenticate with the control API server&lt;/li&gt;
+&lt;li&gt;copy the &lt;code&gt;kubead join&lt;/code&gt; command provided by the control plane&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-install-the-pod-network--run-on-the-control-node-only&#34;&gt;4. Install the pod network &amp;gt; run on the control node only&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;At this point, the worker nodes have joined the cluster and running the command &lt;code&gt;kubectl get nodes&lt;/code&gt; will return a list on woker nodes in &lt;code&gt;Ready&lt;/code&gt; state.&lt;/li&gt;
+&lt;li&gt;The nodes are will registerd bu there is no network fabric connecting them. This means that pods on &lt;code&gt;node0&lt;/code&gt; cannot talk to pods on &lt;code&gt;node 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;We need to install a Container Network Interface to create this virtual network.&lt;/li&gt;
+&lt;li&gt;We will use Callico&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/calico.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;After this, running the command &lt;code&gt;kubectl get nodes&lt;/code&gt; will return nodes in the ready state&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Reaources&lt;/strong&gt;
+&lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/&#34;&gt;creating a cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>AWS: Identity and Access Management(IAM)</title>
+      <link>http://localhost:1313/posts/aws-securityiam/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/aws-securityiam/</guid>
+      <description>&lt;h1 id=&#34;aws-identity-and-access-management&#34;&gt;AWS: Identity and Access Management&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;What is IAM?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;IAM stands for Identity and Access Management. It is a tool provided by cloud providers that you can use for user, role, and privilege management. This tool is very important as it can determine how vulnerable or strong your account can be. IAM is one of the main security tools provided by AWS as part of its shared responsibility model in the cloud.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;aws-identity-and-access-management&#34;&gt;AWS: Identity and Access Management&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;What is IAM?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;IAM stands for Identity and Access Management. It is a tool provided by cloud providers that you can use for user, role, and privilege management. This tool is very important as it can determine how vulnerable or strong your account can be. IAM is one of the main security tools provided by AWS as part of its shared responsibility model in the cloud.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Usage of IAM&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Manage IAM Users and Their Access:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You have the ability to create users and assign security credentials such as access keys, passwords, and multi-factor authentication devices.&lt;/li&gt;
+&lt;li&gt;You can manage permissions to determine operations a user can perform.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Manage IAM Roles and Their Permissions&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;As the root user, you have the ability to assign roles to specific users. It is always advisable to assign the least privilege to users and only add more privileges upon request and verification. This reduces the attack surface.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;User Groups&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A user group consists of users that need to have access to the same data. Privileges can be set at the group level rather than giving them to an individual user. This feature gives more control over the policies we set and how we implement them. Giving a single user privileges is called an inline policy, but it&amp;rsquo;s not the best practice. Attaching policies to groups reduces the load on the admin as it basically involves just adding and removing a user to a group.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Managed Policies&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Managed policies are pre-built policies created by either AWS or your Admin.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The policies are attached to an IAM user or user group.&lt;/li&gt;
+&lt;li&gt;Making changes to a policy applies to all groups and users that are attached to the policy.&lt;/li&gt;
+&lt;li&gt;Policies are in JSON format.&lt;/li&gt;
+&lt;li&gt;It is advised to assign support users the ability to view but not modify the rules.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Structure:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Version:&lt;/strong&gt; Defines the version of the policy, this is normally the date the policy was created.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Statement:&lt;/strong&gt; This is an array of policies, enclosed in square brackets to indicate it&amp;rsquo;s a list.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sid:&lt;/strong&gt; This is the identification name of the specific policy.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Effect:&lt;/strong&gt; Defines what is to be done, whether to allow or deny permissions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Action:&lt;/strong&gt; Specifies the API call that can be made on an AWS service.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Principal:&lt;/strong&gt; Specifies the user who will have this policy applied to them.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Condition:&lt;/strong&gt; The condition in which the policy will be in effect.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Resource:&lt;/strong&gt; Defines the scope of entities covered by the policy rule.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An Admin policy has a customer inline policy, which is a policy that is assigned to one user or group.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// This is an admin policy
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The policy above is versioned for when it was created and gives administrative access to every resource. The &lt;code&gt;Effect&lt;/code&gt; is marked as &lt;code&gt;Allow&lt;/code&gt;, meaning all actions are allowed. &lt;code&gt;Action&lt;/code&gt; is marked as &amp;lsquo;*&amp;rsquo;, meaning all API calls will be allowed on all resources.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Policy to allow access to the s3 ivs resource
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s3:PutObject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;arn:aws:s3:::AWSIVS_*/ivs/*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The policy above allows putting objects to the &lt;code&gt;s3 ivs&lt;/code&gt; resource.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Example of a custom policy
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Sid&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;VisualEditor0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;iam:ListUsers&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;iam:GetUser&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The custom policy basically allows our users to list and get users in IAM by making the &lt;code&gt;ListUsers&lt;/code&gt; and &lt;code&gt;GetUser&lt;/code&gt; API calls.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IAM Security&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Creating a user is the first step, and securing it is the next. With the AWS shared security model, AWS is more responsible for the security of the cloud, and they have a set of tools that an administrator can use to secure users.
+Some of these tools include multi-factor authentication (MFA) and password managers. But the most basic way to protect a user account is by coming up with effective password policies that can make it difficult for threat actors to try cracking the password.&lt;/p&gt;
+&lt;p&gt;Examples of password policies include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Set a minimum password length.&lt;/li&gt;
+&lt;li&gt;Require specific character types such as numbers, upper &amp;amp; lowercase letters, and non-alphanumeric characters.&lt;/li&gt;
+&lt;li&gt;Allow all IAM users to change their passwords.&lt;/li&gt;
+&lt;li&gt;Require users to change their passwords after some time.&lt;/li&gt;
+&lt;li&gt;Prevent password reuse.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Multi-Factor Authentication (MFA)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This involves using multiple forms of verification on top of the password to prove your identity. This could include using passkeys, email verification, or text verification.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IAM Roles&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AWS services are expected to interact with each other or carry out tasks on our behalf. To do this, we use IAM Roles to assign permissions to users.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Common roles include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EC2 instance Roles&lt;/li&gt;
+&lt;li&gt;Lambda function Roles&lt;/li&gt;
+&lt;li&gt;Roles for CloudFormation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Creating a role involves navigating to IAM -&amp;gt; Roles -&amp;gt; Create Role -&amp;gt; AWS Service.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Roles define are in JSON formart.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Sample role for EC2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sts:AssumeRole&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Principal&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;Service&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ec2.amazonaws.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;The role above tells AWS to let an EC2 service to &lt;code&gt;AssumeRole&lt;/code&gt; when making API calls.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;IAM Best Practices&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Always create an IAM user with Administrator privileges to avoid using the root account for your day-to-day interaction in AWS.&lt;/li&gt;
+&lt;li&gt;Always set up MFA for all your users, including root and IAM users.&lt;/li&gt;
+&lt;li&gt;An IAM user is the same as a physical user. Avoid giving out root user credentials. Instead, create an IAM user for anyone who needs access.&lt;/li&gt;
+&lt;li&gt;For AWS services, use Roles to give permissions to specific services.&lt;/li&gt;
+&lt;li&gt;Generate Access keys when using the CLI or SDK.
+&lt;ul&gt;
+&lt;li&gt;Access keys should be stored safely.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>http://localhost:1313/projects/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/projects/</guid>
+      <description>&lt;h1 id=&#34;dev-ops-playground&#34;&gt;&lt;a href=&#34;https://github.com/AlexNduta/DevOps-playground&#34;&gt;Dev-Ops Playground&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;budgetlify&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/budgetlify/&#34;&gt;Budgetlify&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;This was a personal budgeting application to help me counter my poor budgeting and financial habits.
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/oi7WxT6WvN8?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;dev-ops-playground&#34;&gt;&lt;a href=&#34;https://github.com/AlexNduta/DevOps-playground&#34;&gt;Dev-Ops Playground&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;budgetlify&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/budgetlify/&#34;&gt;Budgetlify&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;This was a personal budgeting application to help me counter my poor budgeting and financial habits.
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/oi7WxT6WvN8?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Troubleshooting a misconfigured kube-controller manager</title>
+      <link>http://localhost:1313/posts/troubleshooting-misconfigured-kube-controller-manager/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/troubleshooting-misconfigured-kube-controller-manager/</guid>
+      <description>&lt;h1 id=&#34;troubleshooting-a-misconfigured-kube-controller-manager&#34;&gt;Troubleshooting a misconfigured kube-controller manager&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured&#34;&gt;Lab&lt;/a&gt;
+The main role of a &lt;code&gt;kube-controller manager&lt;/code&gt; is to check the health of running containers. This means that in a k8s cluster, if the kube-controller is not operational, it would be impossible to detect failed applications to trigger the sel-healing mechanism which is basically the k8s system trying to restart the pods. This means that probes would also fail.&lt;/p&gt;
+&lt;h2 id=&#34;context&#34;&gt;context&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The problem here is that the kube-controller manager pod is not comming on. its is stuck on the &lt;code&gt;CrashLoopBack&lt;/code&gt; status&lt;/li&gt;
+&lt;li&gt;we can confirm this with the command &lt;code&gt;kubectl get pods -n kube-system&lt;/code&gt;. This just lists all pods in the &lt;code&gt;kube-system&lt;/code&gt; namespace&lt;/li&gt;
+&lt;li&gt;considering that the &lt;code&gt;kube-controller manager&lt;/code&gt; is a static pod, we can use the container runtime commands to check its logs. In context of &lt;code&gt;Docker&lt;/code&gt;, we would use &lt;code&gt;docker ps&lt;/code&gt; but our system uses &lt;code&gt;cri-o&lt;/code&gt; and thus we can list all running containers using the command &lt;code&gt;watch crictl ps -a&lt;/code&gt;. the &lt;code&gt;-a&lt;/code&gt; flag just specifies that we want to see even the failed container&lt;/li&gt;
+&lt;li&gt;The above commnad should list all running containers in the system even the failed and &lt;code&gt;kube-controller-manager&lt;/code&gt; should be there&lt;/li&gt;
+&lt;li&gt;Beaing a static pod, we can either use the &lt;code&gt;crictl logs container-id&lt;/code&gt;, &lt;code&gt;journalctl&lt;/code&gt; or &lt;code&gt;/var/log/syslog&lt;/code&gt; file to check for errors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fix&#34;&gt;fix&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Using the commad &lt;code&gt;crictl logs container-ID | grep -i error&lt;/code&gt; we get an output telling us that there is an error in the manifest file&lt;/li&gt;
+&lt;li&gt;The static pod&amp;rsquo;s manifest files are located in &lt;code&gt;/etc/kubernetes/manifests/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;a simple search on the patterns got from the error in the manifest file, we can get the rootcause of the error&lt;/li&gt;
+&lt;li&gt;saving the manifest file will trigger the system to create another pod from the corrected manifest file. This might take awhile, alternatively, we can move the manifest file to another directory and put it back in the kubernetes manifests file. This will manualy trigger the creation of a new &lt;code&gt;kube-controller manager&lt;/code&gt; pod&lt;/li&gt;
+&lt;li&gt;running the command &lt;code&gt;kubectl get pods -n kube-system&lt;/code&gt; will show the pod in &lt;strong&gt;Running&lt;/strong&gt; state&lt;/li&gt;
+&lt;/ul&gt;</description>
+      <content>&lt;h1 id=&#34;troubleshooting-a-misconfigured-kube-controller-manager&#34;&gt;Troubleshooting a misconfigured kube-controller manager&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured&#34;&gt;Lab&lt;/a&gt;
+The main role of a &lt;code&gt;kube-controller manager&lt;/code&gt; is to check the health of running containers. This means that in a k8s cluster, if the kube-controller is not operational, it would be impossible to detect failed applications to trigger the sel-healing mechanism which is basically the k8s system trying to restart the pods. This means that probes would also fail.&lt;/p&gt;
+&lt;h2 id=&#34;context&#34;&gt;context&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The problem here is that the kube-controller manager pod is not comming on. its is stuck on the &lt;code&gt;CrashLoopBack&lt;/code&gt; status&lt;/li&gt;
+&lt;li&gt;we can confirm this with the command &lt;code&gt;kubectl get pods -n kube-system&lt;/code&gt;. This just lists all pods in the &lt;code&gt;kube-system&lt;/code&gt; namespace&lt;/li&gt;
+&lt;li&gt;considering that the &lt;code&gt;kube-controller manager&lt;/code&gt; is a static pod, we can use the container runtime commands to check its logs. In context of &lt;code&gt;Docker&lt;/code&gt;, we would use &lt;code&gt;docker ps&lt;/code&gt; but our system uses &lt;code&gt;cri-o&lt;/code&gt; and thus we can list all running containers using the command &lt;code&gt;watch crictl ps -a&lt;/code&gt;. the &lt;code&gt;-a&lt;/code&gt; flag just specifies that we want to see even the failed container&lt;/li&gt;
+&lt;li&gt;The above commnad should list all running containers in the system even the failed and &lt;code&gt;kube-controller-manager&lt;/code&gt; should be there&lt;/li&gt;
+&lt;li&gt;Beaing a static pod, we can either use the &lt;code&gt;crictl logs container-id&lt;/code&gt;, &lt;code&gt;journalctl&lt;/code&gt; or &lt;code&gt;/var/log/syslog&lt;/code&gt; file to check for errors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fix&#34;&gt;fix&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Using the commad &lt;code&gt;crictl logs container-ID | grep -i error&lt;/code&gt; we get an output telling us that there is an error in the manifest file&lt;/li&gt;
+&lt;li&gt;The static pod&amp;rsquo;s manifest files are located in &lt;code&gt;/etc/kubernetes/manifests/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;a simple search on the patterns got from the error in the manifest file, we can get the rootcause of the error&lt;/li&gt;
+&lt;li&gt;saving the manifest file will trigger the system to create another pod from the corrected manifest file. This might take awhile, alternatively, we can move the manifest file to another directory and put it back in the kubernetes manifests file. This will manualy trigger the creation of a new &lt;code&gt;kube-controller manager&lt;/code&gt; pod&lt;/li&gt;
+&lt;li&gt;running the command &lt;code&gt;kubectl get pods -n kube-system&lt;/code&gt; will show the pod in &lt;strong&gt;Running&lt;/strong&gt; state&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Troubleshooting a misconfigured kublete</title>
+      <link>http://localhost:1313/posts/troubleshooting--misconfigured-kublete/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/troubleshooting--misconfigured-kublete/</guid>
+      <description>&lt;h1 id=&#34;troubleshooting-a-misconfigured-kublete&#34;&gt;Troubleshooting a misconfigured kublete&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured&#34;&gt;Lab&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;Kublete&lt;/code&gt; is the agent that runs in the nodes that directly communicates with the &lt;code&gt;Apiserver&lt;/code&gt; receiving instructions from the control node as a &lt;code&gt;podspec&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The kubelet receives a  podspec which is a YAML file from the apiserver that describes how the containers should be running. The kublet makes sure that the nodes are healthy and ready t&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;context&#34;&gt;context&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;In this lab, the &lt;code&gt;kublete&lt;/code&gt; in &lt;em&gt;node01&lt;/em&gt; is not working and you can confirm that by getting to the node01 and checking the kubelet service status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ssh node01
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl status kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# for older systems&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ service status kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;With the kubelet down, this means that we are unable to know the state of our node. This makes it impossible to schedule any pod on it.&lt;/li&gt;
+&lt;li&gt;Get the logs to see any issues raised&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat /var/log syslog | grep -i kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ journalctl -xe | kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This should give all logs related to the kubelet and why it failed&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;troubleshooting-a-misconfigured-kublete&#34;&gt;Troubleshooting a misconfigured kublete&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured&#34;&gt;Lab&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;Kublete&lt;/code&gt; is the agent that runs in the nodes that directly communicates with the &lt;code&gt;Apiserver&lt;/code&gt; receiving instructions from the control node as a &lt;code&gt;podspec&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The kubelet receives a  podspec which is a YAML file from the apiserver that describes how the containers should be running. The kublet makes sure that the nodes are healthy and ready t&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;context&#34;&gt;context&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;In this lab, the &lt;code&gt;kublete&lt;/code&gt; in &lt;em&gt;node01&lt;/em&gt; is not working and you can confirm that by getting to the node01 and checking the kubelet service status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ssh node01
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl status kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# for older systems&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ service status kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;With the kubelet down, this means that we are unable to know the state of our node. This makes it impossible to schedule any pod on it.&lt;/li&gt;
+&lt;li&gt;Get the logs to see any issues raised&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat /var/log syslog | grep -i kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ journalctl -xe | kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This should give all logs related to the kubelet and why it failed&lt;/p&gt;
+&lt;h2 id=&#34;fix&#34;&gt;fix&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;In this lab, the error is in the flags. we need to make edits to the kubeadm configuration.&lt;/li&gt;
+&lt;li&gt;The easiest way to know what configuration file to work with is to use the &lt;code&gt;find&lt;/code&gt; command then filter using &lt;code&gt;grep&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ find / | grep -i kubeadm
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# make edits to the file containinig the `flag`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ vi /var/lib/kubelet/kubeadm-flags.env
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#reload the service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl restart kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# confirm the service is running&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl status kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+    </item>
+    
+    <item>
+      <title>What is Kubernetes ?</title>
+      <link>http://localhost:1313/posts/what-is-kubernetes/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/what-is-kubernetes/</guid>
+      <description>&lt;h1 id=&#34;what-is-kubernetes&#34;&gt;What is kubernetes?&lt;/h1&gt;
+&lt;p&gt;This is a container ochestration tool that was initialy developed by Google for use as an internal tool. It was later on made open source and donated to the Cloud Native Foundation(CNCF).
+This sounds like a lot of tech words to throw around in a single sentence. Lets go to the very basics. What is a container?&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;container&lt;/a&gt; is a package that contains an application and all the dependencies it needs to run.
+This makes it easy to share around applications and run them in different enviroment. This is all fun an games until you have to work with multiple containers.
+For multiple containerised applications, we use docker compose which is a IaaC used to define multiple container environments.
+This gets the job done but has limitations. We have to manualy manage and control the containers. This gets harder to scale or fix a falling container.
+A failing container could be a business critical service that could mean the ultimate death of the business due to frustrations faced by the customer accessing the service.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;what-is-kubernetes&#34;&gt;What is kubernetes?&lt;/h1&gt;
+&lt;p&gt;This is a container ochestration tool that was initialy developed by Google for use as an internal tool. It was later on made open source and donated to the Cloud Native Foundation(CNCF).
+This sounds like a lot of tech words to throw around in a single sentence. Lets go to the very basics. What is a container?&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;container&lt;/a&gt; is a package that contains an application and all the dependencies it needs to run.
+This makes it easy to share around applications and run them in different enviroment. This is all fun an games until you have to work with multiple containers.
+For multiple containerised applications, we use docker compose which is a IaaC used to define multiple container environments.
+This gets the job done but has limitations. We have to manualy manage and control the containers. This gets harder to scale or fix a falling container.
+A failing container could be a business critical service that could mean the ultimate death of the business due to frustrations faced by the customer accessing the service.&lt;/p&gt;
+&lt;p&gt;These challenges are solved with a container ochestration tool such as &lt;code&gt;kubernetes&lt;/code&gt;, &lt;code&gt;Openshift&lt;/code&gt;. But what really is a container ochestration tool?
+This is a tool that abstracts all the container operations by letting us describe the infrasture we need, that is resources, number of container to run etc using a declarative yaml file called a &lt;code&gt;manifest&lt;/code&gt;.
+The platform does all the dirty work of managing, scaling, networking containerised application.
+This comes in handy when working with alot of containers especially a micro-service enviroment.&lt;/p&gt;
+&lt;p&gt;Kubernetes does all this. we define our infrastructure in a decrarative way using yaml file called manifests. In the manifest, we can define a kubernetes object such as a &lt;code&gt;pod&lt;/code&gt; how it should run, what image should run and how many replicas(instaces of the pod) should run.
+I know I have just introduced two tech buzz-words without the courtesy of describing their meaning. So, what is a kubernetes object and what about a pod?&lt;/p&gt;
+&lt;p&gt;A Kubenetes object is a peristent entity that describe the desired state of our cluster. When you describe a kubenetes object, you are basically specifying what should be running and how it should be. examples include &lt;code&gt;Pods&lt;/code&gt;, &lt;code&gt;Deployments&lt;/code&gt;, &lt;code&gt;Services&lt;/code&gt;, &lt;code&gt;Replicasets&lt;/code&gt;, &lt;code&gt;Namespace&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;code&gt;pod&lt;/code&gt; is the smallest unit in context of kubernetes. It is used to encapsulate a containerised application.
+It might cotain one or a few related containers. In kubernetes, we interact directly with pods. This means that all the resources we define are targeted to a pod which in turn transposes into the container running with.&lt;/p&gt;
+&lt;p&gt;kubernetes commonly refered to as K8s is enables us to describe an object like a  &lt;code&gt;Pod&lt;/code&gt;, specify the number of replicas of the pod that should exist and how netowking should be done. Replicas are used to achieve high availibity(HA) especially when used with a Loadbalancer object. This mean that if we have have specified that we should have 3 replicas, kubernetes keeps checking if the desired number is always met, if at any point one of the pod is unreacheable, k8s tries to restart it. If this fails, another fresh pod is launched so as to achieve the desired number of replicas.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>The exciting Roadtrip of a URL</title>
+      <link>http://localhost:1313/posts/url-road-trip/</link>
+      <pubDate>Sat, 30 Nov 2024 20:57:09 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/url-road-trip/</guid>
+      <description>&lt;h1 id=&#34;the-exciting-roadtrip-of-a-url&#34;&gt;The exciting Roadtrip of a URL&lt;/h1&gt;
+&lt;p&gt;Have you ever wondered what happens behind the scenes when you type “https://www.google.com&amp;quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.&lt;/p&gt;
+&lt;p&gt;In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;the-exciting-roadtrip-of-a-url&#34;&gt;The exciting Roadtrip of a URL&lt;/h1&gt;
+&lt;p&gt;Have you ever wondered what happens behind the scenes when you type “https://www.google.com&amp;quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.&lt;/p&gt;
+&lt;p&gt;In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;DNS Request:
+The journey begins with the Domain Name System (DNS). When you type “https://www.google.com&amp;quot; in your browser, the first step is to translate the human-readable domain name (&lt;a href=&#34;https://www.google.com&#34;&gt;www.google.com&lt;/a&gt;) into its corresponding IP address. This process is known as a DNS (Domain Name System) request. Your browser queries a DNS server, which returns the IP address associated with the domain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCP/IP:
+Once the browser has the IP address, it establishes a connection using the Transmission Control Protocol (TCP) and the Internet Protocol (IP). TCP ensures reliable data transfer by breaking it into packets and adding HTTP headers on it for easy transportation, while IP routes these packets across the internet to reach the destination.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Firewall:
+Before reaching the intended destination, the packets may encounter firewalls.which act as the gate keeper between your computer and the server. Firewalls monitor and regulate incoming and outgoing network traffic based on predetermined security rules. If the packets meet the criteria, they are allowed to pass through. Firewalls become efficient when firewall rules are set to regulate incoming and outgoing traffic. The firewall can be inbuilt in your computer, embedded in your router(gateway) or for large organisations, they have large hardwarefirewalls such as SOPHOS, Miraki, Ubiquity etc..&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTPS/SSL:
+To ensure the security and privacy of dat apakctes during transmission, the Hypertext Transfer Protocol Secure (HTTPS) is employed. HTTPS uses Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocols to encrypt the data exchanged between your browser and the server. This encryption prevents unauthorized access and protects sensitive information from interception.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Load-Balancer:
+In the case of popular websites like Google, a load-balancer comes into play. Load-balancers distribute incoming network traffic across multiple servers to ensure optimal resource utilization, maximize throughput, and minimize response time. This helps prevent any single server from becoming overwhelmed with too much traffic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Web Server:
+Upon reaching Google’s servers, the web server processes the incoming request. The web server handles static content, such as HTML, CSS, and images. It retrieves the requested information and sends it back to the user’s browser.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Application Server:
+For dynamic content, such as search results personalized for each user, an application server is employed. The application server executes the server-side code, interacts with databases, and generates dynamic content based on user requests.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Database:
+If the requested information involves data stored in a database, the application server queries the database to retrieve the relevant data. The retrieved data is then sent back to the application server, which combines it with other elements to generate the final response.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Conclusion:
+The journey of a URL from your browser to the Google homepage involves a sophisticated interplay of various technologies and systems, each with its specific role. Understanding this process gives us a glimpse into the complexity of the modern internet infrastructure, showcasing how seamlessly it operates to deliver the web content we access every day. The next time you type a URL into your browser, you can appreciate the intricate dance of technology that occurs behind the scenes, making the internet a marvel of modern engineering.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Intro: DevOps Zero to hero</title>
+      <link>http://localhost:1313/posts/intro/</link>
+      <pubDate>Sat, 30 Nov 2024 15:31:14 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/intro/</guid>
+      <description>&lt;h1 id=&#34;devops-zero-to-hero&#34;&gt;DevOps Zero to hero&lt;/h1&gt;
+&lt;p&gt;This will be a series of articles showcasing the skills I pick up along the way.&lt;/p&gt;
+&lt;h3 id=&#34;backstory&#34;&gt;Backstory&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;ve been a Network Support Technician for two years and recently got promoted to Network Security Engineer at the same organization. This role is more of a hybrid, as I&amp;rsquo;m responsible for the institution&amp;rsquo;s IT infrastructure.&lt;/p&gt;
+&lt;p&gt;Our current setup is quite complex, and I&amp;rsquo;ll draw an architectural diagram in future articles to illustrate the issues. Our infrastructure has many unnecessary connections and devices. For example, we host a Windows server as a VM on one PC and our Unifi controller on another.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;devops-zero-to-hero&#34;&gt;DevOps Zero to hero&lt;/h1&gt;
+&lt;p&gt;This will be a series of articles showcasing the skills I pick up along the way.&lt;/p&gt;
+&lt;h3 id=&#34;backstory&#34;&gt;Backstory&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;ve been a Network Support Technician for two years and recently got promoted to Network Security Engineer at the same organization. This role is more of a hybrid, as I&amp;rsquo;m responsible for the institution&amp;rsquo;s IT infrastructure.&lt;/p&gt;
+&lt;p&gt;Our current setup is quite complex, and I&amp;rsquo;ll draw an architectural diagram in future articles to illustrate the issues. Our infrastructure has many unnecessary connections and devices. For example, we host a Windows server as a VM on one PC and our Unifi controller on another.&lt;/p&gt;
+&lt;p&gt;My primary goal in this role is to simplify the setup and eliminate unnecessary connections, which pose security risks. The first step was to consolidate the server setup onto a single server for easier management and configuration. This led me to request a Lenovo SR650 V3 server.&lt;/p&gt;
+&lt;p&gt;While many would suggest migrating to the cloud and using EC2 instances, compliance restrictions require us to host and access all security devices within the organization&amp;rsquo;s boundaries. I&amp;rsquo;m the only person authorized to access these systems remotely, and even that requires rigorous testing.&lt;/p&gt;
+&lt;p&gt;The main purpose of this blog is to document my learning journey as I set up the servers, make mistakes, and learn from them. I&amp;rsquo;m preparing for a DevOps role, so I&amp;rsquo;ll document everything from hardware setup to using Terraform for VM and &lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;container&lt;/a&gt; deployment, as well as other DevOps tools. I&amp;rsquo;ll also provide in-depth tutorials on concepts I learn along the way, which will serve as future reference points.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/1-hardware-review/&#34;&gt;Hardware Review&lt;/a&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Budgetlify</title>
+      <link>http://localhost:1313/posts/budgetlify/</link>
+      <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/budgetlify/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Source code&lt;/a&gt;
+This was a personal budgeting application to help me counter my poor budgeting and financial habits.&lt;/p&gt;
+&lt;h2 id=&#34;technologies&#34;&gt;Technologies&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Python&lt;/code&gt;
+&lt;code&gt;FastAPI&lt;/code&gt;
+&lt;code&gt;MySQL&lt;/code&gt;
+&lt;code&gt;Linux&lt;/code&gt;&lt;/p&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+       &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/oi7WxT6WvN8?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+     &lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This is a budgeting app that enables you to create an account and track your regular spending, savings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dir:
+&lt;code&gt;API&lt;/code&gt;: This is the backend section of the app
+- Queries the DB(currently using file storage) for data
+- Currently only accepts &lt;code&gt;Category&lt;/code&gt;, &lt;code&gt;Date&lt;/code&gt;, &lt;code&gt;Amount&lt;/code&gt; and &lt;code&gt;Description&lt;/code&gt;. The ID is auto generated&lt;/p&gt;</description>
+      <content>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Source code&lt;/a&gt;
+This was a personal budgeting application to help me counter my poor budgeting and financial habits.&lt;/p&gt;
+&lt;h2 id=&#34;technologies&#34;&gt;Technologies&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Python&lt;/code&gt;
+&lt;code&gt;FastAPI&lt;/code&gt;
+&lt;code&gt;MySQL&lt;/code&gt;
+&lt;code&gt;Linux&lt;/code&gt;&lt;/p&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+       &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/oi7WxT6WvN8?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+     &lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This is a budgeting app that enables you to create an account and track your regular spending, savings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dir:
+&lt;code&gt;API&lt;/code&gt;: This is the backend section of the app
+- Queries the DB(currently using file storage) for data
+- Currently only accepts &lt;code&gt;Category&lt;/code&gt;, &lt;code&gt;Date&lt;/code&gt;, &lt;code&gt;Amount&lt;/code&gt; and &lt;code&gt;Description&lt;/code&gt;. The ID is auto generated&lt;/p&gt;
+&lt;h2 id=&#34;endpoints&#34;&gt;Endpoints&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;`Expense management`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;method&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;endpoint&lt;/th&gt;
+          &lt;th style=&#34;text-align: right&#34;&gt;purpose&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;POST&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/expense&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;create a new expense&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GET&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostanme]/Budgetlify/api/v1.0/expense&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;get a list of all expenses&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GET&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/expenses{expense ID}&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;get a specific expense&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PUT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/expenses{expense ID}&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;update an existing expense&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DELETE&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/expenses{expense ID}&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;delete a specific expense&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;category management&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;POST&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/categories&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;create categories&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GET&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/categories&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;get a list of all categories&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Monthly Report&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GET&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/reports/{year}/{month}&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;Get reports for a specific month&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;User Management&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GET&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/profile&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;Get info of an authenticated user&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PUT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/profile&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;update a user&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;Login&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PUT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/user&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;creates a new user&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;POST&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;http://[hostname]/Budgetlify/api/v1.0/Login&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;login a user&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;APP&lt;/code&gt;: frontend android app for the user
+stack:
+- Android
+- Kotlin
+- JetpakCompose&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/al.png?width=200&amp;amp;height=100&#34; alt=&#34;alex&#34;&gt;
+&lt;strong&gt;&lt;code&gt;I love building stuff&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I help organizations protect critical data, reduce security risks, and streamline IT operations for efficiency and cost savings.
+With over 3 years of experience in IT operations and cybersecurity, I specialize in DevOps automation, cloud and on-premise infrastructure, and systems security.
+I’ve successfully led projects that boosted security update efficiency by 80% and implemented robust security frameworks.
+My expertise bridges development and operations, ensuring businesses operate with secure, reliable, and scalable systems.
+Let’s discuss how I can help your organization strengthen its IT infrastructure and achieve operational excellence.&lt;/p&gt;</description>
+      <content>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/al.png?width=200&amp;amp;height=100&#34; alt=&#34;alex&#34;&gt;
+&lt;strong&gt;&lt;code&gt;I love building stuff&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I help organizations protect critical data, reduce security risks, and streamline IT operations for efficiency and cost savings.
+With over 3 years of experience in IT operations and cybersecurity, I specialize in DevOps automation, cloud and on-premise infrastructure, and systems security.
+I’ve successfully led projects that boosted security update efficiency by 80% and implemented robust security frameworks.
+My expertise bridges development and operations, ensuring businesses operate with secure, reliable, and scalable systems.
+Let’s discuss how I can help your organization strengthen its IT infrastructure and achieve operational excellence.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s connect&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/in/alex-n-66851418a/&#34;&gt;LinkedIn&lt;/a&gt; - &lt;a href=&#34;https://github.com/AlexNduta&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/articles/&#34;&gt;Articles&lt;/a&gt; - &lt;a href=&#34;#ZgotmplZ&#34;&gt;Projects&lt;/a&gt; - &lt;a href=&#34;https://alexnduta.netlify.app/showcase/&#34;&gt;CV&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;aleckskin1@gmail.com&#34;&gt;Want to work with me?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/articles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/articles/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;code&gt;Articles&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;devops&#34;&gt;DevOps&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/intro/&#34;&gt;1.My introduction to DevOps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/1-hardware-review/&#34;&gt;2.Server Hardware Review&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/url-road-trip/&#34;&gt;3.The Exciting Roadtrip of a URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/incident-report-procedure/&#34;&gt;4. Incident Report Procedure&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/git-branching/&#34;&gt;5. Git Branching&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;containerization&#34;&gt;Containerization&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;Introduction to Containerization&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;kubernetes-administration&#34;&gt;Kubernetes Administration&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;&#34;&gt;What is kubernetes?&lt;/a&gt;
+&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kube-apisever&lt;/a&gt;
+&lt;a href=&#34;&#34;&gt;troubleshooting a misconfigured kube-controller manager&lt;/a&gt;
+&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kubelet&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;cloudaws&#34;&gt;Cloud(AWS)&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/aws-securityiam/&#34;&gt;AWS: Identity and Access Management(IAM)&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;development&#34;&gt;Development&lt;/h1&gt;</description>
+      <content>&lt;p&gt;&lt;strong&gt;&lt;code&gt;Articles&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;devops&#34;&gt;DevOps&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/intro/&#34;&gt;1.My introduction to DevOps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/1-hardware-review/&#34;&gt;2.Server Hardware Review&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/url-road-trip/&#34;&gt;3.The Exciting Roadtrip of a URL&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/incident-report-procedure/&#34;&gt;4. Incident Report Procedure&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/git-branching/&#34;&gt;5. Git Branching&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;containerization&#34;&gt;Containerization&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;Introduction to Containerization&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;kubernetes-administration&#34;&gt;Kubernetes Administration&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;&#34;&gt;What is kubernetes?&lt;/a&gt;
+&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kube-apisever&lt;/a&gt;
+&lt;a href=&#34;&#34;&gt;troubleshooting a misconfigured kube-controller manager&lt;/a&gt;
+&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kubelet&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;cloudaws&#34;&gt;Cloud(AWS)&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/aws-securityiam/&#34;&gt;AWS: Identity and Access Management(IAM)&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;development&#34;&gt;Development&lt;/h1&gt;
+</content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/docker/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/showcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/showcase/</guid>
+      <description>&lt;h1 id=&#34;alex-kinyanjui-nduta&#34;&gt;Alex Kinyanjui Nduta&lt;/h1&gt;
+&lt;h3 id=&#34;devops--it-systems-engineer&#34;&gt;DevOps &amp;amp; IT Systems Engineer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;alex.k.nduta@gmail.com&#34;&gt;&lt;em&gt;Email&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Phone&lt;/em&gt;: +254702795563&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/alex-n-66851418a/&#34;&gt;&lt;em&gt;LinkedIn&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/AlexNduta&#34;&gt;&lt;em&gt;Github&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Location&lt;/em&gt;: Kenya&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://alexnduta.netlify.app/&#34;&gt;&lt;em&gt;Blog&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;professional-summary&#34;&gt;Professional Summary&lt;/h2&gt;
+&lt;p&gt;Highly motivated IT security professional with 3+ years of combined experience in IT operations and
+cybersecurity, specializing in implementing and maintaining robust security controls, vulnerability
+management, and system hardening. Proven track record in deploying and managing security
+technologies while ensuring compliance with industry standards and best practices.&lt;/p&gt;
+&lt;h2 id=&#34;professional-experience&#34;&gt;Professional Experience&lt;/h2&gt;
+&lt;h2 id=&#34;network-security-engineer--lead-infrastructure-engineer&#34;&gt;Network Security Engineer / Lead Infrastructure Engineer&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;St Christopher&amp;rsquo;s International School&lt;/strong&gt; | &lt;em&gt;Oct 2024 - Present&lt;/em&gt;&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;alex-kinyanjui-nduta&#34;&gt;Alex Kinyanjui Nduta&lt;/h1&gt;
+&lt;h3 id=&#34;devops--it-systems-engineer&#34;&gt;DevOps &amp;amp; IT Systems Engineer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;alex.k.nduta@gmail.com&#34;&gt;&lt;em&gt;Email&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Phone&lt;/em&gt;: +254702795563&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/alex-n-66851418a/&#34;&gt;&lt;em&gt;LinkedIn&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/AlexNduta&#34;&gt;&lt;em&gt;Github&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Location&lt;/em&gt;: Kenya&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://alexnduta.netlify.app/&#34;&gt;&lt;em&gt;Blog&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;professional-summary&#34;&gt;Professional Summary&lt;/h2&gt;
+&lt;p&gt;Highly motivated IT security professional with 3+ years of combined experience in IT operations and
+cybersecurity, specializing in implementing and maintaining robust security controls, vulnerability
+management, and system hardening. Proven track record in deploying and managing security
+technologies while ensuring compliance with industry standards and best practices.&lt;/p&gt;
+&lt;h2 id=&#34;professional-experience&#34;&gt;Professional Experience&lt;/h2&gt;
+&lt;h2 id=&#34;network-security-engineer--lead-infrastructure-engineer&#34;&gt;Network Security Engineer / Lead Infrastructure Engineer&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;St Christopher&amp;rsquo;s International School&lt;/strong&gt; | &lt;em&gt;Oct 2024 - Present&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automated security patches and updates using Terraform and Ansible, improving efficiency and
+consistency by 80%.&lt;/li&gt;
+&lt;li&gt;Deployed and managed on-premise Intrusion Detection System (Snort) for proactive
+threat detection&lt;/li&gt;
+&lt;li&gt;Led infrastructure security initiatives and incident response protocols&lt;/li&gt;
+&lt;li&gt;Implemented comprehensive security monitoring and threat mitigation strategies&lt;/li&gt;
+&lt;li&gt;Collaborated with cross-functional teams to enhance overall security posture.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;network-support--systems-administrator&#34;&gt;Network Support / Systems Administrator&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;St Christopher&amp;rsquo;s International School&lt;/strong&gt; | &lt;em&gt;Feb 2022 - Sept 2024&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Led implementation of Proxmox-based private cloud infrastructure(PC hosted)&lt;a href=&#34;https://alexnduta.netlify.app/&#34;&gt;blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Reduced network issue resolution time by 80% through Nagios monitoring
+implementation&lt;/li&gt;
+&lt;li&gt;Automated routine tasks using Bash and Python scripts, improving operational efficiency&lt;/li&gt;
+&lt;li&gt;Successfully migrated 700 users to Windows Server domain environment&lt;/li&gt;
+&lt;li&gt;Deployed self-hosted ticketing system, reducing resolution time by 15%&lt;/li&gt;
+&lt;li&gt;Architected and deployed RAG LLM system for staff onboarding, reducing process time
+by 50%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;odoo-erp-saas-providerfreelance-odoo-developer&#34;&gt;Odoo ERP SaaS Provider/Freelance Odoo Developer&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;HostNoma (Freelance/Self-Employed)&lt;/strong&gt; | &lt;em&gt;Jan 2024 -persent&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;SaaS Provisioning&lt;/em&gt;:
+Developed and managed a cloud-based Odoo ERP SaaS platform, providing businesses with accessible and scalable ERP solutions. Implemented and maintained secure and         reliable Odoo hosting environments, ensuring optimal performance and uptime. Managed customer Odoo instances, including upgrades and maintenance.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Implementation &amp;amp; Setup&lt;/em&gt;:
+Conducted thorough business analysis to understand client requirements and tailored Odoo configurations accordingly.Successfully implemented and configured Odoo modules       for various industries, including POS, Inverntory, HR, Manufacturing and Accounting.Migrated data from legacy systems to Odoo, ensuring data integrity and accuracy.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Custom Module Development&lt;/em&gt;:
+Designed and developed custom Odoo modules to meet specific client needs, enhancing functionality and automating processes.
+Utilized Python and Odoo framework to create efficient and scalable custom solutions.
+Maintained and updated custom modules, ensuring compatibility with new Odoo versions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Training &amp;amp; Support&lt;/em&gt;:
+Provided comprehensive Odoo training to end-users, empowering them to effectively utilize the system.
+Offered ongoing technical support and troubleshooting, resolving client issues promptly.
+Created and maintained documentation for Odoo configurations and custom modules.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;DevOps&lt;/em&gt;:
+Implemented DevOps practices to automate deployments, testing, and monitoring of Odoo instances.
+Utilized containerization and orchestration tools (e.g., Docker, Kubernetes) to ensure consistent and scalable deployments.
+Managed server infrastructure and cloud resources, optimizing performance and cost-effectiveness.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Business Development&lt;/em&gt;:
+Acquired and managed client relationships, understanding their needs and creating solutions.
+Developed and maintained the HostNoma brand and online presence.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;lead-technical-mentor--cyber-security-track&#34;&gt;Lead Technical Mentor | Cyber Security Track&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Mentor Me Collective&lt;/strong&gt; | &lt;em&gt;Oct 2024 - Present&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Led team of mentors in developing cyber security training materials&lt;/li&gt;
+&lt;li&gt;Provided guidance on cloud platforms (AWS, GCP) and security best practices&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;technical-skills&#34;&gt;Technical Skills&lt;/h1&gt;
+&lt;h2 id=&#34;infrastructure--cloud&#34;&gt;Infrastructure &amp;amp; Cloud&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cloud Platforms&lt;/strong&gt;: &lt;code&gt;AWS&lt;/code&gt;, &lt;code&gt;GCP&lt;/code&gt;, &lt;code&gt;Proxmox&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Containerization&lt;/strong&gt;: Docker, LXD, Containerd runtimes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Infrastructure Management&lt;/strong&gt;: &lt;code&gt;Type 1 hypervisors&lt;/code&gt;, &lt;code&gt;Linux administration&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;devops--automation&#34;&gt;DevOps &amp;amp; Automation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Version Control&lt;/strong&gt;: &lt;code&gt;Git&lt;/code&gt;, &lt;code&gt;GitHub&lt;/code&gt;, &lt;code&gt;GitLab&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CI/CD&lt;/strong&gt;: &lt;code&gt;GitHub Actions&lt;/code&gt;, &lt;code&gt;Jenkins&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;em&gt;Configuration Management&lt;/em&gt;:&lt;/em&gt; &lt;code&gt;Ansible&lt;/code&gt;, &lt;code&gt;Puppet&lt;/code&gt;, &lt;code&gt;Terraform&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scripting&lt;/strong&gt;: &lt;code&gt;Python&lt;/code&gt;, &lt;code&gt;Bash&lt;/code&gt;, &lt;code&gt;Powershell&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;monitoring--security&#34;&gt;Monitoring &amp;amp; Security*&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Network Monitoring&lt;/strong&gt;: &lt;code&gt;Nagios&lt;/code&gt;, &lt;code&gt;Wireshark&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security Tools&lt;/strong&gt;: &lt;code&gt;Snort&lt;/code&gt;, &lt;code&gt;Suricata&lt;/code&gt;, &lt;code&gt;Kismet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Firewall Configuration Management&lt;/strong&gt; &lt;code&gt;Web Appliction firewalls&lt;/code&gt;, &lt;code&gt;Next Generation Firewalls&lt;/code&gt;, &lt;code&gt;Netowork Firewalls&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IDS/IPS Implementation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;systems--networking&#34;&gt;Systems &amp;amp; Networking*&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Operating Systems&lt;/strong&gt;: &lt;code&gt;Linux&lt;/code&gt;, &lt;code&gt;Windows&lt;/code&gt;, &lt;code&gt;MacOS&lt;/code&gt;, &lt;code&gt;Unix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Networking&lt;/strong&gt;: &lt;code&gt;DNS&lt;/code&gt;, &lt;code&gt;DHCP&lt;/code&gt;, &lt;code&gt;Routing/Switching&lt;/code&gt;, &lt;code&gt;VLANs&lt;/code&gt;, &lt;code&gt;Software Defined Networking&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VPN Configuration and Management&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Traffic Analysis and Optimization&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;projects&#34;&gt;Projects&lt;/h1&gt;
+&lt;h3 id=&#34;odoo-project-setup-script&#34;&gt;&lt;a href=&#34;https://github.com/AlexNduta/Odoo-Setup/blob/main/README.md&#34;&gt;Odoo-project setup script&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Technologies&lt;/em&gt; : Docker, Odoo, Python, Bash, Postgres&lt;/p&gt;
+&lt;h3 id=&#34;dev-ops-playground&#34;&gt;&lt;a href=&#34;https://github.com/AlexNduta/DevOps-playground&#34;&gt;Dev-Ops Playground&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Developed a suite of my day to day automation scripts for Linux environment management
+&lt;em&gt;Technologies&lt;/em&gt; : &lt;code&gt;Bash, Python, Powershell, Ansible, Terraform, YAML, JSON&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Focus on dotfiles management and development robust environment setup&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;budgetlify-backend-as-a-service&#34;&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Budgetlify (Backend-as-a-Service)&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Built API for expense tracking and budget management
+&lt;em&gt;Technologies&lt;/em&gt;: &lt;code&gt;Python, FastAPI, MySQL, Azure cloud, Linux&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;kibandaski_&#34;&gt;&lt;a href=&#34;https://github.com/AlexNduta/Kibandaski_API&#34;&gt;Kibandaski_API&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Developed web scraping API for price comparison
+&lt;em&gt;Technologies&lt;/em&gt;: &lt;code&gt;Python(Flask), MySQL, Redis, Beautiful Soup, GCP&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;certifications&#34;&gt;Certifications&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;AWS Certified Cloud Practitioner (CLF-201)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google Certified Cyber Security professional&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Design - API Academy (Broadcom)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cisco Certified Network Associate (CCNA)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google Africa Developer Scholarship program (Android)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;education&#34;&gt;Education&lt;/h1&gt;
+&lt;h3 id=&#34;software-engineering-nanodegree-alx-africa&#34;&gt;Software Engineering Nanodegree, &lt;code&gt;ALX Africa &lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;(Feb 2022 - June 2024)&lt;/p&gt;
+&lt;h3 id=&#34;diploma-in-information-technology-thika-technical-training-institute&#34;&gt;Diploma in Information Technology, &lt;code&gt;Thika Technical Training Institute&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;(2017 - 2021)&lt;/p&gt;
+&lt;h1 id=&#34;languages&#34;&gt;Languages&lt;/h1&gt;
+&lt;p&gt;English (C1, Advanced)
+Swahili (fluent)&lt;/p&gt;
+&lt;h2 id=&#34;key-competencies&#34;&gt;KEY COMPETENCIES&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Strong understanding of cybersecurity frameworks (NIST CSF, ISO 27001)&lt;/li&gt;
+&lt;li&gt;Experience in security incident response and threat mitigation&lt;/li&gt;
+&lt;li&gt;Expertise in implementing and maintaining security controls&lt;/li&gt;
+&lt;li&gt;Strong analytical and problem-solving abilities&lt;/li&gt;
+&lt;li&gt;Excellent documentation and technical writing skills&lt;/li&gt;
+&lt;li&gt;Effective communication with technical and non-technical stakeholders&lt;/li&gt;
+&lt;li&gt;Adaptable to dynamic, high-pressure environments&lt;/li&gt;
+&lt;li&gt;Commitment to continuous learning and staying current with security trends&lt;/li&gt;
+&lt;li&gt;Proactive approach to continuous learning and improvement&lt;/li&gt;
+&lt;li&gt;Strong understanding of DevOps methodologies and best practices&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Docker: Introduction to containerization</title>
+      <link>http://localhost:1313/posts/containerrisation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/containerrisation/</guid>
+      <description>&lt;h1 id=&#34;what-is-containerization&#34;&gt;What is containerization&lt;/h1&gt;
+&lt;p&gt;A &lt;code&gt;container&lt;/code&gt; is a package that simulates the underlying operating system and is packaged with all the dependecies that your application need to run. Unlike a &lt;code&gt;Virtual Machine&lt;/code&gt; that simulates and  virtualise the underlying hardware, a container only virtualise the OS. They provide a way to package applications with required dependencies that is seperated from the host OS. This enables the application to run out-of-the-box despite running on a different underlying enviroment other than the one its was compiled on. Containers basically act as lightweight VMs and they share the underlying OS.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;what-is-containerization&#34;&gt;What is containerization&lt;/h1&gt;
+&lt;p&gt;A &lt;code&gt;container&lt;/code&gt; is a package that simulates the underlying operating system and is packaged with all the dependecies that your application need to run. Unlike a &lt;code&gt;Virtual Machine&lt;/code&gt; that simulates and  virtualise the underlying hardware, a container only virtualise the OS. They provide a way to package applications with required dependencies that is seperated from the host OS. This enables the application to run out-of-the-box despite running on a different underlying enviroment other than the one its was compiled on. Containers basically act as lightweight VMs and they share the underlying OS.&lt;/p&gt;
+&lt;p&gt;Let me explain this in the simplest way possible. A developer builds an application that is supposed to run in an ubuntu 22.04. This basically means that if the developer wants to run the appplication in on another machine, they need to make sure that the target machine has the same operating system and dependencies installed. With the cloud, this issue is easy to reslove because you can get a VM on demand for a specified environment.
+Things get sticky when the application is being built collaboratively and the other developers have a different enviroment(windows is a good example) than the target enviroment. This makes it practically impossible run or test the application as Linux and windows dependencies are not compatible.&lt;/p&gt;
+&lt;p&gt;With  containerization, the developer will just package the application in a container with all the dependencies required for the app to run alongside the runtime of choice(OS). If they were to share the application/code with another developer, all he/she needs is a container runtime enviroment(&lt;code&gt;daemon&lt;/code&gt;) and the application will run out-of-the-box.&lt;/p&gt;
+&lt;h1 id=&#34;origin-of-containers&#34;&gt;Origin of containers&lt;/h1&gt;
+&lt;p&gt;When we mention containers, what comes to mind to most is &lt;code&gt;Docker&lt;/code&gt;. There are so many types of containers and the best way to learn either of the exhaustive list of types of containers is to understand the underlying technlogy behind. The concept of containerization dates back to &lt;code&gt;chroot&lt;/code&gt; systemcall in Unix. This syscall allowed processes to change their root directory leading to isolation from the filesystem.&lt;/p&gt;
+&lt;h3 id=&#34;chroot&#34;&gt;chroot&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Chroot&#34;&gt;Chroot&lt;/a&gt; is the first concept that led to the conception of container technology. It is used to change the root directory(/) of the current running process and its child processes.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your current working directory could be &lt;code&gt;/home/myfiles&lt;/code&gt; and using chroot we can restrict the process we are running to that directory.&lt;/li&gt;
+&lt;li&gt;The change creates a restricted enviroment referred to as a &lt;code&gt;chroot jail&lt;/code&gt; or &lt;code&gt;jailed directory&lt;/code&gt; where the processes are limited to accessing only files within the new directory.&lt;/li&gt;
+&lt;li&gt;The tools is useful for:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Creating a test enviroment&lt;/code&gt;: Developers can create an isolated test environment  for softwares without damaging the main system.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;System Recovery&lt;/code&gt; Chroot can be used to repair a broken system such a repairing file systems or password recovery.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Reinstalling the Bootloader&lt;/code&gt;: If the bootloader is corrupted, chroot allows you to access the system enviroment to reinstall or repair it without affecting the main root system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Chroot syntax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ chroot /path-to-new-root-dir  command-to-jail
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# alternative&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ chroot /path-to-new-root-dir /path-to-server-process
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The syntax above shows the basic usage of the chroot command in any Unix or Unix-like systems. We can also use comand options or flags.
+The concept of process isolation is heavily used in containerization. In 2000 FreeBSD introduced &lt;code&gt;jails&lt;/code&gt; that was a build up of chroot and allowed for advanced isolation by allowing multiple indipendent enviroments on a single system complete with  their own user and network configurations.
+These concepts brought about the idea of process isolation but was not the full blown idea of containerization&lt;/p&gt;
+&lt;h3 id=&#34;cgroups&#34;&gt;Cgroups&lt;/h3&gt;
+&lt;p&gt;A &lt;a href=&#34;https://en.wikipedia.org/wiki/Cgroups&#34;&gt;Control group&lt;/a&gt; is a Linux feature that limits, accounts for and isolates resource usage of a single or collection of processes. Some of the resouces include, CPU, memory, network, disk I/O etc..
+Control groups are used to control how much a given resouce can be used by a process or set of processes.They are the key componet in a container because there are multiple processes running in a container and the usage of each has to be curbed to avoid resource over usage by a process.
+They enable fine-grained control over system reource allocation for groups and processes&lt;/p&gt;
+&lt;h3 id=&#34;namespaces&#34;&gt;NameSpaces&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Namespace&#34;&gt;Namespaces&lt;/a&gt; are a feature found in Linux that offer isolation of system resources to different specified processes. They give an illussion that a process has its private instance of a resource. This could be resources such as filesystems, processID and network intefaces.&lt;/p&gt;
+&lt;p&gt;There are multiple types of Namespaces:
+Note: for better understanding, in the explanations below, we will use room as a representative of an isolated enviroment with dedicated resources.
+1.&lt;code&gt;Process ID namespace&lt;/code&gt;
+sets a process ID to processes for identification and makes sure that a process in one &amp;lsquo;room&amp;rsquo; does not know about another.
+2.&lt;code&gt;Unix Timesharing system(UTS) Namespace&lt;/code&gt;
+Isolates hostnames and domain names. allow each &amp;lsquo;room&amp;rsquo; to have its own hostname and domain name and the hostname can be renamed without affecting the host OS
+3.&lt;code&gt;Inter-process Communication (IPC) Namespace&lt;/code&gt;
+Seperates shared resources such asshared memory and message queues and ensure that such resources are not accessible to other rooms.
+4.&lt;code&gt;Network Namespace&lt;/code&gt;
+Isolates network interphases, Internet protocol address(IP) and ensures that each room has its own network configurations.
+5.&lt;code&gt;User namepaces&lt;/code&gt;
+Isolates users and group ID&amp;rsquo;s. A process can have root priviledges in one room but not in the main host OS
+6. &lt;code&gt;Cgroup Namespace&lt;/code&gt;
+Makes a &amp;lsquo;room&amp;rsquo; &amp;rsquo;think&amp;rsquo; it has its own set of resources by isolating its own set of reources.&lt;/p&gt;
+&lt;p&gt;Together, namespaces and Cgroups form the backbone of container technology, enabling secure and efficient application deployment in modern cloud environments.
+Some examples of container technology is Docker, Kubernetes, Podman, and LXD.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Incident Report Procedure</title>
+      <link>http://localhost:1313/posts/incident-report-procedure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/incident-report-procedure/</guid>
+      <description>&lt;p&gt;Linux Based Environment&lt;/p&gt;
+&lt;p&gt;Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it.
+&lt;strong&gt;&lt;strong&gt;Assumptions&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An incident has been declared and the server is suspected to be involved&lt;/li&gt;
+&lt;li&gt;The operations person has login credentials(SSH and password)&lt;/li&gt;
+&lt;li&gt;The existent of a ticketing or issue tracking system(Jira, ServiceNow)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;phase1-preparation-and-initial-assessment&#34;&gt;phase1: preparation and initial assessment&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Acknowledge the assigned ticket&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Take up the assigned ticket and read through the details&lt;/li&gt;
+&lt;li&gt;From this point, document every action carried out, command run and the timestamp for better documentation in the postmortem
+&lt;strong&gt;Gather context&lt;/strong&gt;:&lt;/li&gt;
+&lt;li&gt;Understand the issues presented or associated with the server in the ticket(e.g ‘slow server’, ‘API returning 500’, ‘Users unable to login into the domain’ )&lt;/li&gt;
+&lt;li&gt;Understand the issue reported so as to know what to tackle:
+* what errors are presented
+&lt;ul&gt;
+&lt;li&gt;what services are hosted in the server?&lt;/li&gt;
+&lt;li&gt;Are any other services in the server experiencing the same issue?&lt;/li&gt;
+&lt;li&gt;Check for monitoring dashboards before logging in(DataDog, Grafana, Nagios, ) look for obvious anomalies:
+&lt;blockquote&gt;
+&lt;p&gt;High CPU/Memory Usage
+Latency spikes
+Error rate increase
+Health check failures&lt;/p&gt;</description>
+      <content>&lt;p&gt;Linux Based Environment&lt;/p&gt;
+&lt;p&gt;Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it.
+&lt;strong&gt;&lt;strong&gt;Assumptions&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An incident has been declared and the server is suspected to be involved&lt;/li&gt;
+&lt;li&gt;The operations person has login credentials(SSH and password)&lt;/li&gt;
+&lt;li&gt;The existent of a ticketing or issue tracking system(Jira, ServiceNow)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;phase1-preparation-and-initial-assessment&#34;&gt;phase1: preparation and initial assessment&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Acknowledge the assigned ticket&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Take up the assigned ticket and read through the details&lt;/li&gt;
+&lt;li&gt;From this point, document every action carried out, command run and the timestamp for better documentation in the postmortem
+&lt;strong&gt;Gather context&lt;/strong&gt;:&lt;/li&gt;
+&lt;li&gt;Understand the issues presented or associated with the server in the ticket(e.g ‘slow server’, ‘API returning 500’, ‘Users unable to login into the domain’ )&lt;/li&gt;
+&lt;li&gt;Understand the issue reported so as to know what to tackle:
+* what errors are presented
+&lt;ul&gt;
+&lt;li&gt;what services are hosted in the server?&lt;/li&gt;
+&lt;li&gt;Are any other services in the server experiencing the same issue?&lt;/li&gt;
+&lt;li&gt;Check for monitoring dashboards before logging in(DataDog, Grafana, Nagios, ) look for obvious anomalies:
+&lt;blockquote&gt;
+&lt;p&gt;High CPU/Memory Usage
+Latency spikes
+Error rate increase
+Health check failures&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;phase2-basic-connectivity--system-status&#34;&gt;Phase2: Basic Connectivity &amp;amp; system status&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Connection test&lt;/strong&gt;
+From your workstation or bastion host, attempt to host the server
+&lt;em&gt;Observervation&lt;/em&gt;: check for packet loss, latency or reachability
+&lt;strong&gt;Login attempt&lt;/strong&gt; :
+try logingin in using &lt;code&gt;SSH&lt;/code&gt; or &lt;code&gt;RDP&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: successful login? slow login? connection refused? Timeout? Authentication error?
+&lt;strong&gt;Initial system Overview when logged in&lt;/strong&gt;:
+check system uptime uptime
+&lt;em&gt;observation&lt;/em&gt;: How long has the system been up?  Has the system booted recently? what is the load average?
+&lt;strong&gt;check for logged in users&lt;/strong&gt;:  &lt;code&gt;who w&lt;/code&gt; or
+&lt;em&gt;Observation&lt;/em&gt;: Any unexpected user or session?
+&lt;strong&gt;Recent Login History&lt;/strong&gt;: &lt;code&gt;last | head -n 20&lt;/code&gt;
+&lt;em&gt;Observation&lt;/em&gt;: check for any unusual logins around when the issue started&lt;/p&gt;
+&lt;h2 id=&#34;phase-3-resource-utilisation-analysis&#34;&gt;Phase 3: Resource Utilisation Analysis&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;CPU Usage&lt;/strong&gt;:
+Check overall per-process CPU usage &lt;code&gt;top&lt;/code&gt; or &lt;code&gt;htop&lt;/code&gt; if installed
+&lt;em&gt;observation&lt;/em&gt;: is the CPU usage close to 100%, which processes are consuming most CPU?
+&lt;strong&gt;Run for a short period to see trends&lt;/strong&gt; &lt;code&gt;vmstat 1 5&lt;/code&gt;
+&lt;em&gt;Observation&lt;/em&gt;: Look at &lt;code&gt;us&lt;/code&gt; , &lt;code&gt;sys&lt;/code&gt; , &lt;code&gt;id&lt;/code&gt; , &lt;code&gt;wa&lt;/code&gt; high &lt;code&gt;wa&lt;/code&gt; (IO wait time ) means that there are bottle necks&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Memory Usage&lt;/strong&gt;:
+check memory usage &lt;code&gt;free -h&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: is available memory very low? is swap heavily used?
+use &lt;code&gt;top&lt;/code&gt; or &lt;code&gt;htop&lt;/code&gt;(sort by memory usage type &lt;code&gt;M&lt;/code&gt; in &lt;code&gt;top&lt;/code&gt;, or f6 in htop the select &lt;code&gt;PERCENT_MEM&lt;/code&gt;)
+&lt;em&gt;observation&lt;/em&gt;: which processes are consuming alot of memory?
+**Check OOM(out of memory) **
+killer events &lt;code&gt;dmesg | grep -i oom-killer&lt;/code&gt; or &lt;code&gt;journalctl | grep -i oom&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: Has the kernel killed processes due to low memory?
+&lt;strong&gt;Disk I/O&lt;/strong&gt;:
+check for disk utilisation and wait times: &lt;code&gt;iostat -dxz 1 5&lt;/code&gt; (reports disk status every minute 5 times)
+&lt;em&gt;observation&lt;/em&gt;: Look for high &lt;code&gt;%util&lt;/code&gt; and high wait times. which devices are affected?
+&lt;strong&gt;check per process&lt;/strong&gt; I/O &lt;code&gt;iotop&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: Check for processes with most disk writes&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disk space&lt;/strong&gt;:
+check file system usage: df -h
+&lt;em&gt;observation&lt;/em&gt;: any critical file mounts(&lt;code&gt;/var&lt;/code&gt; , &lt;code&gt;/temp&lt;/code&gt; , &lt;code&gt;/ &lt;/code&gt;) full or almost full?(&amp;gt; 90-95)
+&lt;strong&gt;Network I/O clonnection&lt;/strong&gt;
+Check network interface statistics ip -s link show or &lt;code&gt;netstat -i&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: Look for high error count errors , dropped&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Check network throughput per interface/ process&lt;/strong&gt;: &lt;code&gt;iftop&lt;/code&gt; or &lt;code&gt;nethogs&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: is a particular interface saturated? is there a process sending high abnormal traffick?
+&lt;strong&gt;Listening ports and established connections&lt;/strong&gt;: &lt;code&gt;ss -tulnp&lt;/code&gt; &lt;code&gt;netstat -tulpn&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: Are there any expected services listening?
+Are there expected services listening?(&lt;code&gt;ESTABLISHED&lt;/code&gt;, &lt;code&gt;TIME_WAIT&lt;/code&gt;)
+Any suspicious listening port?&lt;/p&gt;
+&lt;h2 id=&#34;application-and-service-level-checks&#34;&gt;Application and service level checks&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;service status&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check the status of the primary running apps/services on the server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;systemd:  &lt;code&gt;system status [servicename]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;SysVinit: &lt;code&gt;service [servicename] status&lt;/code&gt; or &lt;code&gt;/etc/init.d/[servicename] status&lt;/code&gt;
+observation: is the servive active/running?
+Did the service exit with an error?
+check the recent logs provided by the &lt;code&gt;status&lt;/code&gt; command&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Process Check&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verrify the application proces is running: &lt;code&gt;ps aux | grep [proces-nam]&lt;/code&gt; or &lt;code&gt;pgrep -lf [proces-name]&lt;/code&gt;
+Observation: is the process running? Are there any zombie processes? (z)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Application logs&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Locate application specific logs(&lt;code&gt;/var/log/nginx/error.log&lt;/code&gt;, &lt;code&gt;/var/log/app/app/log&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;You can tail the logs for live activity &lt;code&gt;tail -f /path/to/applogs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Search for logs around the time the error occured &lt;code&gt;grep -iE  &amp;quot;error|warn|fatal|exception|timeout&amp;quot; path/to/log&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;You can specify the time and specific error: &lt;code&gt;journalctl --since &amp;quot;1 hour ago&amp;quot;&lt;/code&gt; or &lt;code&gt;journalctl --since &amp;quot;1 hour ago&amp;quot;| grep -f failed&lt;/code&gt;
+&lt;em&gt;observation&lt;/em&gt;: are there error messages correlating with the incident start time?
+** Local Functionality test**
+&lt;ul&gt;
+&lt;li&gt;If its a webserve, try acccesing it localy: &lt;code&gt;curl -v http://localhost:port/path&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If its a database, try connecting to it using a local client tool
+&lt;em&gt;observation&lt;/em&gt;: Does it work locally? any slow response? Are there any errors?
+&lt;ul&gt;
+&lt;li&gt;This could help differentiate a network issue to external sources and an internal server issue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;phase-5-deeper-system-configuration-check&#34;&gt;phase 5: Deeper system configuration check&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Kernel/system log deepdive&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Go back to &lt;code&gt;/var/log/messges&lt;/code&gt;, &lt;code&gt;var/log/syslog/&lt;/code&gt; or &lt;code&gt;journalctl&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Look at the timeframe of the incident&lt;/li&gt;
+&lt;li&gt;search for specific errors related to hardware, storage, network and kernel modules.
+&lt;strong&gt;configuration changes&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;check if relevant configuration files &lt;code&gt;/etc/&lt;/code&gt; have been chabged&lt;/li&gt;
+&lt;li&gt;if you are using &lt;code&gt;git&lt;/code&gt; then check the version control history
+&lt;strong&gt;Hardware Health&lt;/strong&gt;*&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Check disk health if suspected: &lt;code&gt;smartctl -a /dev/sdX&lt;/code&gt;(required &lt;code&gt;smartmontools&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Checkn for hardware errors reported by the system (&lt;code&gt;dmesg&lt;/code&gt;, vendor specific tools)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;escalate-and-resolution&#34;&gt;Escalate and Resolution&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Synthesize findings&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Review all the findings gathered&lt;/li&gt;
+&lt;li&gt;Formulate a hypothesis about the root cause; e.g Network connectivity led to Database outage
+&lt;strong&gt;Attempt remefiation&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;if the the main cause of the issue is clear and within you scope, fix it e.g reboot the servers, clearing temporary files&lt;/li&gt;
+&lt;li&gt;Adviceable to document anything before doing it.&lt;/li&gt;
+&lt;li&gt;Verrify if the fix resolved the issue. Monitor closely.
+&lt;strong&gt;Escalate if necessary&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;If the issue is beyond your scope, this is the best time to escalate it to a higher manager or another team(eg developers, networking team)&lt;/li&gt;
+&lt;li&gt;This could also be as a result of an issue that require reboot and might affect other services in the same server, this might require authorisation&lt;/li&gt;
+&lt;li&gt;When escalating the issue, make sure you have gathered enough data(evidence) to point out the exact issue with the server, do not escalate issues with vague diagnosis statement like(server X is broken)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;
+&lt;a href=&#34;https://zeltser.com/media/docs/security-incident-survey-cheat-sheet.pdf?msc=Cheat&amp;#43;Sheet&amp;#43;Blog&#34;&gt;Security Incident survery cheat sheet for server Administrators&lt;/a&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>1 Hardware Review :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DevOps Zero to Hero: # 1 Hardware Review So, the hardware landed two weeks after the order. The specs were:
+Lenovo ThinkSystem SR650 V3 (2U Rack Server) Processor: Intel Xeon Silver 4410Y (12C 2.0GHz) Memory: 1 x 64GB DDR5 RDIMM Disk Bay: 8 SAS/SATA SFF Storage: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD NIC: 4-port 1GbE RJ45, 2-port 10GbE SFP28 Power Supply: 2 x 1100W Titanium Fans: 5 x Standard Fans Processor Coming from the world of regular CPUs, you might not be familiar with Intel Xeon CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/1-hardware-review/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="1 Hardware Review">
+<meta property="og:description" content="DevOps Zero to Hero: # 1 Hardware Review So, the hardware landed two weeks after the order. The specs were:
+Lenovo ThinkSystem SR650 V3 (2U Rack Server) Processor: Intel Xeon Silver 4410Y (12C 2.0GHz) Memory: 1 x 64GB DDR5 RDIMM Disk Bay: 8 SAS/SATA SFF Storage: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD NIC: 4-port 1GbE RJ45, 2-port 10GbE SFP28 Power Supply: 2 x 1100W Titanium Fans: 5 x Standard Fans Processor Coming from the world of regular CPUs, you might not be familiar with Intel Xeon CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.
+" />
+<meta property="og:url" content="http://localhost:1313/posts/1-hardware-review/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-12-03 12:42:47 &#43;0300 EAT" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/1-hardware-review/">1 Hardware Review</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-12-03</time><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="devops-zero-to-hero--1-hardware-review">DevOps Zero to Hero: # 1 Hardware Review<a href="#devops-zero-to-hero--1-hardware-review" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p>So, the hardware landed two weeks after the order. The specs were:</p>
+<ul>
+<li><code>Lenovo</code> ThinkSystem SR650 V3 (2U Rack Server)</li>
+<li><code>Processor</code>: Intel Xeon Silver 4410Y (12C 2.0GHz)</li>
+<li><code>Memory</code>: 1 x 64GB DDR5 RDIMM</li>
+<li><code>Disk Bay</code>: 8 SAS/SATA SFF</li>
+<li><code>Storage</code>: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD</li>
+<li><code>NIC</code>: 4-port 1GbE RJ45, 2-port 10GbE SFP28</li>
+<li><code>Power Supply</code>: 2 x 1100W Titanium</li>
+<li><code>Fans</code>: 5 x Standard Fans</li>
+</ul>
+<h2 id="processor">Processor<a href="#processor" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Coming from the world of regular CPUs, you might not be familiar with <code>Intel Xeon</code> CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.</p>
+<p>Intel Xeon CPUs are designed with lower clock speeds compared to Intel i-series CPUs, which helps reduce heat generation and improve stability over long periods of time. Despite the lower clock speeds, they are designed for power efficiency, especially during intensive workload operations. The architecture allows them to achieve this.</p>
+<p>The CPU in question is a 12-core server-grade processor ideal for enterprise data center environments. The 12 cores make it ideal for multitasking and parallel processing. The 30MB Layer 3 cache improves data retrieval speeds for frequently accessed data. Regular Intel i-series CPUs have a Layer 3 cache that ranges between 3-8MB for i3 to i7, respectively. This clearly shows that the Xeon CPU is not your average CPU.</p>
+<p>The CPU architecture is based on <code>Sapphire Rapids</code> architecture, which enhances performance and efficiency compared to previous generations. Sapphire Rapids is the fourth generation of Intel Xeon Scalable processors and is based on the Golden Cove microarchitecture.</p>
+<p>The CPU supports DDR5-4000 memory with a maximum of 4TB across 8 channels, facilitating high-speed data access and processing. With such killer features, the beast is optimized for workloads such as virtualization, data analytics, and general server functions like web hosting and file serving.</p>
+<h2 id="memory">Memory<a href="#memory" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>With 64GB of memory, I have more than enough for my workloads. My plan is to run Windows Server as the main VM, a couple of Linux VMs for system hosting, and a ton of containers. This is more memory than I need.</p>
+<h2 id="storage">Storage<a href="#storage" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>This was the hardest decision. With two 480GB SSDs as primary drives, I was stuck between using RAID 0 and RAID 1 for my setup. For the four 1.2TB SAS HDDs, I also had to do a lot of research to settle on the ideal drive setup. I&rsquo;ll write a comprehensive article on RAID and ZFS and how I arrived at the final decision.</p>
+<h2 id="network-interface-cards">Network Interface Cards<a href="#network-interface-cards" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>My main intent is to create an aggregated link for redundancy, and having two 10GbE SFPs is the ideal solution. I still need to figure out how to pass multiple VLANs through the two aggregated links, as my Windows server will require multiple VLANs. My network architecture is subdivided into multiple VLANs, and Active Directory needs to serve each VLAN. Four 1GbE Ethernet ports are more than enough but I have future use cases in mind.</p>
+<p>The setup was assembled at the freight station as an after-sales service, which really ruined the fun of figuring out where each component fits. This still saved me time and allowed me to focus on getting the system up and running. The following series of articles will build upon this one as I share my learning and re-learning in the process of getting the system fully operational.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/" class="button inline prev">
+         How to upgrade a kubernetes node in a cluster
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/" class="button inline next">
+        1 Hardware Review
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

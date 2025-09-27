@@ -1,8 +1,9 @@
 baseurl = "https://was-site.netlify.app/"
 languageCode = "en-us"
 theme = "terminal"
-paginate = 5
-
+# paginate = 5
+[pagination]
+  pagerSize = 10
 [markup.goldmark.renderer]
   unsafe = true
 [params]

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>The exciting Roadtrip of a URL :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The exciting Roadtrip of a URL Have you ever wondered what happens behind the scenes when you type “https://www.google.com&quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.
+In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/url-road-trip/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The exciting Roadtrip of a URL">
+<meta property="og:description" content="The exciting Roadtrip of a URL Have you ever wondered what happens behind the scenes when you type “https://www.google.com&quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.
+In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.
+" />
+<meta property="og:url" content="http://localhost:1313/posts/url-road-trip/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-11-30 20:57:09 &#43;0300 EAT" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/url-road-trip/">The exciting Roadtrip of a URL</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-11-30</time><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="the-exciting-roadtrip-of-a-url">The exciting Roadtrip of a URL<a href="#the-exciting-roadtrip-of-a-url" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p>Have you ever wondered what happens behind the scenes when you type “https://www.google.com&quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.</p>
+<p>In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.</p>
+<ol>
+<li>
+<p>DNS Request:
+The journey begins with the Domain Name System (DNS). When you type “https://www.google.com&quot; in your browser, the first step is to translate the human-readable domain name (<a href="https://www.google.com">www.google.com</a>) into its corresponding IP address. This process is known as a DNS (Domain Name System) request. Your browser queries a DNS server, which returns the IP address associated with the domain.</p>
+</li>
+<li>
+<p>TCP/IP:
+Once the browser has the IP address, it establishes a connection using the Transmission Control Protocol (TCP) and the Internet Protocol (IP). TCP ensures reliable data transfer by breaking it into packets and adding HTTP headers on it for easy transportation, while IP routes these packets across the internet to reach the destination.</p>
+</li>
+<li>
+<p>Firewall:
+Before reaching the intended destination, the packets may encounter firewalls.which act as the gate keeper between your computer and the server. Firewalls monitor and regulate incoming and outgoing network traffic based on predetermined security rules. If the packets meet the criteria, they are allowed to pass through. Firewalls become efficient when firewall rules are set to regulate incoming and outgoing traffic. The firewall can be inbuilt in your computer, embedded in your router(gateway) or for large organisations, they have large hardwarefirewalls such as SOPHOS, Miraki, Ubiquity etc..</p>
+</li>
+<li>
+<p>HTTPS/SSL:
+To ensure the security and privacy of dat apakctes during transmission, the Hypertext Transfer Protocol Secure (HTTPS) is employed. HTTPS uses Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocols to encrypt the data exchanged between your browser and the server. This encryption prevents unauthorized access and protects sensitive information from interception.</p>
+</li>
+<li>
+<p>Load-Balancer:
+In the case of popular websites like Google, a load-balancer comes into play. Load-balancers distribute incoming network traffic across multiple servers to ensure optimal resource utilization, maximize throughput, and minimize response time. This helps prevent any single server from becoming overwhelmed with too much traffic.</p>
+</li>
+<li>
+<p>Web Server:
+Upon reaching Google’s servers, the web server processes the incoming request. The web server handles static content, such as HTML, CSS, and images. It retrieves the requested information and sends it back to the user’s browser.</p>
+</li>
+<li>
+<p>Application Server:
+For dynamic content, such as search results personalized for each user, an application server is employed. The application server executes the server-side code, interacts with databases, and generates dynamic content based on user requests.</p>
+</li>
+<li>
+<p>Database:
+If the requested information involves data stored in a database, the application server queries the database to retrieve the relevant data. The retrieved data is then sent back to the application server, which combines it with other elements to generate the final response.</p>
+</li>
+</ol>
+<p>Conclusion:
+The journey of a URL from your browser to the Google homepage involves a sophisticated interplay of various technologies and systems, each with its specific role. Understanding this process gives us a glimpse into the complexity of the modern internet infrastructure, showcasing how seamlessly it operates to deliver the web content we access every day. The next time you type a URL into your browser, you can appreciate the intricate dance of technology that occurs behind the scenes, making the internet a marvel of modern engineering.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/what-is-kubernetes/" class="button inline prev">
+        What is Kubernetes ?
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="http://localhost:1313/posts/intro/" class="button inline next">
+        Intro: DevOps Zero to hero
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Incident Report Procedure :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Linux Based Environment
+Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it. Assumptions
+An incident has been declared and the server is suspected to be involved The operations person has login credentials(SSH and password) The existent of a ticketing or issue tracking system(Jira, ServiceNow) phase1: preparation and initial assessment Acknowledge the assigned ticket:
+Take up the assigned ticket and read through the details From this point, document every action carried out, command run and the timestamp for better documentation in the postmortem Gather context: Understand the issues presented or associated with the server in the ticket(e.g ‘slow server’, ‘API returning 500’, ‘Users unable to login into the domain’ ) Understand the issue reported so as to know what to tackle: * what errors are presented what services are hosted in the server? Are any other services in the server experiencing the same issue? Check for monitoring dashboards before logging in(DataDog, Grafana, Nagios, ) look for obvious anomalies: High CPU/Memory Usage Latency spikes Error rate increase Health check failures
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/incident-report-procedure/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Incident Report Procedure">
+<meta property="og:description" content="Linux Based Environment
+Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it. Assumptions
+An incident has been declared and the server is suspected to be involved The operations person has login credentials(SSH and password) The existent of a ticketing or issue tracking system(Jira, ServiceNow) phase1: preparation and initial assessment Acknowledge the assigned ticket:
+Take up the assigned ticket and read through the details From this point, document every action carried out, command run and the timestamp for better documentation in the postmortem Gather context: Understand the issues presented or associated with the server in the ticket(e.g ‘slow server’, ‘API returning 500’, ‘Users unable to login into the domain’ ) Understand the issue reported so as to know what to tackle: * what errors are presented what services are hosted in the server? Are any other services in the server experiencing the same issue? Check for monitoring dashboards before logging in(DataDog, Grafana, Nagios, ) look for obvious anomalies: High CPU/Memory Usage Latency spikes Error rate increase Health check failures
+" />
+<meta property="og:url" content="http://localhost:1313/posts/incident-report-procedure/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/incident-report-procedure/">Incident Report Procedure</a>
+  </h1>
+  <div class="post-meta"><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>Linux Based Environment</p>
+<p>Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it.
+<strong><strong>Assumptions</strong></strong></p>
+<ul>
+<li>An incident has been declared and the server is suspected to be involved</li>
+<li>The operations person has login credentials(SSH and password)</li>
+<li>The existent of a ticketing or issue tracking system(Jira, ServiceNow)</li>
+</ul>
+<h2 id="phase1-preparation-and-initial-assessment">phase1: preparation and initial assessment<a href="#phase1-preparation-and-initial-assessment" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>Acknowledge the assigned ticket</strong>:</p>
+<ul>
+<li>Take up the assigned ticket and read through the details</li>
+<li>From this point, document every action carried out, command run and the timestamp for better documentation in the postmortem
+<strong>Gather context</strong>:</li>
+<li>Understand the issues presented or associated with the server in the ticket(e.g ‘slow server’, ‘API returning 500’, ‘Users unable to login into the domain’ )</li>
+<li>Understand the issue reported so as to know what to tackle:
+* what errors are presented
+<ul>
+<li>what services are hosted in the server?</li>
+<li>Are any other services in the server experiencing the same issue?</li>
+<li>Check for monitoring dashboards before logging in(DataDog, Grafana, Nagios, ) look for obvious anomalies:
+<blockquote>
+<p>High CPU/Memory Usage
+Latency spikes
+Error rate increase
+Health check failures</p></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="phase2-basic-connectivity--system-status">Phase2: Basic Connectivity &amp; system status<a href="#phase2-basic-connectivity--system-status" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>Connection test</strong>
+From your workstation or bastion host, attempt to host the server
+<em>Observervation</em>: check for packet loss, latency or reachability
+<strong>Login attempt</strong> :
+try logingin in using <code>SSH</code> or <code>RDP</code>
+<em>observation</em>: successful login? slow login? connection refused? Timeout? Authentication error?
+<strong>Initial system Overview when logged in</strong>:
+check system uptime uptime
+<em>observation</em>: How long has the system been up?  Has the system booted recently? what is the load average?
+<strong>check for logged in users</strong>:  <code>who w</code> or
+<em>Observation</em>: Any unexpected user or session?
+<strong>Recent Login History</strong>: <code>last | head -n 20</code>
+<em>Observation</em>: check for any unusual logins around when the issue started</p>
+<h2 id="phase-3-resource-utilisation-analysis">Phase 3: Resource Utilisation Analysis<a href="#phase-3-resource-utilisation-analysis" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>CPU Usage</strong>:
+Check overall per-process CPU usage <code>top</code> or <code>htop</code> if installed
+<em>observation</em>: is the CPU usage close to 100%, which processes are consuming most CPU?
+<strong>Run for a short period to see trends</strong> <code>vmstat 1 5</code>
+<em>Observation</em>: Look at <code>us</code> , <code>sys</code> , <code>id</code> , <code>wa</code> high <code>wa</code> (IO wait time ) means that there are bottle necks</p>
+<p><strong>Memory Usage</strong>:
+check memory usage <code>free -h</code>
+<em>observation</em>: is available memory very low? is swap heavily used?
+use <code>top</code> or <code>htop</code>(sort by memory usage type <code>M</code> in <code>top</code>, or f6 in htop the select <code>PERCENT_MEM</code>)
+<em>observation</em>: which processes are consuming alot of memory?
+**Check OOM(out of memory) **
+killer events <code>dmesg | grep -i oom-killer</code> or <code>journalctl | grep -i oom</code>
+<em>observation</em>: Has the kernel killed processes due to low memory?
+<strong>Disk I/O</strong>:
+check for disk utilisation and wait times: <code>iostat -dxz 1 5</code> (reports disk status every minute 5 times)
+<em>observation</em>: Look for high <code>%util</code> and high wait times. which devices are affected?
+<strong>check per process</strong> I/O <code>iotop</code>
+<em>observation</em>: Check for processes with most disk writes</p>
+<p><strong>Disk space</strong>:
+check file system usage: df -h
+<em>observation</em>: any critical file mounts(<code>/var</code> , <code>/temp</code> , <code>/ </code>) full or almost full?(&gt; 90-95)
+<strong>Network I/O clonnection</strong>
+Check network interface statistics ip -s link show or <code>netstat -i</code>
+<em>observation</em>: Look for high error count errors , dropped</p>
+<p><strong>Check network throughput per interface/ process</strong>: <code>iftop</code> or <code>nethogs</code>
+<em>observation</em>: is a particular interface saturated? is there a process sending high abnormal traffick?
+<strong>Listening ports and established connections</strong>: <code>ss -tulnp</code> <code>netstat -tulpn</code>
+<em>observation</em>: Are there any expected services listening?
+Are there expected services listening?(<code>ESTABLISHED</code>, <code>TIME_WAIT</code>)
+Any suspicious listening port?</p>
+<h2 id="application-and-service-level-checks">Application and service level checks<a href="#application-and-service-level-checks" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>service status</strong></p>
+<ul>
+<li>check the status of the primary running apps/services on the server</li>
+</ul>
+<ul>
+<li>systemd:  <code>system status [servicename]</code></li>
+<li>SysVinit: <code>service [servicename] status</code> or <code>/etc/init.d/[servicename] status</code>
+observation: is the servive active/running?
+Did the service exit with an error?
+check the recent logs provided by the <code>status</code> command</li>
+</ul>
+<p><strong>Process Check</strong>:</p>
+<ul>
+<li>Verrify the application proces is running: <code>ps aux | grep [proces-nam]</code> or <code>pgrep -lf [proces-name]</code>
+Observation: is the process running? Are there any zombie processes? (z)</li>
+<li><strong>Application logs</strong></li>
+<li>Locate application specific logs(<code>/var/log/nginx/error.log</code>, <code>/var/log/app/app/log</code>)</li>
+<li>You can tail the logs for live activity <code>tail -f /path/to/applogs</code></li>
+<li>Search for logs around the time the error occured <code>grep -iE  &quot;error|warn|fatal|exception|timeout&quot; path/to/log</code></li>
+<li>You can specify the time and specific error: <code>journalctl --since &quot;1 hour ago&quot;</code> or <code>journalctl --since &quot;1 hour ago&quot;| grep -f failed</code>
+<em>observation</em>: are there error messages correlating with the incident start time?
+** Local Functionality test**
+<ul>
+<li>If its a webserve, try acccesing it localy: <code>curl -v http://localhost:port/path</code></li>
+<li>If its a database, try connecting to it using a local client tool
+<em>observation</em>: Does it work locally? any slow response? Are there any errors?
+<ul>
+<li>This could help differentiate a network issue to external sources and an internal server issue</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="phase-5-deeper-system-configuration-check">phase 5: Deeper system configuration check<a href="#phase-5-deeper-system-configuration-check" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>Kernel/system log deepdive</strong></p>
+<ul>
+<li>Go back to <code>/var/log/messges</code>, <code>var/log/syslog/</code> or <code>journalctl</code></li>
+<li>Look at the timeframe of the incident</li>
+<li>search for specific errors related to hardware, storage, network and kernel modules.
+<strong>configuration changes</strong>
+<ul>
+<li>check if relevant configuration files <code>/etc/</code> have been chabged</li>
+<li>if you are using <code>git</code> then check the version control history
+<strong>Hardware Health</strong>*</li>
+</ul>
+</li>
+<li>Check disk health if suspected: <code>smartctl -a /dev/sdX</code>(required <code>smartmontools</code>)</li>
+<li>Checkn for hardware errors reported by the system (<code>dmesg</code>, vendor specific tools)</li>
+</ul>
+<h2 id="escalate-and-resolution">Escalate and Resolution<a href="#escalate-and-resolution" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>Synthesize findings</strong></p>
+<ul>
+<li>Review all the findings gathered</li>
+<li>Formulate a hypothesis about the root cause; e.g Network connectivity led to Database outage
+<strong>Attempt remefiation</strong></li>
+<li>if the the main cause of the issue is clear and within you scope, fix it e.g reboot the servers, clearing temporary files</li>
+<li>Adviceable to document anything before doing it.</li>
+<li>Verrify if the fix resolved the issue. Monitor closely.
+<strong>Escalate if necessary</strong></li>
+<li>If the issue is beyond your scope, this is the best time to escalate it to a higher manager or another team(eg developers, networking team)</li>
+<li>This could also be as a result of an issue that require reboot and might affect other services in the same server, this might require authorisation</li>
+<li>When escalating the issue, make sure you have gathered enough data(evidence) to point out the exact issue with the server, do not escalate issues with vague diagnosis statement like(server X is broken)</li>
+</ul>
+<p><strong>Reference</strong>
+<a href="https://zeltser.com/media/docs/security-incident-survey-cheat-sheet.pdf?msc=Cheat&#43;Sheet&#43;Blog">Security Incident survery cheat sheet for server Administrators</a></p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/containerrisation/" class="button inline prev">
+        Docker: Introduction to containerization
+      </a>
+    
+    
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

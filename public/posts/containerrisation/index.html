@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Docker: Introduction to containerization :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What is containerization A container is a package that simulates the underlying operating system and is packaged with all the dependecies that your application need to run. Unlike a Virtual Machine that simulates and virtualise the underlying hardware, a container only virtualise the OS. They provide a way to package applications with required dependencies that is seperated from the host OS. This enables the application to run out-of-the-box despite running on a different underlying enviroment other than the one its was compiled on. Containers basically act as lightweight VMs and they share the underlying OS.
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/containerrisation/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Docker: Introduction to containerization">
+<meta property="og:description" content="What is containerization A container is a package that simulates the underlying operating system and is packaged with all the dependecies that your application need to run. Unlike a Virtual Machine that simulates and virtualise the underlying hardware, a container only virtualise the OS. They provide a way to package applications with required dependencies that is seperated from the host OS. This enables the application to run out-of-the-box despite running on a different underlying enviroment other than the one its was compiled on. Containers basically act as lightweight VMs and they share the underlying OS.
+" />
+<meta property="og:url" content="http://localhost:1313/posts/containerrisation/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/containerrisation/">Docker: Introduction to containerization</a>
+  </h1>
+  <div class="post-meta"><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="what-is-containerization">What is containerization<a href="#what-is-containerization" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p>A <code>container</code> is a package that simulates the underlying operating system and is packaged with all the dependecies that your application need to run. Unlike a <code>Virtual Machine</code> that simulates and  virtualise the underlying hardware, a container only virtualise the OS. They provide a way to package applications with required dependencies that is seperated from the host OS. This enables the application to run out-of-the-box despite running on a different underlying enviroment other than the one its was compiled on. Containers basically act as lightweight VMs and they share the underlying OS.</p>
+<p>Let me explain this in the simplest way possible. A developer builds an application that is supposed to run in an ubuntu 22.04. This basically means that if the developer wants to run the appplication in on another machine, they need to make sure that the target machine has the same operating system and dependencies installed. With the cloud, this issue is easy to reslove because you can get a VM on demand for a specified environment.
+Things get sticky when the application is being built collaboratively and the other developers have a different enviroment(windows is a good example) than the target enviroment. This makes it practically impossible run or test the application as Linux and windows dependencies are not compatible.</p>
+<p>With  containerization, the developer will just package the application in a container with all the dependencies required for the app to run alongside the runtime of choice(OS). If they were to share the application/code with another developer, all he/she needs is a container runtime enviroment(<code>daemon</code>) and the application will run out-of-the-box.</p>
+<h1 id="origin-of-containers">Origin of containers<a href="#origin-of-containers" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p>When we mention containers, what comes to mind to most is <code>Docker</code>. There are so many types of containers and the best way to learn either of the exhaustive list of types of containers is to understand the underlying technlogy behind. The concept of containerization dates back to <code>chroot</code> systemcall in Unix. This syscall allowed processes to change their root directory leading to isolation from the filesystem.</p>
+<h3 id="chroot">chroot<a href="#chroot" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p><a href="https://en.wikipedia.org/wiki/Chroot">Chroot</a> is the first concept that led to the conception of container technology. It is used to change the root directory(/) of the current running process and its child processes.</p>
+<ul>
+<li>Your current working directory could be <code>/home/myfiles</code> and using chroot we can restrict the process we are running to that directory.</li>
+<li>The change creates a restricted enviroment referred to as a <code>chroot jail</code> or <code>jailed directory</code> where the processes are limited to accessing only files within the new directory.</li>
+<li>The tools is useful for:
+<ul>
+<li><code>Creating a test enviroment</code>: Developers can create an isolated test environment  for softwares without damaging the main system.</li>
+<li><code>System Recovery</code> Chroot can be used to repair a broken system such a repairing file systems or password recovery.</li>
+<li><code>Reinstalling the Bootloader</code>: If the bootloader is corrupted, chroot allows you to access the system enviroment to reinstall or repair it without affecting the main root system.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># Chroot syntax</span>
+</span></span><span style="display:flex;"><span>$ chroot /path-to-new-root-dir  command-to-jail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># alternative</span>
+</span></span><span style="display:flex;"><span>$ chroot /path-to-new-root-dir /path-to-server-process
+</span></span></code></pre></div><p>The syntax above shows the basic usage of the chroot command in any Unix or Unix-like systems. We can also use comand options or flags.
+The concept of process isolation is heavily used in containerization. In 2000 FreeBSD introduced <code>jails</code> that was a build up of chroot and allowed for advanced isolation by allowing multiple indipendent enviroments on a single system complete with  their own user and network configurations.
+These concepts brought about the idea of process isolation but was not the full blown idea of containerization</p>
+<h3 id="cgroups">Cgroups<a href="#cgroups" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>A <a href="https://en.wikipedia.org/wiki/Cgroups">Control group</a> is a Linux feature that limits, accounts for and isolates resource usage of a single or collection of processes. Some of the resouces include, CPU, memory, network, disk I/O etc..
+Control groups are used to control how much a given resouce can be used by a process or set of processes.They are the key componet in a container because there are multiple processes running in a container and the usage of each has to be curbed to avoid resource over usage by a process.
+They enable fine-grained control over system reource allocation for groups and processes</p>
+<h3 id="namespaces">NameSpaces<a href="#namespaces" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p><a href="https://en.wikipedia.org/wiki/Namespace">Namespaces</a> are a feature found in Linux that offer isolation of system resources to different specified processes. They give an illussion that a process has its private instance of a resource. This could be resources such as filesystems, processID and network intefaces.</p>
+<p>There are multiple types of Namespaces:
+Note: for better understanding, in the explanations below, we will use room as a representative of an isolated enviroment with dedicated resources.
+1.<code>Process ID namespace</code>
+sets a process ID to processes for identification and makes sure that a process in one &lsquo;room&rsquo; does not know about another.
+2.<code>Unix Timesharing system(UTS) Namespace</code>
+Isolates hostnames and domain names. allow each &lsquo;room&rsquo; to have its own hostname and domain name and the hostname can be renamed without affecting the host OS
+3.<code>Inter-process Communication (IPC) Namespace</code>
+Seperates shared resources such asshared memory and message queues and ensure that such resources are not accessible to other rooms.
+4.<code>Network Namespace</code>
+Isolates network interphases, Internet protocol address(IP) and ensures that each room has its own network configurations.
+5.<code>User namepaces</code>
+Isolates users and group ID&rsquo;s. A process can have root priviledges in one room but not in the main host OS
+6. <code>Cgroup Namespace</code>
+Makes a &lsquo;room&rsquo; &rsquo;think&rsquo; it has its own set of resources by isolating its own set of reources.</p>
+<p>Together, namespaces and Cgroups form the backbone of container technology, enabling secure and efficient application deployment in modern cloud environments.
+Some examples of container technology is Docker, Kubernetes, Podman, and LXD.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/docker/" class="button inline prev">
+        
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="http://localhost:1313/posts/incident-report-procedure/" class="button inline next">
+        Incident Report Procedure
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

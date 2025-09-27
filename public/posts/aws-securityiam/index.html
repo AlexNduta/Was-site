@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>AWS: Identity and Access Management(IAM) :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AWS: Identity and Access Management What is IAM?
+IAM stands for Identity and Access Management. It is a tool provided by cloud providers that you can use for user, role, and privilege management. This tool is very important as it can determine how vulnerable or strong your account can be. IAM is one of the main security tools provided by AWS as part of its shared responsibility model in the cloud.
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/aws-securityiam/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="AWS: Identity and Access Management(IAM)">
+<meta property="og:description" content="AWS: Identity and Access Management What is IAM?
+IAM stands for Identity and Access Management. It is a tool provided by cloud providers that you can use for user, role, and privilege management. This tool is very important as it can determine how vulnerable or strong your account can be. IAM is one of the main security tools provided by AWS as part of its shared responsibility model in the cloud.
+" />
+<meta property="og:url" content="http://localhost:1313/posts/aws-securityiam/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-12-03 12:42:47 &#43;0300 EAT" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/aws-securityiam/">AWS: Identity and Access Management(IAM)</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-12-03</time><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="aws-identity-and-access-management">AWS: Identity and Access Management<a href="#aws-identity-and-access-management" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p><strong>What is IAM?</strong></p>
+<p>IAM stands for Identity and Access Management. It is a tool provided by cloud providers that you can use for user, role, and privilege management. This tool is very important as it can determine how vulnerable or strong your account can be. IAM is one of the main security tools provided by AWS as part of its shared responsibility model in the cloud.</p>
+<p><strong>Usage of IAM</strong></p>
+<ol>
+<li>
+<p><strong>Manage IAM Users and Their Access:</strong></p>
+<ul>
+<li>You have the ability to create users and assign security credentials such as access keys, passwords, and multi-factor authentication devices.</li>
+<li>You can manage permissions to determine operations a user can perform.</li>
+</ul>
+</li>
+<li>
+<p><strong>Manage IAM Roles and Their Permissions</strong></p>
+<ul>
+<li>As the root user, you have the ability to assign roles to specific users. It is always advisable to assign the least privilege to users and only add more privileges upon request and verification. This reduces the attack surface.</li>
+</ul>
+</li>
+</ol>
+<p><strong>User Groups</strong></p>
+<p>A user group consists of users that need to have access to the same data. Privileges can be set at the group level rather than giving them to an individual user. This feature gives more control over the policies we set and how we implement them. Giving a single user privileges is called an inline policy, but it&rsquo;s not the best practice. Attaching policies to groups reduces the load on the admin as it basically involves just adding and removing a user to a group.</p>
+<p><strong>Managed Policies</strong></p>
+<p>Managed policies are pre-built policies created by either AWS or your Admin.</p>
+<ul>
+<li>The policies are attached to an IAM user or user group.</li>
+<li>Making changes to a policy applies to all groups and users that are attached to the policy.</li>
+<li>Policies are in JSON format.</li>
+<li>It is advised to assign support users the ability to view but not modify the rules.</li>
+</ul>
+<p><strong>Structure:</strong></p>
+<ul>
+<li><strong>Version:</strong> Defines the version of the policy, this is normally the date the policy was created.</li>
+<li><strong>Statement:</strong> This is an array of policies, enclosed in square brackets to indicate it&rsquo;s a list.</li>
+<li><strong>sid:</strong> This is the identification name of the specific policy.</li>
+<li><strong>Effect:</strong> Defines what is to be done, whether to allow or deny permissions.</li>
+<li><strong>Action:</strong> Specifies the API call that can be made on an AWS service.</li>
+<li><strong>Principal:</strong> Specifies the user who will have this policy applied to them.</li>
+<li><strong>Condition:</strong> The condition in which the policy will be in effect.</li>
+<li><strong>Resource:</strong> Defines the scope of entities covered by the policy rule.</li>
+</ul>
+<p>An Admin policy has a customer inline policy, which is a policy that is assigned to one user or group.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">// This is an admin policy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: <span style="color:#e6db74">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The policy above is versioned for when it was created and gives administrative access to every resource. The <code>Effect</code> is marked as <code>Allow</code>, meaning all actions are allowed. <code>Action</code> is marked as &lsquo;*&rsquo;, meaning all API calls will be allowed on all resources.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">// Policy to allow access to the s3 ivs resource
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;s3:PutObject&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:s3:::AWSIVS_*/ivs/*&#34;</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The policy above allows putting objects to the <code>s3 ivs</code> resource.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">// Example of a custom policy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Sid&#34;</span>: <span style="color:#e6db74">&#34;VisualEditor0&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;iam:ListUsers&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;iam:GetUser&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The custom policy basically allows our users to list and get users in IAM by making the <code>ListUsers</code> and <code>GetUser</code> API calls.</p>
+<p><strong>IAM Security</strong></p>
+<p>Creating a user is the first step, and securing it is the next. With the AWS shared security model, AWS is more responsible for the security of the cloud, and they have a set of tools that an administrator can use to secure users.
+Some of these tools include multi-factor authentication (MFA) and password managers. But the most basic way to protect a user account is by coming up with effective password policies that can make it difficult for threat actors to try cracking the password.</p>
+<p>Examples of password policies include:</p>
+<ul>
+<li>Set a minimum password length.</li>
+<li>Require specific character types such as numbers, upper &amp; lowercase letters, and non-alphanumeric characters.</li>
+<li>Allow all IAM users to change their passwords.</li>
+<li>Require users to change their passwords after some time.</li>
+<li>Prevent password reuse.</li>
+</ul>
+<p><strong>Multi-Factor Authentication (MFA)</strong></p>
+<p>This involves using multiple forms of verification on top of the password to prove your identity. This could include using passkeys, email verification, or text verification.</p>
+<p><strong>IAM Roles</strong></p>
+<p>AWS services are expected to interact with each other or carry out tasks on our behalf. To do this, we use IAM Roles to assign permissions to users.</p>
+<ul>
+<li>
+<p>Common roles include:</p>
+<ul>
+<li>EC2 instance Roles</li>
+<li>Lambda function Roles</li>
+<li>Roles for CloudFormation</li>
+</ul>
+</li>
+<li>
+<p>Creating a role involves navigating to IAM -&gt; Roles -&gt; Create Role -&gt; AWS Service.</p>
+</li>
+<li>
+<p>Roles define are in JSON formart.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">// Sample role for EC2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;sts:AssumeRole&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Principal&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;Service&#34;</span>: [
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;ec2.amazonaws.com&#34;</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The role above tells AWS to let an EC2 service to <code>AssumeRole</code> when making API calls.</li>
+</ul>
+<p><strong>IAM Best Practices</strong></p>
+<ol>
+<li>Always create an IAM user with Administrator privileges to avoid using the root account for your day-to-day interaction in AWS.</li>
+<li>Always set up MFA for all your users, including root and IAM users.</li>
+<li>An IAM user is the same as a physical user. Avoid giving out root user credentials. Instead, create an IAM user for anyone who needs access.</li>
+<li>For AWS services, use Roles to give permissions to specific services.</li>
+<li>Generate Access keys when using the CLI or SDK.
+<ul>
+<li>Access keys should be stored safely.</li>
+</ul>
+</li>
+</ol>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/" class="button inline prev">
+        1 Hardware Review
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="http://localhost:1313/posts/troubleshooting-misconfigured-kube-controller-manager/" class="button inline next">
+        Troubleshooting a misconfigured kube-controller manager
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

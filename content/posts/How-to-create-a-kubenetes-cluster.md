@@ -1,5 +1,5 @@
 +++
-title = " How to create a kubernets cluster using kubeadm"
+title = "1 Hardware Review"
 date = "2024-12-03T12:42:47+03:00"
 #dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
 author = "Alex Kinyanjui"
@@ -10,9 +10,11 @@ keywords = ["", ""]
 description = ""
 showFullContent = false
 readingTime = false
-
+hideComments = false
++++
 
 - In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a `Control plane` that does all the administrative operations and the `Nodes` whichs are responsible for housing the `pods`.
+
 
 
 # Control plane

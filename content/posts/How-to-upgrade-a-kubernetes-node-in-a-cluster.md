@@ -11,6 +11,7 @@ description = ""
 showFullContent = false
 readingTime = false
 
++++
 # context
 we have 3 major nodes running
     - `control`

@@ -1,7 +1,16 @@
 +++
 title = "Git Branching"
-date = "2024-01-25"
+date = "2025-12-03T12:42:47+03:00"
+#dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
 author = "Alex Kinyanjui"
+authorTwitter = "" #do not include @
+cover = ""
+tags = ["", ""]
+keywords = ["", ""]
+description = ""
+showFullContent = false
+readingTime = false
+hideComments = false
 +++
 
 

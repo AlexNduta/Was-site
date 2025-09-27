@@ -14,7 +14,12 @@
 ### Containerization
 [Introduction to Containerization](https://alexnduta.netlify.app/posts/containerrisation/)
 
-## Kubernetes
+## Kubernetes Administration
+[What is kubernetes?]()
+[Troubleshooting a misconfigured kube-apisever]()
+[troubleshooting a misconfigured kube-controller manager]()
+[Troubleshooting a misconfigured kubelet]()
+
 
 
 # Cloud(AWS)

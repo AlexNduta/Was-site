@@ -6,91 +6,18 @@
     <description>Recent content in Posts on Terminal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Dec 2025 12:42:47 +0300</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Sep 2025 12:42:47 +0300</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title> How to upgrade a kubernetes node in a cluster</title>
-      <link>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</link>
-      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
-      
-      <guid>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</guid>
-      <description>&lt;h1 id=&#34;context&#34;&gt;context&lt;/h1&gt;
-&lt;p&gt;we have 3 major nodes running
-- &lt;code&gt;control&lt;/code&gt;
-- &lt;code&gt;node0&lt;/code&gt;
-- &lt;code&gt;node1&lt;/code&gt;
-upon running the command &lt;code&gt;kubectl get nodes&lt;/code&gt;, we realise that the two worker nodes are on kuberntes v1.30 and the controlplan is on kubentes v1.34.
-Our main tasks is to upgrade the two nodes.&lt;/p&gt;
-&lt;p&gt;When upgrading a node in a cluster, you need to work on one node at a time for high availability. This means that systems do not have to go down because of an upgrade.&lt;/p&gt;</description>
-      <content>&lt;h1 id=&#34;context&#34;&gt;context&lt;/h1&gt;
-&lt;p&gt;we have 3 major nodes running
-- &lt;code&gt;control&lt;/code&gt;
-- &lt;code&gt;node0&lt;/code&gt;
-- &lt;code&gt;node1&lt;/code&gt;
-upon running the command &lt;code&gt;kubectl get nodes&lt;/code&gt;, we realise that the two worker nodes are on kuberntes v1.30 and the controlplan is on kubentes v1.34.
-Our main tasks is to upgrade the two nodes.&lt;/p&gt;
-&lt;p&gt;When upgrading a node in a cluster, you need to work on one node at a time for high availability. This means that systems do not have to go down because of an upgrade.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;step 1: drain the target node&lt;/strong&gt;&lt;/p&gt;
-</content>
-    </item>
-    
-    <item>
-      <title>1 Hardware Review</title>
-      <link>http://localhost:1313/posts/1-hardware-review/</link>
-      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
-      
-      <guid>http://localhost:1313/posts/1-hardware-review/</guid>
-      <description>&lt;h1 id=&#34;devops-zero-to-hero--1-hardware-review&#34;&gt;DevOps Zero to Hero: # 1 Hardware Review&lt;/h1&gt;
-&lt;p&gt;So, the hardware landed two weeks after the order. The specs were:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Lenovo&lt;/code&gt; ThinkSystem SR650 V3 (2U Rack Server)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Processor&lt;/code&gt;: Intel Xeon Silver 4410Y (12C 2.0GHz)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Memory&lt;/code&gt;: 1 x 64GB DDR5 RDIMM&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Disk Bay&lt;/code&gt;: 8 SAS/SATA SFF&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Storage&lt;/code&gt;: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;NIC&lt;/code&gt;: 4-port 1GbE RJ45, 2-port 10GbE SFP28&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Power Supply&lt;/code&gt;: 2 x 1100W Titanium&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Fans&lt;/code&gt;: 5 x Standard Fans&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;processor&#34;&gt;Processor&lt;/h2&gt;
-&lt;p&gt;Coming from the world of regular CPUs, you might not be familiar with &lt;code&gt;Intel Xeon&lt;/code&gt; CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.&lt;/p&gt;</description>
-      <content>&lt;h1 id=&#34;devops-zero-to-hero--1-hardware-review&#34;&gt;DevOps Zero to Hero: # 1 Hardware Review&lt;/h1&gt;
-&lt;p&gt;So, the hardware landed two weeks after the order. The specs were:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Lenovo&lt;/code&gt; ThinkSystem SR650 V3 (2U Rack Server)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Processor&lt;/code&gt;: Intel Xeon Silver 4410Y (12C 2.0GHz)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Memory&lt;/code&gt;: 1 x 64GB DDR5 RDIMM&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Disk Bay&lt;/code&gt;: 8 SAS/SATA SFF&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Storage&lt;/code&gt;: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;NIC&lt;/code&gt;: 4-port 1GbE RJ45, 2-port 10GbE SFP28&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Power Supply&lt;/code&gt;: 2 x 1100W Titanium&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Fans&lt;/code&gt;: 5 x Standard Fans&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;processor&#34;&gt;Processor&lt;/h2&gt;
-&lt;p&gt;Coming from the world of regular CPUs, you might not be familiar with &lt;code&gt;Intel Xeon&lt;/code&gt; CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.&lt;/p&gt;
-&lt;p&gt;Intel Xeon CPUs are designed with lower clock speeds compared to Intel i-series CPUs, which helps reduce heat generation and improve stability over long periods of time. Despite the lower clock speeds, they are designed for power efficiency, especially during intensive workload operations. The architecture allows them to achieve this.&lt;/p&gt;
-&lt;p&gt;The CPU in question is a 12-core server-grade processor ideal for enterprise data center environments. The 12 cores make it ideal for multitasking and parallel processing. The 30MB Layer 3 cache improves data retrieval speeds for frequently accessed data. Regular Intel i-series CPUs have a Layer 3 cache that ranges between 3-8MB for i3 to i7, respectively. This clearly shows that the Xeon CPU is not your average CPU.&lt;/p&gt;
-&lt;p&gt;The CPU architecture is based on &lt;code&gt;Sapphire Rapids&lt;/code&gt; architecture, which enhances performance and efficiency compared to previous generations. Sapphire Rapids is the fourth generation of Intel Xeon Scalable processors and is based on the Golden Cove microarchitecture.&lt;/p&gt;
-&lt;p&gt;The CPU supports DDR5-4000 memory with a maximum of 4TB across 8 channels, facilitating high-speed data access and processing. With such killer features, the beast is optimized for workloads such as virtualization, data analytics, and general server functions like web hosting and file serving.&lt;/p&gt;
-&lt;h2 id=&#34;memory&#34;&gt;Memory&lt;/h2&gt;
-&lt;p&gt;With 64GB of memory, I have more than enough for my workloads. My plan is to run Windows Server as the main VM, a couple of Linux VMs for system hosting, and a ton of containers. This is more memory than I need.&lt;/p&gt;
-&lt;h2 id=&#34;storage&#34;&gt;Storage&lt;/h2&gt;
-&lt;p&gt;This was the hardest decision. With two 480GB SSDs as primary drives, I was stuck between using RAID 0 and RAID 1 for my setup. For the four 1.2TB SAS HDDs, I also had to do a lot of research to settle on the ideal drive setup. I&amp;rsquo;ll write a comprehensive article on RAID and ZFS and how I arrived at the final decision.&lt;/p&gt;
-&lt;h2 id=&#34;network-interface-cards&#34;&gt;Network Interface Cards&lt;/h2&gt;
-&lt;p&gt;My main intent is to create an aggregated link for redundancy, and having two 10GbE SFPs is the ideal solution. I still need to figure out how to pass multiple VLANs through the two aggregated links, as my Windows server will require multiple VLANs. My network architecture is subdivided into multiple VLANs, and Active Directory needs to serve each VLAN. Four 1GbE Ethernet ports are more than enough but I have future use cases in mind.&lt;/p&gt;
-&lt;p&gt;The setup was assembled at the freight station as an after-sales service, which really ruined the fun of figuring out where each component fits. This still saved me time and allowed me to focus on getting the system up and running. The following series of articles will build upon this one as I share my learning and re-learning in the process of getting the system fully operational.&lt;/p&gt;
-</content>
-    </item>
-    
-    <item>
-      <title>1 Hardware Review</title>
+      <title>How  to create a 3-node kubernetes cluster using kubeadm</title>
       <link>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</link>
-      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      <pubDate>Wed, 03 Sep 2025 12:42:47 +0300</pubDate>
       
       <guid>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</guid>
-      <description>&lt;ul&gt;
+      <description>&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
+&lt;ul&gt;
 &lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;h2 id=&#34;control-plane&#34;&gt;Control plane&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The control plane contains the following:
@@ -103,7 +30,7 @@ Our main tasks is to upgrade the two nodes.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;h3 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
 &lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
@@ -112,13 +39,14 @@ Our main tasks is to upgrade the two nodes.&lt;/p&gt;
 &lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;h2 id=&#34;the-setup&#34;&gt;The setup&lt;/h2&gt;
 &lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
 the main intention is to create a kubentes cluster&lt;/p&gt;</description>
-      <content>&lt;ul&gt;
+      <content>&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
+&lt;ul&gt;
 &lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;h2 id=&#34;control-plane&#34;&gt;Control plane&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The control plane contains the following:
@@ -131,7 +59,7 @@ the main intention is to create a kubentes cluster&lt;/p&gt;</description>
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;h3 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
 &lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
@@ -140,10 +68,10 @@ the main intention is to create a kubentes cluster&lt;/p&gt;</description>
 &lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;h2 id=&#34;the-setup&#34;&gt;The setup&lt;/h2&gt;
 &lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
 the main intention is to create a kubentes cluster&lt;/p&gt;
-&lt;h1 id=&#34;the-process&#34;&gt;The process&lt;/h1&gt;
+&lt;h2 id=&#34;the-process&#34;&gt;The process&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;There are four phases to this process:
 &lt;ul&gt;
@@ -306,6 +234,106 @@ the main intention is to create a kubentes cluster&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Reaources&lt;/strong&gt;
 &lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/&#34;&gt;creating a cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title> How to upgrade a kubernetes node in a cluster</title>
+      <link>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</guid>
+      <description>&lt;p&gt;##context
+we have 3 major nodes running
+- &lt;code&gt;control&lt;/code&gt;
+- &lt;code&gt;node0&lt;/code&gt;
+- &lt;code&gt;node1&lt;/code&gt;
+upon running the command &lt;code&gt;kubectl get nodes&lt;/code&gt;, we realise that the two worker nodes are on kuberntes v1.30 and the controlplan is on kubentes v1.34.
+Our main tasks is to upgrade the two nodes.
+&lt;em&gt;NOTE:&lt;/em&gt; This update procedure only applies to updating a patch version
+When upgrading a node in a cluster, you need to work on one node at a time for high availability. This means that systems do not have to go down because of an upgrade.&lt;/p&gt;</description>
+      <content>&lt;p&gt;##context
+we have 3 major nodes running
+- &lt;code&gt;control&lt;/code&gt;
+- &lt;code&gt;node0&lt;/code&gt;
+- &lt;code&gt;node1&lt;/code&gt;
+upon running the command &lt;code&gt;kubectl get nodes&lt;/code&gt;, we realise that the two worker nodes are on kuberntes v1.30 and the controlplan is on kubentes v1.34.
+Our main tasks is to upgrade the two nodes.
+&lt;em&gt;NOTE:&lt;/em&gt; This update procedure only applies to updating a patch version
+When upgrading a node in a cluster, you need to work on one node at a time for high availability. This means that systems do not have to go down because of an upgrade.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;step 1: make the node unscheduable&lt;/strong&gt;
+&lt;code&gt;kubectl cordon node01&lt;/code&gt;
+This prevents any new nodes from being scheduled on this node as its under maintenance.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;step2: Drain the nodes&lt;/strong&gt;
+&lt;code&gt;kubectl drain node01 --ignore-daemonsets&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This evicts all containers scheduled on this specified nodes&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;step3: upgrade the kubelet and kubectl&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# query the database to findout which version is available for update&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ apt-cache show kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ apt install kubelet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;lt;specified-version&amp;gt; - y
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ apt-cache show kubectl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt install kubectl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;lt;specified-version&amp;gt; -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;we should first upgrade the kubelet and kubectl before we upgrade the whole system&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;step4: Upgrade the whole system&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubeadm upgrade node
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# restart the kubelet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl restart kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;step5: make the node scheduable&lt;/strong&gt;
+After updating the node, we need to make the node scheduable or else all other pods will not be scheduled on it
+``sh&lt;/p&gt;
+&lt;h1 id=&#34;run-this-on-the-control-plane&#34;&gt;run this on the control plane&lt;/h1&gt;
+&lt;p&gt;$ kubectl uncordon node01&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;we can test if the node is active by running the `get nodes` command on the control plane. we should see node01&amp;#39;s state as `Ready`
+&lt;/code&gt;&lt;/pre&gt;</content>
+    </item>
+    
+    <item>
+      <title>1 Hardware Review</title>
+      <link>http://localhost:1313/posts/1-hardware-review/</link>
+      <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/1-hardware-review/</guid>
+      <description>&lt;h1 id=&#34;devops-zero-to-hero--1-hardware-review&#34;&gt;DevOps Zero to Hero: # 1 Hardware Review&lt;/h1&gt;
+&lt;p&gt;So, the hardware landed two weeks after the order. The specs were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Lenovo&lt;/code&gt; ThinkSystem SR650 V3 (2U Rack Server)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Processor&lt;/code&gt;: Intel Xeon Silver 4410Y (12C 2.0GHz)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Memory&lt;/code&gt;: 1 x 64GB DDR5 RDIMM&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Disk Bay&lt;/code&gt;: 8 SAS/SATA SFF&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Storage&lt;/code&gt;: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NIC&lt;/code&gt;: 4-port 1GbE RJ45, 2-port 10GbE SFP28&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Power Supply&lt;/code&gt;: 2 x 1100W Titanium&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Fans&lt;/code&gt;: 5 x Standard Fans&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;processor&#34;&gt;Processor&lt;/h2&gt;
+&lt;p&gt;Coming from the world of regular CPUs, you might not be familiar with &lt;code&gt;Intel Xeon&lt;/code&gt; CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;devops-zero-to-hero--1-hardware-review&#34;&gt;DevOps Zero to Hero: # 1 Hardware Review&lt;/h1&gt;
+&lt;p&gt;So, the hardware landed two weeks after the order. The specs were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Lenovo&lt;/code&gt; ThinkSystem SR650 V3 (2U Rack Server)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Processor&lt;/code&gt;: Intel Xeon Silver 4410Y (12C 2.0GHz)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Memory&lt;/code&gt;: 1 x 64GB DDR5 RDIMM&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Disk Bay&lt;/code&gt;: 8 SAS/SATA SFF&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Storage&lt;/code&gt;: 2 x 480GB Read Intensive SATA SSD, 4 x 1.2TB SAS HDD&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NIC&lt;/code&gt;: 4-port 1GbE RJ45, 2-port 10GbE SFP28&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Power Supply&lt;/code&gt;: 2 x 1100W Titanium&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Fans&lt;/code&gt;: 5 x Standard Fans&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;processor&#34;&gt;Processor&lt;/h2&gt;
+&lt;p&gt;Coming from the world of regular CPUs, you might not be familiar with &lt;code&gt;Intel Xeon&lt;/code&gt; CPUs. Server CPUs are designed to balance performance and power consumption, striking a delicate balance. They are not as fast as regular CPUs in terms of clock speed, but they are optimized for sustained performance under heavy workloads.&lt;/p&gt;
+&lt;p&gt;Intel Xeon CPUs are designed with lower clock speeds compared to Intel i-series CPUs, which helps reduce heat generation and improve stability over long periods of time. Despite the lower clock speeds, they are designed for power efficiency, especially during intensive workload operations. The architecture allows them to achieve this.&lt;/p&gt;
+&lt;p&gt;The CPU in question is a 12-core server-grade processor ideal for enterprise data center environments. The 12 cores make it ideal for multitasking and parallel processing. The 30MB Layer 3 cache improves data retrieval speeds for frequently accessed data. Regular Intel i-series CPUs have a Layer 3 cache that ranges between 3-8MB for i3 to i7, respectively. This clearly shows that the Xeon CPU is not your average CPU.&lt;/p&gt;
+&lt;p&gt;The CPU architecture is based on &lt;code&gt;Sapphire Rapids&lt;/code&gt; architecture, which enhances performance and efficiency compared to previous generations. Sapphire Rapids is the fourth generation of Intel Xeon Scalable processors and is based on the Golden Cove microarchitecture.&lt;/p&gt;
+&lt;p&gt;The CPU supports DDR5-4000 memory with a maximum of 4TB across 8 channels, facilitating high-speed data access and processing. With such killer features, the beast is optimized for workloads such as virtualization, data analytics, and general server functions like web hosting and file serving.&lt;/p&gt;
+&lt;h2 id=&#34;memory&#34;&gt;Memory&lt;/h2&gt;
+&lt;p&gt;With 64GB of memory, I have more than enough for my workloads. My plan is to run Windows Server as the main VM, a couple of Linux VMs for system hosting, and a ton of containers. This is more memory than I need.&lt;/p&gt;
+&lt;h2 id=&#34;storage&#34;&gt;Storage&lt;/h2&gt;
+&lt;p&gt;This was the hardest decision. With two 480GB SSDs as primary drives, I was stuck between using RAID 0 and RAID 1 for my setup. For the four 1.2TB SAS HDDs, I also had to do a lot of research to settle on the ideal drive setup. I&amp;rsquo;ll write a comprehensive article on RAID and ZFS and how I arrived at the final decision.&lt;/p&gt;
+&lt;h2 id=&#34;network-interface-cards&#34;&gt;Network Interface Cards&lt;/h2&gt;
+&lt;p&gt;My main intent is to create an aggregated link for redundancy, and having two 10GbE SFPs is the ideal solution. I still need to figure out how to pass multiple VLANs through the two aggregated links, as my Windows server will require multiple VLANs. My network architecture is subdivided into multiple VLANs, and Active Directory needs to serve each VLAN. Four 1GbE Ethernet ports are more than enough but I have future use cases in mind.&lt;/p&gt;
+&lt;p&gt;The setup was assembled at the freight station as an after-sales service, which really ruined the fun of figuring out where each component fits. This still saved me time and allowed me to focus on getting the system up and running. The following series of articles will build upon this one as I share my learning and re-learning in the process of getting the system fully operational.&lt;/p&gt;
 </content>
     </item>
     
@@ -518,10 +546,10 @@ The main role of a &lt;code&gt;kube-controller manager&lt;/code&gt; is to check 
     
     <item>
       <title>Troubleshooting a misconfigured kublete</title>
-      <link>http://localhost:1313/posts/troubleshooting--misconfigured-kublete/</link>
+      <link>http://localhost:1313/posts/troubleshooting-misconfigured-kublete/</link>
       <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/troubleshooting--misconfigured-kublete/</guid>
+      <guid>http://localhost:1313/posts/troubleshooting-misconfigured-kublete/</guid>
       <description>&lt;h1 id=&#34;troubleshooting-a-misconfigured-kublete&#34;&gt;Troubleshooting a misconfigured kublete&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured&#34;&gt;Lab&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -702,8 +730,11 @@ The journey of a URL from your browser to the Google homepage involves a sophist
       <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/budgetlify/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Source code&lt;/a&gt;
-This was a personal budgeting application to help me counter my poor budgeting and financial habits.&lt;/p&gt;
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/1uk3WBFevD6KB6ZKzvk_lvbsDPVDola6dTf7MqW_O09Q/edit?usp=sharing&#34;&gt;presentatation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Source code&lt;/a&gt;
+This was a personal budgeting application to help me counter my poor budgeting and financial habits.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;technologies&#34;&gt;Technologies&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;Python&lt;/code&gt;
 &lt;code&gt;FastAPI&lt;/code&gt;
@@ -720,8 +751,11 @@ This was a personal budgeting application to help me counter my poor budgeting a
 &lt;code&gt;API&lt;/code&gt;: This is the backend section of the app
 - Queries the DB(currently using file storage) for data
 - Currently only accepts &lt;code&gt;Category&lt;/code&gt;, &lt;code&gt;Date&lt;/code&gt;, &lt;code&gt;Amount&lt;/code&gt; and &lt;code&gt;Description&lt;/code&gt;. The ID is auto generated&lt;/p&gt;</description>
-      <content>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Source code&lt;/a&gt;
-This was a personal budgeting application to help me counter my poor budgeting and financial habits.&lt;/p&gt;
+      <content>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/1uk3WBFevD6KB6ZKzvk_lvbsDPVDola6dTf7MqW_O09Q/edit?usp=sharing&#34;&gt;presentatation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/AlexNduta/Budgetlify-API-SQL-&#34;&gt;Source code&lt;/a&gt;
+This was a personal budgeting application to help me counter my poor budgeting and financial habits.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;technologies&#34;&gt;Technologies&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;Python&lt;/code&gt;
 &lt;code&gt;FastAPI&lt;/code&gt;
@@ -848,6 +882,157 @@ stack:
       <guid>http://localhost:1313/posts/docker/</guid>
       <description></description>
       <content></content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/twender-deploy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/twender-deploy/</guid>
+      <description>&lt;h1 id=&#34;deploying-a-3-tier-application-on-kubernetes&#34;&gt;Deploying a 3-tier application on Kubernetes&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/1Kww9vjTg72eGYL40sY1b1iVIOTOXZBZaEVSrDD-uKbE/edit?usp=sharing&#34;&gt;presentation&lt;/a&gt;
+&lt;a href=&#34;https://github.com/AlexNduta/Twender/tree/main/K8s&#34;&gt;source codde&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;3-tier-app.png&#34; alt=&#34;3-tier-app.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ui&#34;&gt;UI&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This will be represeneted by the &lt;code&gt;swagger-ui&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;This is what the user will interact with&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;django-apptwender-app&#34;&gt;Django app(Twender-App)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the main logic of the application&lt;/li&gt;
+&lt;li&gt;functionality:
+&lt;blockquote&gt;
+&lt;p&gt;User creation
+user validation
+User login
+trip creation
+payment
+payment validation
+trip update&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;mysql-database&#34;&gt;MySQL Database&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Stores all data processed by the django app&lt;/li&gt;
+&lt;li&gt;offers data on-request&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-architecture&#34;&gt;The architecture&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;k8s-architecture.png&#34; alt=&#34;k8s-architecture.png&#34;&gt;&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;deploying-a-3-tier-application-on-kubernetes&#34;&gt;Deploying a 3-tier application on Kubernetes&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/1Kww9vjTg72eGYL40sY1b1iVIOTOXZBZaEVSrDD-uKbE/edit?usp=sharing&#34;&gt;presentation&lt;/a&gt;
+&lt;a href=&#34;https://github.com/AlexNduta/Twender/tree/main/K8s&#34;&gt;source codde&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;3-tier-app.png&#34; alt=&#34;3-tier-app.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ui&#34;&gt;UI&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This will be represeneted by the &lt;code&gt;swagger-ui&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;This is what the user will interact with&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;django-apptwender-app&#34;&gt;Django app(Twender-App)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the main logic of the application&lt;/li&gt;
+&lt;li&gt;functionality:
+&lt;blockquote&gt;
+&lt;p&gt;User creation
+user validation
+User login
+trip creation
+payment
+payment validation
+trip update&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;mysql-database&#34;&gt;MySQL Database&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Stores all data processed by the django app&lt;/li&gt;
+&lt;li&gt;offers data on-request&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-architecture&#34;&gt;The architecture&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;k8s-architecture.png&#34; alt=&#34;k8s-architecture.png&#34;&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/twender/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/twender/</guid>
+      <description>&lt;h1 id=&#34;twender&#34;&gt;Twender&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;- [presentation](https://docs.google.com/presentation/d/1W8wUs0bUqKhZYc2ARwsxevkH3hzyMRJ93z3C47h44b4/edit?usp=sharing)
+
+- [source code](https://github.com/AlexNduta/Twender)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;A Django REST framework API designed to act as a virtual matatu(public transport system) conductor by managing payments and passenger trips.&lt;/li&gt;
+&lt;li&gt;The application features role-based access for passengers and condutors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;User registration and JWT Authentication&lt;/li&gt;
+&lt;li&gt;Role-Based access Control(passenger)&lt;/li&gt;
+&lt;li&gt;Dynamic fare calculation based on dynamic routes, stops and peak-hours&lt;/li&gt;
+&lt;li&gt;passenger endpoints to create trips&lt;/li&gt;
+&lt;li&gt;conductor-only endpoint to view passenger destination and payment statuses&lt;/li&gt;
+&lt;li&gt;conductor-only ability to update the payment status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;structure&#34;&gt;Structure&lt;/h2&gt;
+&lt;p&gt;-Twender
+- Users App: Handles user registration, login an profiles&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;twender&#34;&gt;Twender&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;- [presentation](https://docs.google.com/presentation/d/1W8wUs0bUqKhZYc2ARwsxevkH3hzyMRJ93z3C47h44b4/edit?usp=sharing)
+
+- [source code](https://github.com/AlexNduta/Twender)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;A Django REST framework API designed to act as a virtual matatu(public transport system) conductor by managing payments and passenger trips.&lt;/li&gt;
+&lt;li&gt;The application features role-based access for passengers and condutors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;User registration and JWT Authentication&lt;/li&gt;
+&lt;li&gt;Role-Based access Control(passenger)&lt;/li&gt;
+&lt;li&gt;Dynamic fare calculation based on dynamic routes, stops and peak-hours&lt;/li&gt;
+&lt;li&gt;passenger endpoints to create trips&lt;/li&gt;
+&lt;li&gt;conductor-only endpoint to view passenger destination and payment statuses&lt;/li&gt;
+&lt;li&gt;conductor-only ability to update the payment status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;structure&#34;&gt;Structure&lt;/h2&gt;
+&lt;p&gt;-Twender
+- Users App: Handles user registration, login an profiles&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- Trips Apps: Manages journeys - creating trips, calculating fares, view trip history
+
+- Payment App: Handlin payment logic
+
+- Conductors App: conductor app for viewing pasengers and confirming payments
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;Twender-User-flow.png&#34; alt=&#34;Twender-User-flow.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;api-documentation&#34;&gt;API documentation&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;This API is documented using Swagger/OpenAPI. Once the project is running, the interactive documentation can be accessed at http://127.0.0.1:8000/api/schema/swagger-ui/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;database-schema-erd&#34;&gt;Database Schema (ERD):&lt;/h1&gt;
+&lt;p&gt;The database was designed to normalize route and user data. The Entity-Relationship Diagram can be viewed &lt;a href=&#34;https://drive.google.com/file/d/1TQM27c3QBKhCLC-oX_obyzpiyrLpI4F3/view?usp=drive_link&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;getting-started--local-development&#34;&gt;Getting Started / Local Development:&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;- Prerequisites (`git`, `Python 3.10+`, `Docker`).
+
+- Clone the repository: git clone ...
+
+- Set up the `.env` file .
+
+- Build and run with Docker Compose: `docker-compose up --build`
+
+- Run database migrations: `docker-compose exec web python manage.py migrate`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;technology-stack&#34;&gt;Technology Stack:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Backend: Django, Django REST Framework&lt;/li&gt;
+&lt;li&gt;Database: MySQL&lt;/li&gt;
+&lt;li&gt;Containerization: Docker, Docker Compose&lt;/li&gt;
+&lt;li&gt;API Documentation: drf-spectacular (Swagger/OpenAPI)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
     </item>
     
     <item>

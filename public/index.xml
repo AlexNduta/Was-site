@@ -587,10 +587,10 @@ The main role of a &lt;code&gt;kube-controller manager&lt;/code&gt; is to check 
     
     <item>
       <title>Troubleshooting a misconfigured kublete</title>
-      <link>http://localhost:1313/posts/troubleshooting--misconfigured-kublete/</link>
+      <link>http://localhost:1313/posts/troubleshooting-misconfigured-kublete/</link>
       <pubDate>Tue, 03 Dec 2024 12:42:47 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/troubleshooting--misconfigured-kublete/</guid>
+      <guid>http://localhost:1313/posts/troubleshooting-misconfigured-kublete/</guid>
       <description>&lt;h1 id=&#34;troubleshooting-a-misconfigured-kublete&#34;&gt;Troubleshooting a misconfigured kublete&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured&#34;&gt;Lab&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -958,35 +958,37 @@ Let’s discuss how I can help your organization strengthen its IT infrastructur
       <guid>http://localhost:1313/articles/</guid>
       <description>&lt;p&gt;&lt;strong&gt;&lt;code&gt;Articles&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;devops&#34;&gt;DevOps&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/&#34;&gt;0. How to create a kubernetes cluster&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/intro/&#34;&gt;1.My introduction to DevOps&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/1-hardware-review/&#34;&gt;2.Server Hardware Review&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/url-road-trip/&#34;&gt;3.The Exciting Roadtrip of a URL&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/incident-report-procedure/&#34;&gt;4. Incident Report Procedure&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/incident-report-procedure/&#34;&gt;4. Incident Report Procedure&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/git-branching/&#34;&gt;5. Git Branching&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;containerization&#34;&gt;Containerization&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;Introduction to Containerization&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;kubernetes-administration&#34;&gt;Kubernetes Administration&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;&#34;&gt;What is kubernetes?&lt;/a&gt;
-&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kube-apisever&lt;/a&gt;
-&lt;a href=&#34;&#34;&gt;troubleshooting a misconfigured kube-controller manager&lt;/a&gt;
-&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kubelet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/&#34;&gt;1. How to create a kubernetes cluster&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/troubleshooting-misconfigured-kublete/&#34;&gt;2. Troubleshooting a misconfigured kubelet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/troubleshooting-misconfigured-kube-controller-manager/&#34;&gt;3. Troubleshooting a misconfigured kube-controller manager&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/&#34;&gt;4. How to upgrade a kubernetes node in a cluster.md&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;cloudaws&#34;&gt;Cloud(AWS)&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/aws-securityiam/&#34;&gt;AWS: Identity and Access Management(IAM)&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;development&#34;&gt;Development&lt;/h1&gt;</description>
       <content>&lt;p&gt;&lt;strong&gt;&lt;code&gt;Articles&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;devops&#34;&gt;DevOps&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/&#34;&gt;0. How to create a kubernetes cluster&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/intro/&#34;&gt;1.My introduction to DevOps&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/1-hardware-review/&#34;&gt;2.Server Hardware Review&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/url-road-trip/&#34;&gt;3.The Exciting Roadtrip of a URL&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/incident-report-procedure/&#34;&gt;4. Incident Report Procedure&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/incident-report-procedure/&#34;&gt;4. Incident Report Procedure&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/git-branching/&#34;&gt;5. Git Branching&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;containerization&#34;&gt;Containerization&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/containerrisation/&#34;&gt;Introduction to Containerization&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;kubernetes-administration&#34;&gt;Kubernetes Administration&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;&#34;&gt;What is kubernetes?&lt;/a&gt;
-&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kube-apisever&lt;/a&gt;
-&lt;a href=&#34;&#34;&gt;troubleshooting a misconfigured kube-controller manager&lt;/a&gt;
-&lt;a href=&#34;&#34;&gt;Troubleshooting a misconfigured kubelet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/&#34;&gt;1. How to create a kubernetes cluster&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/troubleshooting-misconfigured-kublete/&#34;&gt;2. Troubleshooting a misconfigured kubelet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/troubleshooting-misconfigured-kube-controller-manager/&#34;&gt;3. Troubleshooting a misconfigured kube-controller manager&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/&#34;&gt;4. How to upgrade a kubernetes node in a cluster.md&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;cloudaws&#34;&gt;Cloud(AWS)&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://alexnduta.netlify.app/posts/aws-securityiam/&#34;&gt;AWS: Identity and Access Management(IAM)&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;development&#34;&gt;Development&lt;/h1&gt;

@@ -4,7 +4,8 @@ date = "2024-01-25"
 author = "Alex Kinyanjui"
 +++
 
-[Source code](https://github.com/AlexNduta/Budgetlify-API-SQL-)
+- [presentatation](https://docs.google.com/presentation/d/1uk3WBFevD6KB6ZKzvk_lvbsDPVDola6dTf7MqW_O09Q/edit?usp=sharing)
+- [Source code](https://github.com/AlexNduta/Budgetlify-API-SQL-)
 This was a personal budgeting application to help me counter my poor budgeting and financial habits.
 
 ## Technologies

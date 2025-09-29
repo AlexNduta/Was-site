@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8s on Terminal</title>
+    <link>http://localhost:1313/tags/k8s/</link>
+    <description>Recent content in K8s on Terminal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 03 Sep 2025 12:42:47 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How  to create a 3-node kubernetes cluster using kubeadm</title>
+      <link>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</link>
+      <pubDate>Wed, 03 Sep 2025 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The control plane contains the following:
+&lt;ul&gt;
+&lt;li&gt;Apiserver&lt;/li&gt;
+&lt;li&gt;Etcd&lt;/li&gt;
+&lt;li&gt;kubelet&lt;/li&gt;
+&lt;li&gt;kube-scheduler&lt;/li&gt;
+&lt;li&gt;kubectl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
+&lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
+&lt;li&gt;If a request is sent to create a pod &lt;code&gt;kubectl run nginx --image nginx&lt;/code&gt;, the request is sent to the &lt;code&gt;kube-scheduler&lt;/code&gt; which comunicates with the &lt;code&gt;kubelets&lt;/code&gt; to know which node is going to process the workload&lt;/li&gt;
+&lt;li&gt;The kubelets are found in every node and is the gateway between the nodes and the control plane&lt;/li&gt;
+&lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
+the main intention is to create a kubentes cluster&lt;/p&gt;</description>
+      <content>&lt;ul&gt;
+&lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The control plane contains the following:
+&lt;ul&gt;
+&lt;li&gt;Apiserver&lt;/li&gt;
+&lt;li&gt;Etcd&lt;/li&gt;
+&lt;li&gt;kubelet&lt;/li&gt;
+&lt;li&gt;kube-scheduler&lt;/li&gt;
+&lt;li&gt;kubectl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
+&lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
+&lt;li&gt;If a request is sent to create a pod &lt;code&gt;kubectl run nginx --image nginx&lt;/code&gt;, the request is sent to the &lt;code&gt;kube-scheduler&lt;/code&gt; which comunicates with the &lt;code&gt;kubelets&lt;/code&gt; to know which node is going to process the workload&lt;/li&gt;
+&lt;li&gt;The kubelets are found in every node and is the gateway between the nodes and the control plane&lt;/li&gt;
+&lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
+the main intention is to create a kubentes cluster&lt;/p&gt;
+&lt;h1 id=&#34;the-process&#34;&gt;The process&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;There are four phases to this process:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;prerequisites&lt;/strong&gt;: preparing all of the three vms&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Control plane setup&lt;/strong&gt;: initialising the cluster brain on the &lt;code&gt;control&lt;/code&gt; node&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;worker node setup&lt;/strong&gt;: &lt;code&gt;nodde0&lt;/code&gt; and &lt;code&gt;node1&lt;/code&gt; joing the cluster&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Network Setup&lt;/strong&gt;: Installing a network pluging so that the pods in the cluster can communicate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-prerequisites-this-is-to-be-done-on-all-three-nodes&#34;&gt;1. Prerequisites: This is to be done on all three nodes&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Intsall a container runtime&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;k8s never runs containes by itself, it depends on a container runtie to do this. K8s communictates with a container runtime via the  Container Runtime Interface&lt;code&gt;CRI&lt;/code&gt;. This gives us the freedom to work with whichever runtime we want as long as it is compatible with the CRI.&lt;/li&gt;
+&lt;li&gt;examples of &lt;a href=&#34;https://landscapeapp.cncf.io/cncf/card-mode?category=container-runtime&amp;amp;grouping=category&#34;&gt;container rutimes supported by kubentes include&lt;/a&gt; include containerd, cri-o,  firecaker, kata&lt;/li&gt;
+&lt;li&gt;Containerd is the industry standard container runtime that k8s uses to manage containers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# install containerd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get install -y containerd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create the default configuration file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# sudo mkdir -p /etc/containerd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ containerd config default | sudo tee /etc/containerd/config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# configure containerd to use the system cgroup driver which helps in proper resource management&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# this command basically just edits the file `config.toml` and converts the value to `true`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo set -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/SystemdCgroup = false/SystemdCgroup = true/&amp;#39;&lt;/span&gt; /etc/contained/config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# restart the containerd service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl restart containerd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Disable swapp memory&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;swap gives the system an illusion that there is more memory than the system has which could lead to underperfomance in context of kubernetes.&lt;/li&gt;
+&lt;li&gt;We are required to disable swapp as the &lt;code&gt;kubenetes scheduler&lt;/code&gt; needs a predictable and stable measure of memory on every node.&lt;/li&gt;
+&lt;li&gt;By design, the &lt;code&gt;kubelet&lt;/code&gt; fails if the swapp is turned on on a node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# disable swap for the current session&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo swapoff -a
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# permanetly disable swap by commentin the line swap in the fstab file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo set -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/ swap / s/^\(.*\)$/#\1/g&amp;#39;&lt;/span&gt; /etc/fstab
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;configure critical kernel parameters&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;we need to tell the linux kernel to allow IP traffic to be forwarded and let the &lt;code&gt;ip tables&lt;/code&gt; to see the bridged network traffic.&lt;/li&gt;
+&lt;li&gt;k8s CNI plugins create a virtual network and the &lt;code&gt;bridge&lt;/code&gt; is like a virtual swicth that every node gets to plugin to enable the communication between pods on diffrent nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;loading kernel modules&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# create a config file for these settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt; EOF | sudo tee /etc/modules-load.d/k8s.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;overlay
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# load these modules into the kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo modprobe overlay
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo modeprobe br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# confirm if the modules has been loaded succesfully&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ lsmod | grep overlay
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ lsmod | grep br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;overlay&lt;/code&gt; module is an ideal docker overlay filesytem which kubernetes uses to manage container layer. without it docker cannot funtion properly and kubernetes cannot ochestrate  containers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;br_netfilter module&lt;/code&gt;: this module is crucial for networking in k8s. It enables briding and filtering capabilities allowing k8s to manage network traffic between pods and services effectively&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;configuring systcl parameters&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# These paramaters are required for CNI plugins to work&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.bridge.bridge-nf-call-iptables  = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.bridge.bridge-nf-call-ip6tables = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.ipv4.ip_forward                 = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# apply the parameters without having to reboot&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo sysctl --system
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;4. Install &lt;code&gt;kubeadm&lt;/code&gt;, &lt;code&gt;kubelet&lt;/code&gt;  and &lt;code&gt;kubectl&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;kubeadm&lt;/code&gt; use to manage cluster operations with commands such as &lt;code&gt;init&lt;/code&gt; and &lt;code&gt;join&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubelet&lt;/code&gt; This is the agent that runs on every node and listents to instructions from the control plane and manages the pods inside the nodes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubectl&lt;/code&gt; The commandline tool to interact with the cluster&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# update the package index and install packages required to install kubernetes apt repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Download the public siging key for the k8s package repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34.0/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Add the approprite kubernets apt repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /&amp;#39;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/kubernetes.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# update packages and install kubelet, kubead and kubectl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-get install -y kubeadm kubelet kubectl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# pin the package version to prevent accidental upgrade&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo apt-mark hold kubelet kubeadm kubectl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-initialise-the-control-plane--this-is-done-on-the-control-plane-alone&#34;&gt;2. Initialise the control plane &amp;gt; this is done on the control plane alone&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Considering that we have multiple nodes, w need to choose the node that will operate as the &lt;code&gt;control plane&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Running &lt;code&gt;kubeadm init&lt;/code&gt; bootstraps the control plane and setsup:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;etcd -&amp;gt; the cluster db&lt;/li&gt;
+&lt;li&gt;ApI server&lt;/li&gt;
+&lt;li&gt;scheduler&lt;/li&gt;
+&lt;li&gt;and control manger&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;we use the flag &lt;code&gt;--pod-network-cidr=192.168.0.0/16&lt;/code&gt;   to prelocate IP address range for our pod network&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The ip address range should not conflict with the VM Ip address&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;The command might take a while, when done, it will print:
+&lt;ul&gt;
+&lt;li&gt;command to configure kubectl for your user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kubeadm join&lt;/code&gt; hash with a unique token and hash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;you are required to copy the kubeadm join command as you will use it in your worker nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is given as a response, use to to configure kubectl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p $HOME/.kube
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chown &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;id -u&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;:&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;id -g&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; $HOME/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-join-the-worker-nodes--run-on-the-worker-nodes-only&#34;&gt;3. Join the worker nodes &amp;gt; run on the worker nodes only&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This is how we tell our worker nodes how and where to fine the control plane and authenticate with the control API server&lt;/li&gt;
+&lt;li&gt;copy the &lt;code&gt;kubead join&lt;/code&gt; command provided by the control plane&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-install-the-pod-network--run-on-the-control-node-only&#34;&gt;4. Install the pod network &amp;gt; run on the control node only&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;At this point, the worker nodes have joined the cluster and running the command &lt;code&gt;kubectl get nodes&lt;/code&gt; will return a list on woker nodes in &lt;code&gt;Ready&lt;/code&gt; state.&lt;/li&gt;
+&lt;li&gt;The nodes are will registerd bu there is no network fabric connecting them. This means that pods on &lt;code&gt;node0&lt;/code&gt; cannot talk to pods on &lt;code&gt;node 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;We need to install a Container Network Interface to create this virtual network.&lt;/li&gt;
+&lt;li&gt;We will use Callico&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/calico.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;After this, running the command &lt;code&gt;kubectl get nodes&lt;/code&gt; will return nodes in the ready state&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Reaources&lt;/strong&gt;
+&lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/&#34;&gt;creating a cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

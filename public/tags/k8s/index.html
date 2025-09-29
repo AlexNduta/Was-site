@@ -2,7 +2,7 @@
 <html lang="en">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   
-    <title> :: Terminal</title>
+    <title>K8s :: Terminal</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 
   <meta name="robots" content="noodp" />
 
-<link rel="canonical" href="http://localhost:1313/posts/docker/" />
+<link rel="canonical" href="http://localhost:1313/tags/k8s/" />
 
 
 
@@ -74,10 +74,10 @@
 
 
 <meta property="og:locale" content="en" />
-<meta property="og:type" content="article" />
-<meta property="og:title" content="">
+<meta property="og:type" content="website" />
+<meta property="og:title" content="K8s">
 <meta property="og:description" content="" />
-<meta property="og:url" content="http://localhost:1313/posts/docker/" />
+<meta property="og:url" content="http://localhost:1313/tags/k8s/" />
 <meta property="og:site_name" content="Terminal" />
 
   <meta property="og:image" content="http://localhost:1313/og-image.png">
@@ -88,6 +88,8 @@
 
 
 
+
+  <link href="/tags/k8s/index.xml" rel="alternate" type="application/rss+xml" title="Terminal" />
 
 
 
@@ -175,52 +177,80 @@
 
   <div class="content">
     
-<article class="post">
-  <h1 class="post-title">
-    <a href="http://localhost:1313/posts/docker/"></a>
-  </h1>
-  <div class="post-meta"></div>
-
+  <h1>Posts for: #K8s</h1>
   
-  
-
-
-  
-
-  <div class="post-content"></div>
-
-  
+  <div class="posts">
     
-<div class="pagination">
-  <div class="pagination__title">
-    <span class="pagination__title-h"></span>
-    <hr />
-  </div>
+      <article class="post on-list">
+        <h1 class="post-title">
+          <a href="http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/">How  to create a 3-node kubernetes cluster using kubeadm</a>
+        </h1>
+        <div class="post-meta"><time class="post-date">2025-09-03</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/k8s/">k8s</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/kubernetes/">kubernetes</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/kubeadm/">kubeadm</a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <ul>
+<li>In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a <code>Control plane</code> that does all the administrative operations and the <code>Nodes</code> whichs are responsible for housing the <code>pods</code>.</li>
+</ul>
+<h1 id="control-plane">Control plane</h1>
+<ul>
+<li>This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the <code>kubelet</code></li>
+<li>The control plane contains the following:
+<ul>
+<li>Apiserver</li>
+<li>Etcd</li>
+<li>kubelet</li>
+<li>kube-scheduler</li>
+<li>kubectl</li>
+</ul>
+</li>
+</ul>
+<h2 id="apiserver">Apiserver</h2>
+<ul>
+<li>This is the tool that receives requests from users and redirects it to different components within the controlplane</li>
+<li>It acts as a gateway to the outside world and receives requests from the user using the <code>kubectl</code> client</li>
+<li>If a request is sent to create a pod <code>kubectl run nginx --image nginx</code>, the request is sent to the <code>kube-scheduler</code> which comunicates with the <code>kubelets</code> to know which node is going to process the workload</li>
+<li>The kubelets are found in every node and is the gateway between the nodes and the control plane</li>
+<li>It keeps regular watch for any instructions coming from the apiserver which is sent as a <code>podspec</code></li>
+<li>The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the <code>container runtime</code> to crate pods so as to meet the desired state.</li>
+</ul>
+<h1 id="the-setup">The setup</h1>
+<p>This is a basic setup running on a proxmox server. I have three VMs <code>control</code>, <code>Node0</code> and <code>Node1</code>
+the main intention is to create a kubentes cluster</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/how-to-create-a-kubenetes-cluster/"></a>
+          </div>
+        
+      </article>
+    
+
+    <div class="pagination">
   <div class="pagination__buttons">
     
-      <a href="http://localhost:1313/posts/budgetlify/" class="button inline prev">
-        Budgetlify
-      </a>
-    
-    
-      ::
-    
-    
-      <a href="http://localhost:1313/posts/twender-deploy/" class="button inline next">
-        
-      </a>
     
   </div>
 </div>
 
-
-  
-
-  
-    
-
-  
-</article>
+  </div>
 
   </div>
 

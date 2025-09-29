@@ -1,23 +1,23 @@
 +++
-title = "1 Hardware Review"
-date = "2024-12-03T12:42:47+03:00"
-#dateFormat = "2006-01-02" # This value can be configured for per-post date formatting
+title = "How  to create a 3-node kubernetes cluster using kubeadm"
+date = "2025-09-03T12:42:47+03:00"
 author = "Alex Kinyanjui"
 authorTwitter = "" #do not include @
 cover = ""
-tags = ["", ""]
-keywords = ["", ""]
+tags = ["k8s", "kubernetes", "kubeadm"]
+keywords = ["k8s", "kubead", "pods", "Nodes"]
 description = ""
 showFullContent = false
 readingTime = false
 hideComments = false
 +++
 
+# How  to create a 3-node kubernetes cluster using kubeadm
 - In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a `Control plane` that does all the administrative operations and the `Nodes` whichs are responsible for housing the `pods`.
 
 
 
-# Control plane
+## Control plane
 - This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the `kubelet`
 - The control plane contains the following:
 	- Apiserver
@@ -25,7 +25,7 @@ hideComments = false
 	- kubelet
 	- kube-scheduler
 	- kubectl
-## Apiserver
+### Apiserver
 - This is the tool that receives requests from users and redirects it to different components within the controlplane
 - It acts as a gateway to the outside world and receives requests from the user using the `kubectl` client
 - If a request is sent to create a pod `kubectl run nginx --image nginx`, the request is sent to the `kube-scheduler` which comunicates with the `kubelets` to know which node is going to process the workload
@@ -34,12 +34,12 @@ hideComments = false
 - The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the `container runtime` to crate pods so as to meet the desired state.
 
 
-# The setup
+## The setup
 This is a basic setup running on a proxmox server. I have three VMs `control`, `Node0` and `Node1`
 the main intention is to create a kubentes cluster
 
 
-# The process
+## The process
 - There are four phases to this process:
 	- **prerequisites**: preparing all of the three vms
 	- **Control plane setup**: initialising the cluster brain on the `control` node

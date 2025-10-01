@@ -14,6 +14,8 @@
 
 [5. Git Branching](https://alexnduta.netlify.app/posts/git-branching/)
 
+[5. Iptables](/posts/iptables)
+
 ### Containerization
 [Introduction to Containerization](https://alexnduta.netlify.app/posts/containerrisation/)
 

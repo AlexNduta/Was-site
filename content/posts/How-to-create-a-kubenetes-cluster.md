@@ -12,6 +12,7 @@ readingTime = false
 hideComments = false
 +++
 
+[setup script](https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh)
 # How  to create a 3-node kubernetes cluster using kubeadm
 - In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a `Control plane` that does all the administrative operations and the `Nodes` whichs are responsible for housing the `pods`.
 

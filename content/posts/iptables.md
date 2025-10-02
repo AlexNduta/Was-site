@@ -13,7 +13,6 @@ readingTime = false
 hideComments = false
 +++
 
-
 - This is the linux packet filtering tool baked-into linux systems
 - This is the userspace module for managing `Netfilter`
 - Acts as a firewall filtering packets at the kernel level by using rules to filter packets
@@ -39,10 +38,31 @@ hideComments = false
 		- `ACCEPT`: Allow packets to proceed
 		- `REJECT`: Discard a packet and send error messages back to the sender
 		- `DROP`: Silently discard the packets
-
+	 
 ## How Ip tables work
 - when a packet enters or leaves a Linux system, the Netfilter framework in the kernel processes it by following the steps below:
   > The packet is run through the rules in the rlevant table chain
   > Each rule is checked in the order it appears in the chain
   > if apacket matches a rule, the corresponding target action is executed, this could be accept, drop or reject
   > If the packet makes it to the end of a chain without matching any rule, the default rule is applied
+  
+# unblock a specific port
+```sh
+$ sudo iptables -I INPUT 2 -p tcp --dport <specific-port> -j ACCEPT
+```
+- The comand above adds an entry that allows all incoming traffic from the `specified-pot` and adds the rule in the `INPUT` chain on line number 2
+- Being at the very top means that its treated with priority making it override all other rules below it
+
+
+# unblock a specif port for a specified target IP address
+```sh
+dnf install iptables-services -y
+
+systemctl enable iptables.service
+systemctl start iptables.service
+
+iptables -t filter -I INPUT 1 -p tcp --dport 3003 -s 172.16.238.14 -j ACCEPT 
+service iptables save
+```
+- from the above example, we allow traffic from the specified source address on the specif port `3003`
+- From the specified sever, we can test the connection using `telnet IP-address port`

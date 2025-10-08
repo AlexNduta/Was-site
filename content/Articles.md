@@ -15,6 +15,8 @@
 [5. Git Branching](https://alexnduta.netlify.app/posts/git-branching/)
 
 [5. Iptables](/posts/iptables)
+[6. using Nginx as a Loadbalancer](/posts/Nginx-as-a-webserver)
+[7. using Nginx as a Loadbalancer](/posts/Nginx-as-a-loadbalancer)
 
 ### Containerization
 [Introduction to Containerization](https://alexnduta.netlify.app/posts/containerrisation/)
@@ -29,6 +31,10 @@
 
 [4. How to upgrade a kubernetes node in a cluster.md](/posts/How-to-upgrade-a-kubernetes-node-in-a-cluster)
 
+
+# Homel Lab setup/ projetcs
+##  project 1: High Available K8s cluster
+[1. HA k8s cluster setup](/post/ha.md)
 
 
 # Cloud(AWS)

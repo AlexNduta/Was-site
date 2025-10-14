@@ -16,29 +16,61 @@
       <description>&lt;h1 id=&#34;lamp&#34;&gt;LAMP&lt;/h1&gt;
 &lt;p&gt;LAMP stands for Linux, Apache, Mysql, Php&lt;/p&gt;
 &lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task:&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;a. Install httpd, php and its dependencies on all app hosts.&lt;/p&gt;</description>
+&lt;pre&gt;&lt;code&gt;&amp;gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter.
+They have already done infrastructure configuration—for example, 
+on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. 
+Please perform the following steps to accomplish the task:
+
+
+
+a. Install httpd, php and its dependencies on all app hosts.
+
+
+b. Apache should serve on port 6200 within the apps.
+
+
+c. Install/Configure MariaDB server on DB Server.
+
+
+d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. 
+Further make sure this newly created user is able to perform all operation on the database you created.
+
+
+e. Finally you should be able to access the website on LBR link,by clicking on the App button on the top bar. 
+You should see a message like App is able to connect to the database using user kodekloud_top
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;solution&#34;&gt;solution&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;considering that I am working on CentOs, all commands will apply ot all RHEL flavours&lt;/em&gt;&lt;/p&gt;</description>
       <content>&lt;h1 id=&#34;lamp&#34;&gt;LAMP&lt;/h1&gt;
 &lt;p&gt;LAMP stands for Linux, Apache, Mysql, Php&lt;/p&gt;
 &lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task:&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;a. Install httpd, php and its dependencies on all app hosts.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;b. Apache should serve on port 6200 within the apps.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;c. Install/Configure MariaDB server on DB Server.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. Further make sure this newly created user is able to perform all operation on the database you created.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;e. Finally you should be able to access the website on LBR link, by clicking on the App button on the top bar. You should see a message like App is able to connect to the database using user kodekloud_top&lt;/p&gt;&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter.
+They have already done infrastructure configuration—for example, 
+on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. 
+Please perform the following steps to accomplish the task:
+
+
+
+a. Install httpd, php and its dependencies on all app hosts.
+
+
+b. Apache should serve on port 6200 within the apps.
+
+
+c. Install/Configure MariaDB server on DB Server.
+
+
+d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. 
+Further make sure this newly created user is able to perform all operation on the database you created.
+
+
+e. Finally you should be able to access the website on LBR link,by clicking on the App button on the top bar. 
+You should see a message like App is able to connect to the database using user kodekloud_top
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;solution&#34;&gt;solution&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;considering that I am working on CentOs, all commands will apply ot all REHL flavours&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;considering that I am working on CentOs, all commands will apply ot all RHEL flavours&lt;/em&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;install http and mysqli in all the servers&lt;/li&gt;
+&lt;li&gt;install http and mysql in all the servers&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ sudo dnf install httpd php php-mysqlnd -y
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;

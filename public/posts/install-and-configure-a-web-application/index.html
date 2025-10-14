@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Install and configure a web application(Apache) :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The problem XCorp industry requires me as the DevOps Engineer to configure a webserver in their Stratos Data Center in preparation for the website that is still in progress
+Requiremets
+Install Apache on the specified server The website should be served on port 8086 Use the provided templates i.e cluster and ecommerce to server the files The following endpoints should serve the respective files curl localhost:8086/cluster and curl localhost:8086/ecommerce/ The solution Installing Apace considering that we are using a REHL based system, I will use the default package manager to install Apache(httpd) # using dnf sudo dnf install httpd -y By default, the apache service will be disabled and its the best time to make changes to the config file. The Apache config file is found in etc/http/conf/http.conf. This is consitsent in all linux flavours.
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/install-and-configure-a-web-application/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Install and configure a web application(Apache)">
+<meta property="og:description" content="The problem XCorp industry requires me as the DevOps Engineer to configure a webserver in their Stratos Data Center in preparation for the website that is still in progress
+Requiremets
+Install Apache on the specified server The website should be served on port 8086 Use the provided templates i.e cluster and ecommerce to server the files The following endpoints should serve the respective files curl localhost:8086/cluster and curl localhost:8086/ecommerce/ The solution Installing Apace considering that we are using a REHL based system, I will use the default package manager to install Apache(httpd) # using dnf sudo dnf install httpd -y By default, the apache service will be disabled and its the best time to make changes to the config file. The Apache config file is found in etc/http/conf/http.conf. This is consitsent in all linux flavours.
+" />
+<meta property="og:url" content="http://localhost:1313/posts/install-and-configure-a-web-application/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-10-14 12:42:47 &#43;0300 EAT" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/install-and-configure-a-web-application/">Install and configure a web application(Apache)</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-10-14</time><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h2 id="the-problem">The problem<a href="#the-problem" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>XCorp industry requires me as the DevOps Engineer to configure a webserver in their Stratos Data Center in  preparation for the website that is still in progress</p>
+<p><em>Requiremets</em></p>
+<ul>
+<li>Install Apache on the specified server</li>
+<li>The website should be served on port <code>8086</code></li>
+<li>Use the provided templates i.e <code>cluster</code> and <code>ecommerce</code> to server the files</li>
+<li>The following endpoints should serve the respective files <code>curl localhost:8086/cluster</code> and <code>curl localhost:8086/ecommerce/</code></li>
+</ul>
+<h2 id="the-solution">The solution<a href="#the-solution" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ol>
+<li><strong>Installing Apace</strong></li>
+</ol>
+<ul>
+<li>considering that we are using a REHL based system, I will use the default package manager to install Apache(httpd)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># using dnf</span>
+</span></span><span style="display:flex;"><span>sudo dnf install httpd -y
+</span></span></code></pre></div><p>By default, the apache service will be disabled and its the best time to make changes to the config file.
+The Apache config file is found in <code>etc/http/conf/http.conf</code>. This is consitsent in all linux flavours.</p>
+<ol start="2">
+<li><strong>Changing the port to serve</strong>
+A port is like a door to a room in a big appartment that we can use to access a specific service.By default Apache uses port 80 to sever web files. from the requiements, port <code>8086</code> is what we should be service from</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># /etc/httpd/conf/httpd.conf</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># change from this ..</span>
+</span></span><span style="display:flex;"><span>Listen <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># to This</span>
+</span></span><span style="display:flex;"><span>Listen <span style="color:#ae81ff">8086</span>
+</span></span></code></pre></div><p>At this point in time, we can enable the httpd service just to confirm that its using the port we specified</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ sudo systemctl start httpd
+</span></span><span style="display:flex;"><span>$ sudo systemctl enable httpd
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># confirm the port</span>
+</span></span><span style="display:flex;"><span>$ sudo ss -tunlp | grep -i httpd
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># the above should return the port we specified</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. **link URL to a file**
+</span></span><span style="display:flex;"><span>Apache has the capablity of linking files to a URL. This enables us to serve contents of the files using the specified endpoint. In this context we have two folders<span style="color:#f92672">(</span><span style="color:#e6db74">`</span>cluster<span style="color:#e6db74">`</span> and <span style="color:#e6db74">`</span>ecommerce<span style="color:#e6db74">`</span><span style="color:#f92672">)</span> which containing a simple html file.
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span>sh
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/httpd/conf/http.conf</span>
+</span></span><span style="display:flex;"><span>Alias /cluster/ /var/www/html/cluster/
+</span></span><span style="display:flex;"><span>&lt;Directory /var/www/html/cluster/&gt;
+</span></span><span style="display:flex;"><span>    Require all granted
+</span></span><span style="display:flex;"><span>&lt;/Directory&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Best Practice for a directory alias</span>
+</span></span><span style="display:flex;"><span>Alias /ecommerce/ /var/www/html/ecommerce/
+</span></span><span style="display:flex;"><span>&lt;Directory /var/www/html/ecommerce/&gt;
+</span></span><span style="display:flex;"><span>    Require all granted
+</span></span><span style="display:flex;"><span>&lt;/Directory&gt;
+</span></span></code></pre></div><p>In the implementation above, we use the <code>Alias</code> to create a virtual folder that maps to a real directory(example <em>/var/www/html/cluster/</em>.
+This means that our URL will use the virtual folder specified by the <code>Alias</code> to server the files in that folder. We then use the <code>&lt;Directory&gt;</code> tag to specify the access permissions to the directory.</p>
+<p><em>What if we never used the <code>Alias</code> tag?</em>
+In such a situation, the <code>DocumentRoot</code> would be our saviour.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># /etc/httpd/conf/httpd.conf</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DocumentRoot <span style="color:#e6db74">&#34;/var/html/www/html&#34;</span>
+</span></span></code></pre></div><p>Although it looks short, this makes the URL long and hard to remember for clients. In this context, our URL would be <code>http://localhost/var/www/html/cluster/index.html</code> so as to server the <code>index.html file</code>.</p>
+<ol start="4">
+<li><strong>Test the endpoints</strong>
+We first need to reload the httpd service for the changes to take effect then test the endpoints</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ sudo  systemctl restart httpd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Test the endpoint</span>
+</span></span><span style="display:flex;"><span>$ curl localhost:8086/cluster/
+</span></span><span style="display:flex;"><span>$ curl localhost:8086/ecommerce/
+</span></span></code></pre></div><p>The above should return the context of the index,html files in the specified folder.</p>
+<h2 id="conusion">conusion<a href="#conusion" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The above task is not just a excercise of installing and typing out configurations in the configuration files.
+Its a depiction of one&rsquo;s understanding of how a systems administrator would use a webserver to serve files to a client.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/building-a-lamp/" class="button inline prev">
+        Building A LAMP
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="http://localhost:1313/posts/nginx-as-a-loadbalancer/" class="button inline next">
+        How to use Nginx as a Loadbalancer
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

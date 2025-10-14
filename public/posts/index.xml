@@ -6,14 +6,436 @@
     <description>Recent content in Posts on Terminal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Sep 2025 12:42:47 +0300</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Dec 2025 12:42:47 +0300</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building A LAMP</title>
+      <link>http://localhost:1313/posts/building-a-lamp/</link>
+      <pubDate>Tue, 14 Oct 2025 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/building-a-lamp/</guid>
+      <description>&lt;h1 id=&#34;lamp&#34;&gt;LAMP&lt;/h1&gt;
+&lt;p&gt;LAMP stands for Linux, Apache, Mysql, Php&lt;/p&gt;
+&lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task:&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a. Install httpd, php and its dependencies on all app hosts.&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;lamp&#34;&gt;LAMP&lt;/h1&gt;
+&lt;p&gt;LAMP stands for Linux, Apache, Mysql, Php&lt;/p&gt;
+&lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task:&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a. Install httpd, php and its dependencies on all app hosts.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;b. Apache should serve on port 6200 within the apps.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;c. Install/Configure MariaDB server on DB Server.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. Further make sure this newly created user is able to perform all operation on the database you created.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;e. Finally you should be able to access the website on LBR link, by clicking on the App button on the top bar. You should see a message like App is able to connect to the database using user kodekloud_top&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;solution&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;considering that I am working on CentOs, all commands will apply ot all REHL flavours&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;install http and mysqli in all the servers&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ sudo dnf install httpd php php-mysqlnd -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;change the listening port to 6200 as speciifed&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /etc/http/conf/httpd.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# change the line&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# to &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Listen &lt;span style=&#34;color:#ae81ff&#34;&gt;6200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Restart the httpd server&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl restart http
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sysstemctl enable htttpd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# confirm which port the httpd server is listening on&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo ss -tunlp | grep -i httpd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;install &lt;code&gt;mariadb&lt;/code&gt; in the DB Server&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo dnf install mariadb-sever
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# restart the server and make it persistent over reboots&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl restart mariadb-server
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl enable mariadb-server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Create mysql database specified and the user and grant the user all the privileges of our table&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ mysql
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ CREATE DATABASE kodekloud_db5;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ CREATE USER &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;kodekloud_top&amp;#39;&lt;/span&gt;@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; IDENTIFIED BY &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;YchZHRcLkL&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ GRANT AL PRIVILEGES ON kodekloud_db5.* TO kodekloud_top;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ FLUSH PRIVILEGES;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ EXIT;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;5 Setup a loadbalancer to distribute traffic all through our three servers&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo dnf install haproxy
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl restart haproxy
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ systemctl enable haproxy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;setup the config file of the haproxy&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cfg&#34; data-lang=&#34;cfg&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /etc/haproxy/haproxy.cfg&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;global&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;maxconn 4096&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;pidfile /var/run/haproxy.pid&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;defaults&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;mode http&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;retries 3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;option redispatch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;maxconn 2000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;timeout connect 5000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;timeout check 5000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;timeout client 30000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;timeout server 30000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;frontend myAppFrontEnd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;bind *:${BIND_PORT}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;use_backend webservers&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;backend webservers&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;balance roundrobin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;server web1 ${WEB_APP1}:${WEB_APP1_PORT} check&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;server web2 ${WEB_APP2}:${WEB_APP2_PORT} check&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;server web3 ${WEB_APP3}:${WEB_APP3_PORT} check&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Using the URL of the loadbalancer, we will be able to get contents of each web-server&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Install and configure a web application(Apache)</title>
+      <link>http://localhost:1313/posts/install-and-configure-a-web-application/</link>
+      <pubDate>Tue, 14 Oct 2025 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/install-and-configure-a-web-application/</guid>
+      <description>&lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
+&lt;p&gt;XCorp industry requires me as the DevOps Engineer to configure a webserver in their Stratos Data Center in  preparation for the website that is still in progress&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Requiremets&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install Apache on the specified server&lt;/li&gt;
+&lt;li&gt;The website should be served on port &lt;code&gt;8086&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Use the provided templates i.e &lt;code&gt;cluster&lt;/code&gt; and &lt;code&gt;ecommerce&lt;/code&gt; to server the files&lt;/li&gt;
+&lt;li&gt;The following endpoints should serve the respective files &lt;code&gt;curl localhost:8086/cluster&lt;/code&gt; and &lt;code&gt;curl localhost:8086/ecommerce/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-solution&#34;&gt;The solution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Installing Apace&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;considering that we are using a REHL based system, I will use the default package manager to install Apache(httpd)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# using dnf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dnf install httpd -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By default, the apache service will be disabled and its the best time to make changes to the config file.
+The Apache config file is found in &lt;code&gt;etc/http/conf/http.conf&lt;/code&gt;. This is consitsent in all linux flavours.&lt;/p&gt;</description>
+      <content>&lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;
+&lt;p&gt;XCorp industry requires me as the DevOps Engineer to configure a webserver in their Stratos Data Center in  preparation for the website that is still in progress&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Requiremets&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install Apache on the specified server&lt;/li&gt;
+&lt;li&gt;The website should be served on port &lt;code&gt;8086&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Use the provided templates i.e &lt;code&gt;cluster&lt;/code&gt; and &lt;code&gt;ecommerce&lt;/code&gt; to server the files&lt;/li&gt;
+&lt;li&gt;The following endpoints should serve the respective files &lt;code&gt;curl localhost:8086/cluster&lt;/code&gt; and &lt;code&gt;curl localhost:8086/ecommerce/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-solution&#34;&gt;The solution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Installing Apace&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;considering that we are using a REHL based system, I will use the default package manager to install Apache(httpd)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# using dnf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dnf install httpd -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By default, the apache service will be disabled and its the best time to make changes to the config file.
+The Apache config file is found in &lt;code&gt;etc/http/conf/http.conf&lt;/code&gt;. This is consitsent in all linux flavours.&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Changing the port to serve&lt;/strong&gt;
+A port is like a door to a room in a big appartment that we can use to access a specific service.By default Apache uses port 80 to sever web files. from the requiements, port &lt;code&gt;8086&lt;/code&gt; is what we should be service from&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /etc/httpd/conf/httpd.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# change from this ..&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# to This&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Listen &lt;span style=&#34;color:#ae81ff&#34;&gt;8086&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;At this point in time, we can enable the httpd service just to confirm that its using the port we specified&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl start httpd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl enable httpd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# confirm the port&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo ss -tunlp | grep -i httpd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# the above should return the port we specified&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3. **link URL to a file**
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Apache has the capablity of linking files to a URL. This enables us to serve contents of the files using the specified endpoint. In this context we have two folders&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;cluster&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; and &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ecommerce&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; which containing a simple html file.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;```&lt;/span&gt;sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /etc/httpd/conf/http.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Alias /cluster/ /var/www/html/cluster/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;Directory /var/www/html/cluster/&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Require all granted
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/Directory&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Best Practice for a directory alias&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Alias /ecommerce/ /var/www/html/ecommerce/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;Directory /var/www/html/ecommerce/&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Require all granted
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/Directory&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the implementation above, we use the &lt;code&gt;Alias&lt;/code&gt; to create a virtual folder that maps to a real directory(example &lt;em&gt;/var/www/html/cluster/&lt;/em&gt;.
+This means that our URL will use the virtual folder specified by the &lt;code&gt;Alias&lt;/code&gt; to server the files in that folder. We then use the &lt;code&gt;&amp;lt;Directory&amp;gt;&lt;/code&gt; tag to specify the access permissions to the directory.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;What if we never used the &lt;code&gt;Alias&lt;/code&gt; tag?&lt;/em&gt;
+In such a situation, the &lt;code&gt;DocumentRoot&lt;/code&gt; would be our saviour.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /etc/httpd/conf/httpd.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DocumentRoot &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/var/html/www/html&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Although it looks short, this makes the URL long and hard to remember for clients. In this context, our URL would be &lt;code&gt;http://localhost/var/www/html/cluster/index.html&lt;/code&gt; so as to server the &lt;code&gt;index.html file&lt;/code&gt;.&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Test the endpoints&lt;/strong&gt;
+We first need to reload the httpd service for the changes to take effect then test the endpoints&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo  systemctl restart httpd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Test the endpoint&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ curl localhost:8086/cluster/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ curl localhost:8086/ecommerce/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The above should return the context of the index,html files in the specified folder.&lt;/p&gt;
+&lt;h2 id=&#34;conusion&#34;&gt;conusion&lt;/h2&gt;
+&lt;p&gt;The above task is not just a excercise of installing and typing out configurations in the configuration files.
+Its a depiction of one&amp;rsquo;s understanding of how a systems administrator would use a webserver to serve files to a client.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>How to use Nginx as a Loadbalancer</title>
+      <link>http://localhost:1313/posts/nginx-as-a-loadbalancer/</link>
+      <pubDate>Tue, 07 Oct 2025 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/nginx-as-a-loadbalancer/</guid>
+      <description>&lt;h1 id=&#34;what-is-a-loadbalancer&#34;&gt;What is a Loadbalancer?&lt;/h1&gt;
+&lt;p&gt;In situations where we have a single server and multiple clients, our server can be overwhelmed making it unable to serve webpages as expected. In a technical fashion, its is recommended to have multiple servers to distribute the request load. Having multiple severs is good but its all useless unless there&amp;rsquo;s a tool that handles how the logic of how the load is balanced through the servers.
+A load balancer basically accepts request form users on behalf of severs and then routes traffic to the servers depending on the algorithm used. The algorithm could require the loadbalancer to either forward traffic to a server that&amp;rsquo;s alive or just any sever. The main goal is to recduce the load on the severs. This reduces cases such as DDOS attacks as no single sever will have to handle all traffic.
+As discussed earlie, nginx can also be used as a Loadbalancer&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;what-is-a-loadbalancer&#34;&gt;What is a Loadbalancer?&lt;/h1&gt;
+&lt;p&gt;In situations where we have a single server and multiple clients, our server can be overwhelmed making it unable to serve webpages as expected. In a technical fashion, its is recommended to have multiple servers to distribute the request load. Having multiple severs is good but its all useless unless there&amp;rsquo;s a tool that handles how the logic of how the load is balanced through the servers.
+A load balancer basically accepts request form users on behalf of severs and then routes traffic to the servers depending on the algorithm used. The algorithm could require the loadbalancer to either forward traffic to a server that&amp;rsquo;s alive or just any sever. The main goal is to recduce the load on the severs. This reduces cases such as DDOS attacks as no single sever will have to handle all traffic.
+As discussed earlie, nginx can also be used as a Loadbalancer&lt;/p&gt;
+&lt;h2 id=&#34;what-are-the-benefits-of-a-load-balancer&#34;&gt;What are the benefits of a load balancer&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Improved perfomance due to traffic being evenly distributed across the specified server&lt;/li&gt;
+&lt;li&gt;Scalabioity: Allows you to scale horizontaly where instead of getting more powerful servers, you can get simple servers&lt;/li&gt;
+&lt;li&gt;High Availability is achieved as traffic is well distributed, if one of the cluster servers is out, it does not affect  the main application&lt;/li&gt;
+&lt;li&gt;i&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;scenario&#34;&gt;Scenario&lt;/h2&gt;
+&lt;p&gt;I have 3 app servers with the hostnames as follows:
+- server stapp01.stratos.xfusioncorp.com
+- server stapp02.stratos.xfusioncorp.com
+- server stapp03.stratos.xfusioncorp.com&lt;/p&gt;
+&lt;p&gt;I also have another server that I intend on using it as a loadbalancer. The end goal is enable by loadbalancer to takeup traffic from users and distribute it across my 3 servers.&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;install nginx in the server we intend to use as the load balanacer
+&lt;code&gt;sudo dnf install nginx&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Access the configuration file in the path &lt;code&gt;/et/nginx/nginx.conf&lt;/code&gt; and configure it to be used as a loadbalancer&lt;/li&gt;
+&lt;li&gt;edit the config file to this&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;upstream app_server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    server stapp01.stratos.xfusioncorp.com:8087;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    server stapp02.stratos.xfusioncorp.com:8087;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    server stapp03.stratos.xfusioncorp.com:8087;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    listen 80;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    server_name _;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    access_log /var/log/nginx/access.log;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        proxy_pass http://app_server;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        proxy_set_header Host $host;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        proxy_set_header X-Real-IP $remote_addr;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;breadkdown&lt;/strong&gt;
+&lt;code&gt;http{}&lt;/code&gt; is the main container for the nginx webserver configuration
+- everything related to serving HTTP trafic goes here
+&lt;code&gt;upstream app_server{}&lt;/code&gt; defines a server group called &lt;em&gt;app_server&lt;/em&gt;. This is basically our cluster&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;the &lt;code&gt;server&lt;/code&gt; defines every speciifc server name and their serving port&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;server{..}&lt;/code&gt; Defines the virtual host or server instance
+&lt;code&gt;access_log&lt;/code&gt; specifies where the all successful logins will be logged
+&lt;code&gt;location \&lt;/code&gt; This catches all trafic on the url **
+&lt;code&gt;proxy_pass&lt;/code&gt; specifies where to send the data when its received and in this context, its sent over to the upstream group &lt;code&gt;app_server&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now, with the above setup and a simple webserver serving the default &amp;lsquo;welcome&amp;rsquo; webpage running on our servers, anytime we hit the Loadbalancer, it will direct traffic to either of the three servers&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Using Nginx as a Web server</title>
+      <link>http://localhost:1313/posts/nginx-as-a-webserver/</link>
+      <pubDate>Tue, 07 Oct 2025 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/nginx-as-a-webserver/</guid>
+      <description>&lt;p&gt;A mentioned earlier, Nginx can be used  in a number of ways. One of them is as a webserver.
+A webserver is a software that sends webpages stored in webservers to users on request. By default, the web uses HTTP protocol on port 80 which sends data in unencrypted format. Nginx supports both HTTP and HTTPS meaning that we can send data securely.
+Nginx configuration files are found in the &lt;code&gt;/etc/nginx&lt;/code&gt; directory. We majourly make changes to the &lt;code&gt;sites-available&lt;/code&gt; directory which can be structured to house multiple sites each described as a configuration file with the &lt;code&gt;.conf&lt;/code&gt; extension
+After creating a site configuration file, we are supposed to publish the site to the &lt;code&gt;sites-enabled&lt;/code&gt;. This is done by creating a symbolic link with the command
+&lt;code&gt;ln -s ~/etc/nginx/sites-available/default ~/etc/nginx/sites-enabled/default&lt;/code&gt;
+The command above basically links the &lt;code&gt;site-enbaled/default&lt;/code&gt; and for the changes to take place, we need to restart nginx using the command &lt;code&gt;sudo nginx -s reload&lt;/code&gt;&lt;/p&gt;</description>
+      <content>&lt;p&gt;A mentioned earlier, Nginx can be used  in a number of ways. One of them is as a webserver.
+A webserver is a software that sends webpages stored in webservers to users on request. By default, the web uses HTTP protocol on port 80 which sends data in unencrypted format. Nginx supports both HTTP and HTTPS meaning that we can send data securely.
+Nginx configuration files are found in the &lt;code&gt;/etc/nginx&lt;/code&gt; directory. We majourly make changes to the &lt;code&gt;sites-available&lt;/code&gt; directory which can be structured to house multiple sites each described as a configuration file with the &lt;code&gt;.conf&lt;/code&gt; extension
+After creating a site configuration file, we are supposed to publish the site to the &lt;code&gt;sites-enabled&lt;/code&gt;. This is done by creating a symbolic link with the command
+&lt;code&gt;ln -s ~/etc/nginx/sites-available/default ~/etc/nginx/sites-enabled/default&lt;/code&gt;
+The command above basically links the &lt;code&gt;site-enbaled/default&lt;/code&gt; and for the changes to take place, we need to restart nginx using the command &lt;code&gt;sudo nginx -s reload&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;connfigurations&#34;&gt;Connfigurations&lt;/h1&gt;
+&lt;p&gt;By default, nginx uses one configuration file &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt; especially if nginx is installed with a package manager. We put our custom configurations in the &lt;code&gt;/etc/nginx/sites-available&lt;/code&gt; and they can only be served if they are linked with the &lt;code&gt;sites-enables&lt;/code&gt;directory&lt;/p&gt;
+&lt;p&gt;** example of an Nginx config file**&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Basic Settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sendfile on;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    tcp_nopush on;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    tcp_nodelay on;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    keepalive_timeout 65;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    types_hash_max_size 2048;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# server_tokens off;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# server_names_hash_bucket_size 64;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# server_name_in_redirect off;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    include /etc/nginx/mime.types;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    default_type application/octet-stream;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# SSL Settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; &lt;span style=&#34;color:#75715e&#34;&gt;# Dropping SSLv3, ref: POODLE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ssl_prefer_server_ciphers on;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Logging Settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    access_log /var/log/nginx/access.log;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    error_log /var/log/nginx/error.log;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Gzip Settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    gzip on;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# gzip_vary on;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# gzip_proxied any;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# gzip_comp_level 6;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# gzip_buffers 16 8k;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# gzip_http_version 1.1;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Virtual Host Configs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    include /etc/nginx/conf.d/*.conf;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    include /etc/nginx/sites-enabled/*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;The key-pairs above are called &lt;code&gt;directives&lt;/code&gt; and directives always end with a &lt;code&gt;;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Each directive has a specific meaning and defines a feature in context of an application&lt;/li&gt;
+&lt;li&gt;The ones ones the the braces &lt;code&gt;{}&lt;/code&gt; are called &lt;code&gt;contexts&lt;/code&gt;. Contexts also contains directives&lt;/li&gt;
+&lt;li&gt;everything with a &lt;code&gt;$&lt;/code&gt; is a varriable we can access in the config file&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;include&lt;/code&gt; statement is used to import another config file that build up on the config file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Directive Blocks&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;They are enclosed in a module&lt;/li&gt;
+&lt;li&gt;The root config is called the &lt;code&gt;main block&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Blocks can be nested together to build up on a logic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    server&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    listen 80;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    server_name example.com;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    access_log /var/log/nginx/example.com.log;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    location ^~/admin&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        index index.php;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;I the example above, &lt;code&gt;http&lt;/code&gt; is the main block that houses the &lt;code&gt;server&lt;/code&gt; block&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;server&lt;/code&gt; block contains configurations for the &lt;em&gt;example.com&lt;/em&gt; website&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;acces_log&lt;/code&gt; directive givses us a location where to store our logs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;Nginx Configuration example&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#/etc/nginx/conf.d/example.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; server&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;     listen 80;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;     server_name example.com www.example.com;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;     root /var/www/example.com/html;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  5. &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;The example above will is a configuaration of our site names &lt;code&gt;example.com&lt;/code&gt; that will be served on port 80&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;root&lt;/code&gt; directive specifies where to file the files to serve&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>What is Nginx?</title>
+      <link>http://localhost:1313/posts/nginx-intro/</link>
+      <pubDate>Tue, 07 Oct 2025 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/nginx-intro/</guid>
+      <description>&lt;h1 id=&#34;what-is-nginx&#34;&gt;What is Nginx?&lt;/h1&gt;
+&lt;p&gt;This is a software used to &amp;lsquo;serve&amp;rsquo; web content to our browser. It is an intermediary between a client and a server. In this instance, it acts as a reverse proxy where it receives client&amp;rsquo;s requests on behalf of a server.
+Nginx can either be used as:
+- HTTP Server
+- Revers proxy
+- Mail Proxy
+- Generic TCP/UDP proxy server
+Feautures in Nginx are activated using modules. This feature allows admins to only use the features they need. This means that you could install nginx and only use it as a HTTP server only&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;what-is-nginx&#34;&gt;What is Nginx?&lt;/h1&gt;
+&lt;p&gt;This is a software used to &amp;lsquo;serve&amp;rsquo; web content to our browser. It is an intermediary between a client and a server. In this instance, it acts as a reverse proxy where it receives client&amp;rsquo;s requests on behalf of a server.
+Nginx can either be used as:
+- HTTP Server
+- Revers proxy
+- Mail Proxy
+- Generic TCP/UDP proxy server
+Feautures in Nginx are activated using modules. This feature allows admins to only use the features they need. This means that you could install nginx and only use it as a HTTP server only&lt;/p&gt;
+&lt;h2 id=&#34;what-are-the-advantages-of-using-nginx&#34;&gt;What are the advantages of using Nginx?&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Speed&lt;/li&gt;
+&lt;li&gt;Loadbalancing -&amp;gt; can be used to distribute traffic to backend service. This comes as an advantage to prevent DDOS attacks or overwhelming one server&lt;/li&gt;
+&lt;li&gt;Nginx has the ability to run on very cheap hardware&lt;/li&gt;
+&lt;li&gt;nginx has the ability to update without interrupting running workloads&lt;/li&gt;
+&lt;li&gt;Very easy to maintain and install&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    </item>
+    
     <item>
       <title>How  to create a 3-node kubernetes cluster using kubeadm</title>
       <link>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</link>
       <pubDate>Wed, 03 Sep 2025 12:42:47 +0300</pubDate>
       
       <guid>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</guid>
-      <description>&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh&#34;&gt;setup script&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
@@ -42,7 +464,8 @@
 &lt;h2 id=&#34;the-setup&#34;&gt;The setup&lt;/h2&gt;
 &lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
 the main intention is to create a kubentes cluster&lt;/p&gt;</description>
-      <content>&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
+      <content>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh&#34;&gt;setup script&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
@@ -725,6 +1148,130 @@ The journey of a URL from your browser to the Google homepage involves a sophist
     </item>
     
     <item>
+      <title>What are iptables?</title>
+      <link>http://localhost:1313/posts/iptables/</link>
+      <pubDate>Tue, 01 Oct 2024 12:42:47 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/iptables/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This is the linux packet filtering tool baked-into linux systems&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This is the userspace module for managing &lt;code&gt;Netfilter&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Acts as a firewall filtering packets at the kernel level by using rules to filter packets&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rules defined determine how network traffic is handled by the system&lt;/p&gt;
+&lt;h2 id=&#34;structure&#34;&gt;Structure&lt;/h2&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Tables&lt;/code&gt;-
+- These are collection of chains that perform a specific function.
+- Most commontables include &lt;code&gt;filter&lt;/code&gt; , &lt;code&gt;nat&lt;/code&gt;, &lt;code&gt;mangle&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;chains&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;These are a list of rules that packets are checked against&lt;/li&gt;
+&lt;li&gt;The filter table has three default chains
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INPUT&lt;/code&gt;: For packets destined for local packets. packets coming into the server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OUTPUT&lt;/code&gt;:  For localy generated packtes. packets leaving the server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FORWARD&lt;/code&gt;: For packets being routed through the server to another destination&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Rules&lt;/code&gt;&lt;/p&gt;</description>
+      <content>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This is the linux packet filtering tool baked-into linux systems&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This is the userspace module for managing &lt;code&gt;Netfilter&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Acts as a firewall filtering packets at the kernel level by using rules to filter packets&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rules defined determine how network traffic is handled by the system&lt;/p&gt;
+&lt;h2 id=&#34;structure&#34;&gt;Structure&lt;/h2&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Tables&lt;/code&gt;-
+- These are collection of chains that perform a specific function.
+- Most commontables include &lt;code&gt;filter&lt;/code&gt; , &lt;code&gt;nat&lt;/code&gt;, &lt;code&gt;mangle&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;chains&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;These are a list of rules that packets are checked against&lt;/li&gt;
+&lt;li&gt;The filter table has three default chains
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INPUT&lt;/code&gt;: For packets destined for local packets. packets coming into the server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OUTPUT&lt;/code&gt;:  For localy generated packtes. packets leaving the server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FORWARD&lt;/code&gt;: For packets being routed through the server to another destination&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Rules&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Each rule withing a chain specifies a set of criteria for matching a packet&lt;/li&gt;
+&lt;li&gt;The criteria could be the source and destination IP address, protocol or port&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Targets&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;if a packet matches a rule, the rule target determines the action to be taken&lt;/li&gt;
+&lt;li&gt;they can either be:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ACCEPT&lt;/code&gt;: Allow packets to proceed&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;REJECT&lt;/code&gt;: Discard a packet and send error messages back to the sender&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DROP&lt;/code&gt;: Silently discard the packets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;how-ip-tables-work&#34;&gt;How Ip tables work&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;when a packet enters or leaves a Linux system, the Netfilter framework in the kernel processes it by following the steps below:
+&lt;blockquote&gt;
+&lt;p&gt;The packet is run through the rules in the rlevant table chain
+Each rule is checked in the order it appears in the chain
+if apacket matches a rule, the corresponding target action is executed, this could be accept, drop or reject
+If the packet makes it to the end of a chain without matching any rule, the default rule is applied&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;unblock-a-specific-port&#34;&gt;unblock a specific port&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo iptables -I INPUT &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; -p tcp --dport &amp;lt;specific-port&amp;gt; -j ACCEPT
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;The comand above adds an entry that allows all incoming traffic from the &lt;code&gt;specified-pot&lt;/code&gt; and adds the rule in the &lt;code&gt;INPUT&lt;/code&gt; chain on line number 2&lt;/li&gt;
+&lt;li&gt;Being at the very top means that its treated with priority making it override all other rules below it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;unblock-a-specif-port-for-a-specified-target-ip-address&#34;&gt;unblock a specif port for a specified target IP address&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dnf install iptables-services -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl enable iptables.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl start iptables.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;iptables -t filter -I INPUT &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; -p tcp --dport &lt;span style=&#34;color:#ae81ff&#34;&gt;3003&lt;/span&gt; -s 172.16.238.14 -j ACCEPT 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;service iptables save
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;from the above example, we allow traffic from the specified source address on the specif port &lt;code&gt;3003&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;From the specified sever, we can test the connection using &lt;code&gt;telnet IP-address port&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
       <title>Budgetlify</title>
       <link>http://localhost:1313/posts/budgetlify/</link>
       <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate>
@@ -880,6 +1427,16 @@ stack:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/docker/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/ha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/ha/</guid>
       <description></description>
       <content></content>
     </item>

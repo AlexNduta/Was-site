@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Using Nginx as a Web server :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A mentioned earlier, Nginx can be used in a number of ways. One of them is as a webserver. A webserver is a software that sends webpages stored in webservers to users on request. By default, the web uses HTTP protocol on port 80 which sends data in unencrypted format. Nginx supports both HTTP and HTTPS meaning that we can send data securely. Nginx configuration files are found in the /etc/nginx directory. We majourly make changes to the sites-available directory which can be structured to house multiple sites each described as a configuration file with the .conf extension After creating a site configuration file, we are supposed to publish the site to the sites-enabled. This is done by creating a symbolic link with the command ln -s ~/etc/nginx/sites-available/default ~/etc/nginx/sites-enabled/default The command above basically links the site-enbaled/default and for the changes to take place, we need to restart nginx using the command sudo nginx -s reload
+" />
+<meta name="keywords" content="Nginx, Webserver, SSL, HTTP" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/nginx-as-a-webserver/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Using Nginx as a Web server">
+<meta property="og:description" content="A mentioned earlier, Nginx can be used in a number of ways. One of them is as a webserver. A webserver is a software that sends webpages stored in webservers to users on request. By default, the web uses HTTP protocol on port 80 which sends data in unencrypted format. Nginx supports both HTTP and HTTPS meaning that we can send data securely. Nginx configuration files are found in the /etc/nginx directory. We majourly make changes to the sites-available directory which can be structured to house multiple sites each described as a configuration file with the .conf extension After creating a site configuration file, we are supposed to publish the site to the sites-enabled. This is done by creating a symbolic link with the command ln -s ~/etc/nginx/sites-available/default ~/etc/nginx/sites-enabled/default The command above basically links the site-enbaled/default and for the changes to take place, we need to restart nginx using the command sudo nginx -s reload
+" />
+<meta property="og:url" content="http://localhost:1313/posts/nginx-as-a-webserver/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-10-07 12:42:47 &#43;0300 EAT" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/nginx-as-a-webserver/">Using Nginx as a Web server</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-10-07</time><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/nginx/">Nginx</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/webserver/">Webserver</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/ssl/">SSL</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/http/">HTTP</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>A mentioned earlier, Nginx can be used  in a number of ways. One of them is as a webserver.
+A webserver is a software that sends webpages stored in webservers to users on request. By default, the web uses HTTP protocol on port 80 which sends data in unencrypted format. Nginx supports both HTTP and HTTPS meaning that we can send data securely.
+Nginx configuration files are found in the <code>/etc/nginx</code> directory. We majourly make changes to the <code>sites-available</code> directory which can be structured to house multiple sites each described as a configuration file with the <code>.conf</code> extension
+After creating a site configuration file, we are supposed to publish the site to the <code>sites-enabled</code>. This is done by creating a symbolic link with the command
+<code>ln -s ~/etc/nginx/sites-available/default ~/etc/nginx/sites-enabled/default</code>
+The command above basically links the <code>site-enbaled/default</code> and for the changes to take place, we need to restart nginx using the command <code>sudo nginx -s reload</code></p>
+<h1 id="connfigurations">Connfigurations<a href="#connfigurations" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p>By default, nginx uses one configuration file <code>/etc/nginx/nginx.conf</code> especially if nginx is installed with a package manager. We put our custom configurations in the <code>/etc/nginx/sites-available</code> and they can only be served if they are linked with the <code>sites-enables</code>directory</p>
+<p>** example of an Nginx config file**</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Basic Settings</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sendfile on;
+</span></span><span style="display:flex;"><span>    tcp_nopush on;
+</span></span><span style="display:flex;"><span>    tcp_nodelay on;
+</span></span><span style="display:flex;"><span>    keepalive_timeout 65;
+</span></span><span style="display:flex;"><span>    types_hash_max_size 2048;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># server_tokens off;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># server_names_hash_bucket_size 64;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># server_name_in_redirect off;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    include /etc/nginx/mime.types;
+</span></span><span style="display:flex;"><span>    default_type application/octet-stream;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># SSL Settings</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; <span style="color:#75715e"># Dropping SSLv3, ref: POODLE</span>
+</span></span><span style="display:flex;"><span>    ssl_prefer_server_ciphers on;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Logging Settings</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    access_log /var/log/nginx/access.log;
+</span></span><span style="display:flex;"><span>    error_log /var/log/nginx/error.log;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Gzip Settings</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    gzip on;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gzip_vary on;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gzip_proxied any;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gzip_comp_level 6;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gzip_buffers 16 8k;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gzip_http_version 1.1;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Virtual Host Configs</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    include /etc/nginx/conf.d/*.conf;
+</span></span><span style="display:flex;"><span>    include /etc/nginx/sites-enabled/*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
+<li>The key-pairs above are called <code>directives</code> and directives always end with a <code>;</code></li>
+<li>Each directive has a specific meaning and defines a feature in context of an application</li>
+<li>The ones ones the the braces <code>{}</code> are called <code>contexts</code>. Contexts also contains directives</li>
+<li>everything with a <code>$</code> is a varriable we can access in the config file</li>
+<li>the <code>include</code> statement is used to import another config file that build up on the config file</li>
+</ul>
+<p><strong>Directive Blocks</strong></p>
+<ul>
+<li>They are enclosed in a module</li>
+<li>The root config is called the <code>main block</code></li>
+<li>Blocks can be nested together to build up on a logic</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>http<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    server<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    listen 80;
+</span></span><span style="display:flex;"><span>    server_name example.com;
+</span></span><span style="display:flex;"><span>    access_log /var/log/nginx/example.com.log;
+</span></span><span style="display:flex;"><span>    location ^~/admin<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        index index.php;
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span> 	<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
+<li>I the example above, <code>http</code> is the main block that houses the <code>server</code> block</li>
+<li>The <code>server</code> block contains configurations for the <em>example.com</em> website</li>
+<li>The <code>acces_log</code> directive givses us a location where to store our logs</li>
+</ul>
+<p><strong><code>Nginx Configuration example</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#/etc/nginx/conf.d/example.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">1</span> server<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2</span>     listen 80;
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3</span>     server_name example.com www.example.com;
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">4</span>     root /var/www/example.com/html;
+</span></span><span style="display:flex;"><span>  5. <span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
+<li>The example above will is a configuaration of our site names <code>example.com</code> that will be served on port 80</li>
+<li>The <code>root</code> directive specifies where to file the files to serve</li>
+</ul>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="http://localhost:1313/posts/nginx-as-a-loadbalancer/" class="button inline prev">
+        How to use Nginx as a Loadbalancer
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="http://localhost:1313/posts/nginx-intro/" class="button inline next">
+        What is Nginx?
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

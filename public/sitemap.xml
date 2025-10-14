@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-12-03T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-12-03T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/building-a-lamp/</loc>
+    <lastmod>2025-10-14T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/install-and-configure-a-web-application/</loc>
+    <lastmod>2025-10-14T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nginx-as-a-loadbalancer/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/http/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/nginx/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/ssl/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nginx-as-a-webserver/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/webserver/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nginx-intro/</loc>
+    <lastmod>2025-10-07T12:42:47+03:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</loc>
     <lastmod>2025-09-03T12:42:47+03:00</lastmod>
   </url><url>
@@ -12,15 +48,6 @@
     <lastmod>2025-09-03T12:42:47+03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/kubernetes/</loc>
-    <lastmod>2025-09-03T12:42:47+03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-09-03T12:42:47+03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-09-03T12:42:47+03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
     <lastmod>2025-09-03T12:42:47+03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/how-to-upgrade-a-kubernetes-node-in-a-cluster/</loc>
@@ -50,6 +77,9 @@
     <loc>http://localhost:1313/posts/intro/</loc>
     <lastmod>2024-11-30T15:31:14+03:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/iptables/</loc>
+    <lastmod>2024-10-01T12:42:47+03:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/budgetlify/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
@@ -59,6 +89,8 @@
     <loc>http://localhost:1313/articles/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/docker/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/ha/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/twender-deploy/</loc>
   </url><url>

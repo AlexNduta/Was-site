@@ -14,9 +14,17 @@
 
 [5. Git Branching](https://alexnduta.netlify.app/posts/git-branching/)
 
-[5. Iptables](/posts/iptables)
-[6. using Nginx as a Loadbalancer](/posts/Nginx-as-a-webserver)
-[7. using Nginx as a Loadbalancer](/posts/Nginx-as-a-loadbalancer)
+[6. Iptables](/posts/iptables)
+
+
+[7. using Nginx as a Loadbalancer](/posts/Nginx-as-a-webserver)
+
+
+[8. using Nginx as a Loadbalancer](/posts/Nginx-as-a-loadbalancer)
+
+[9. Creating a LAMP stack](/posts/Building-a-LAMP)
+
+[10. Install and configure a web application](/posts/Install-and-configure-a-web-application)
 
 ### Containerization
 [Introduction to Containerization](https://alexnduta.netlify.app/posts/containerrisation/)

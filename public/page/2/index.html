@@ -192,6 +192,283 @@
     
       <article class="post on-list">
         <h2 class="post-title">
+          <a href="http://localhost:1313/posts/troubleshooting-misconfigured-kublete/">Troubleshooting a misconfigured kublete</a>
+        </h2>
+
+        <div class="post-meta"><time class="post-date">2024-12-03</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="troubleshooting-a-misconfigured-kublete">Troubleshooting a misconfigured kublete</h1>
+<p><a href="https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured">Lab</a></p>
+<ul>
+<li>A <code>Kublete</code> is the agent that runs in the nodes that directly communicates with the <code>Apiserver</code> receiving instructions from the control node as a <code>podspec</code>.</li>
+<li>The kubelet receives a  podspec which is a YAML file from the apiserver that describes how the containers should be running. The kublet makes sure that the nodes are healthy and ready t</li>
+</ul>
+<h2 id="context">context</h2>
+<ul>
+<li>In this lab, the <code>kublete</code> in <em>node01</em> is not working and you can confirm that by getting to the node01 and checking the kubelet service status</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ssh node01
+</span></span><span style="display:flex;"><span>$ systemctl status kubelet
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for older systems</span>
+</span></span><span style="display:flex;"><span>$ service status kubelet
+</span></span></code></pre></div><ul>
+<li>With the kubelet down, this means that we are unable to know the state of our node. This makes it impossible to schedule any pod on it.</li>
+<li>Get the logs to see any issues raised</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ cat /var/log syslog | grep -i kubelet
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ journalctl -xe | kubelet
+</span></span></code></pre></div><p>This should give all logs related to the kubelet and why it failed</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/troubleshooting-misconfigured-kublete/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/what-is-kubernetes/">What is Kubernetes ?</a>
+        </h2>
+
+        <div class="post-meta"><time class="post-date">2024-12-03</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="what-is-kubernetes">What is kubernetes?</h1>
+<p>This is a container ochestration tool that was initialy developed by Google for use as an internal tool. It was later on made open source and donated to the Cloud Native Foundation(CNCF).
+This sounds like a lot of tech words to throw around in a single sentence. Lets go to the very basics. What is a container?</p>
+<p>A <a href="https://alexnduta.netlify.app/posts/containerrisation/">container</a> is a package that contains an application and all the dependencies it needs to run.
+This makes it easy to share around applications and run them in different enviroment. This is all fun an games until you have to work with multiple containers.
+For multiple containerised applications, we use docker compose which is a IaaC used to define multiple container environments.
+This gets the job done but has limitations. We have to manualy manage and control the containers. This gets harder to scale or fix a falling container.
+A failing container could be a business critical service that could mean the ultimate death of the business due to frustrations faced by the customer accessing the service.</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/what-is-kubernetes/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/url-road-trip/">The exciting Roadtrip of a URL</a>
+        </h2>
+
+        <div class="post-meta"><time class="post-date">2024-11-30</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="the-exciting-roadtrip-of-a-url">The exciting Roadtrip of a URL</h1>
+<p>Have you ever wondered what happens behind the scenes when you type “https://www.google.com&quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.</p>
+<p>In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/url-road-trip/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/intro/">Intro: DevOps Zero to hero</a>
+        </h2>
+
+        <div class="post-meta"><time class="post-date">2024-11-30</time><span class="post-author">Alex Kinyajui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="devops-zero-to-hero">DevOps Zero to hero</h1>
+<p>This will be a series of articles showcasing the skills I pick up along the way.</p>
+<h3 id="backstory">Backstory</h3>
+<p>I&rsquo;ve been a Network Support Technician for two years and recently got promoted to Network Security Engineer at the same organization. This role is more of a hybrid, as I&rsquo;m responsible for the institution&rsquo;s IT infrastructure.</p>
+<p>Our current setup is quite complex, and I&rsquo;ll draw an architectural diagram in future articles to illustrate the issues. Our infrastructure has many unnecessary connections and devices. For example, we host a Windows server as a VM on one PC and our Unifi controller on another.</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/intro/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/iptables/">What are iptables?</a>
+        </h2>
+
+        <div class="post-meta"><time class="post-date">2024-10-01</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <ul>
+<li>
+<p>This is the linux packet filtering tool baked-into linux systems</p>
+</li>
+<li>
+<p>This is the userspace module for managing <code>Netfilter</code></p>
+</li>
+<li>
+<p>Acts as a firewall filtering packets at the kernel level by using rules to filter packets</p>
+</li>
+<li>
+<p>Rules defined determine how network traffic is handled by the system</p>
+<h2 id="structure">Structure</h2>
+</li>
+<li>
+<p><code>Tables</code>-
+- These are collection of chains that perform a specific function.
+- Most commontables include <code>filter</code> , <code>nat</code>, <code>mangle</code></p>
+</li>
+<li>
+<p><code>chains</code></p>
+<ul>
+<li>These are a list of rules that packets are checked against</li>
+<li>The filter table has three default chains
+<ul>
+<li><code>INPUT</code>: For packets destined for local packets. packets coming into the server</li>
+<li><code>OUTPUT</code>:  For localy generated packtes. packets leaving the server</li>
+<li><code>FORWARD</code>: For packets being routed through the server to another destination</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Rules</code></p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/iptables/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/budgetlify/">Budgetlify</a>
+        </h2>
+
+        <div class="post-meta"><time class="post-date">2024-01-25</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <ul>
+<li><a href="https://docs.google.com/presentation/d/1uk3WBFevD6KB6ZKzvk_lvbsDPVDola6dTf7MqW_O09Q/edit?usp=sharing">presentatation</a></li>
+<li><a href="https://github.com/AlexNduta/Budgetlify-API-SQL-">Source code</a>
+This was a personal budgeting application to help me counter my poor budgeting and financial habits.</li>
+</ul>
+<h2 id="technologies">Technologies</h2>
+<p><code>Python</code>
+<code>FastAPI</code>
+<code>MySQL</code>
+<code>Linux</code></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/oi7WxT6WvN8?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+     </div>
+
+<ul>
+<li>This is a budgeting app that enables you to create an account and track your regular spending, savings</li>
+</ul>
+<p>Dir:
+<code>API</code>: This is the backend section of the app
+- Queries the DB(currently using file storage) for data
+- Currently only accepts <code>Category</code>, <code>Date</code>, <code>Amount</code> and <code>Description</code>. The ID is auto generated</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/budgetlify/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
           <a href="http://localhost:1313/posts/docker/"></a>
         </h2>
 
@@ -211,6 +488,31 @@
         
           <div>
             <a class="read-more button inline" href="/posts/docker/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/ha/"></a>
+        </h2>
+
+        <div class="post-meta"></div>
+
+        
+
+        
+
+
+        <div class="post-content">
+          
+            
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button inline" href="/posts/ha/"></a>
           </div>
         
       </article>
@@ -314,98 +616,6 @@ trip update</p></blockquote>
         
       </article>
     
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/containerrisation/">Docker: Introduction to containerization</a>
-        </h2>
-
-        <div class="post-meta"><span class="post-author">Alex Kinyanjui</span></div>
-
-        
-          <span class="post-tags">
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-          </span>
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="what-is-containerization">What is containerization</h1>
-<p>A <code>container</code> is a package that simulates the underlying operating system and is packaged with all the dependecies that your application need to run. Unlike a <code>Virtual Machine</code> that simulates and  virtualise the underlying hardware, a container only virtualise the OS. They provide a way to package applications with required dependencies that is seperated from the host OS. This enables the application to run out-of-the-box despite running on a different underlying enviroment other than the one its was compiled on. Containers basically act as lightweight VMs and they share the underlying OS.</p>
-          
-        </div>
-
-        
-          <div>
-            <a class="read-more button inline" href="/posts/containerrisation/"></a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/incident-report-procedure/">Incident Report Procedure</a>
-        </h2>
-
-        <div class="post-meta"><span class="post-author">Alex Kinyanjui</span></div>
-
-        
-          <span class="post-tags">
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-          </span>
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <p>Linux Based Environment</p>
-<p>Goal: identify faulty server to find the root cause, gather evidence, either resolve the issue or escalate it.
-<strong><strong>Assumptions</strong></strong></p>
-<ul>
-<li>An incident has been declared and the server is suspected to be involved</li>
-<li>The operations person has login credentials(SSH and password)</li>
-<li>The existent of a ticketing or issue tracking system(Jira, ServiceNow)</li>
-</ul>
-<h2 id="phase1-preparation-and-initial-assessment">phase1: preparation and initial assessment</h2>
-<p><strong>Acknowledge the assigned ticket</strong>:</p>
-<ul>
-<li>Take up the assigned ticket and read through the details</li>
-<li>From this point, document every action carried out, command run and the timestamp for better documentation in the postmortem
-<strong>Gather context</strong>:</li>
-<li>Understand the issues presented or associated with the server in the ticket(e.g ‘slow server’, ‘API returning 500’, ‘Users unable to login into the domain’ )</li>
-<li>Understand the issue reported so as to know what to tackle:
-* what errors are presented
-<ul>
-<li>what services are hosted in the server?</li>
-<li>Are any other services in the server experiencing the same issue?</li>
-<li>Check for monitoring dashboards before logging in(DataDog, Grafana, Nagios, ) look for obvious anomalies:
-<blockquote>
-<p>High CPU/Memory Usage
-Latency spikes
-Error rate increase
-Health check failures</p>
-          
-        </div>
-
-        
-          <div>
-            <a class="read-more button inline" href="/posts/incident-report-procedure/"></a>
-          </div>
-        
-      </article>
-    
 
     <div class="pagination">
   <div class="pagination__buttons">
@@ -415,6 +625,11 @@ Health check failures</p>
         <span class="button__text">Newer posts</span>
       </a>
     
+    
+      <a href="/page/3/" class="button next">
+        <span class="button__text">Older posts</span>
+        <span class="button__icon">→</span>
+      </a>
     
   </div>
 </div>

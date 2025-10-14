@@ -204,10 +204,12 @@
 
         <div class="post-content">
           
-            <ul>
+            <p><a href="https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh">setup script</a></p>
+<h1 id="how--to-create-a-3-node-kubernetes-cluster-using-kubeadm">How  to create a 3-node kubernetes cluster using kubeadm</h1>
+<ul>
 <li>In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a <code>Control plane</code> that does all the administrative operations and the <code>Nodes</code> whichs are responsible for housing the <code>pods</code>.</li>
 </ul>
-<h1 id="control-plane">Control plane</h1>
+<h2 id="control-plane">Control plane</h2>
 <ul>
 <li>This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the <code>kubelet</code></li>
 <li>The control plane contains the following:
@@ -220,7 +222,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="apiserver">Apiserver</h2>
+<h3 id="apiserver">Apiserver</h3>
 <ul>
 <li>This is the tool that receives requests from users and redirects it to different components within the controlplane</li>
 <li>It acts as a gateway to the outside world and receives requests from the user using the <code>kubectl</code> client</li>
@@ -229,7 +231,7 @@
 <li>It keeps regular watch for any instructions coming from the apiserver which is sent as a <code>podspec</code></li>
 <li>The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the <code>container runtime</code> to crate pods so as to meet the desired state.</li>
 </ul>
-<h1 id="the-setup">The setup</h1>
+<h2 id="the-setup">The setup</h2>
 <p>This is a basic setup running on a proxmox server. I have three VMs <code>control</code>, <code>Node0</code> and <code>Node1</code>
 the main intention is to create a kubentes cluster</p>
           

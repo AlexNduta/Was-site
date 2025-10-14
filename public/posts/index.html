@@ -182,6 +182,218 @@
     
       <article class="post on-list">
         <h2 class="post-title">
+          <a href="http://localhost:1313/posts/building-a-lamp/">Building A LAMP</a>
+        </h2>
+        <div class="post-meta"><time class="post-date">2025-10-14</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="lamp">LAMP</h1>
+<p>LAMP stands for Linux, Apache, Mysql, Php</p>
+<h1 id="scenario">Scenario</h1>
+<blockquote>
+<p>X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task:</p></blockquote>
+<blockquote>
+<p>a. Install httpd, php and its dependencies on all app hosts.</p>
+          
+        </div>
+
+        
+           <div>
+            <a class="read-more button inline" href="/posts/building-a-lamp/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/install-and-configure-a-web-application/">Install and configure a web application(Apache)</a>
+        </h2>
+        <div class="post-meta"><time class="post-date">2025-10-14</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/"></a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h2 id="the-problem">The problem</h2>
+<p>XCorp industry requires me as the DevOps Engineer to configure a webserver in their Stratos Data Center in  preparation for the website that is still in progress</p>
+<p><em>Requiremets</em></p>
+<ul>
+<li>Install Apache on the specified server</li>
+<li>The website should be served on port <code>8086</code></li>
+<li>Use the provided templates i.e <code>cluster</code> and <code>ecommerce</code> to server the files</li>
+<li>The following endpoints should serve the respective files <code>curl localhost:8086/cluster</code> and <code>curl localhost:8086/ecommerce/</code></li>
+</ul>
+<h2 id="the-solution">The solution</h2>
+<ol>
+<li><strong>Installing Apace</strong></li>
+</ol>
+<ul>
+<li>considering that we are using a REHL based system, I will use the default package manager to install Apache(httpd)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># using dnf</span>
+</span></span><span style="display:flex;"><span>sudo dnf install httpd -y
+</span></span></code></pre></div><p>By default, the apache service will be disabled and its the best time to make changes to the config file.
+The Apache config file is found in <code>etc/http/conf/http.conf</code>. This is consitsent in all linux flavours.</p>
+          
+        </div>
+
+        
+           <div>
+            <a class="read-more button inline" href="/posts/install-and-configure-a-web-application/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/nginx-as-a-loadbalancer/">How to use Nginx as a Loadbalancer</a>
+        </h2>
+        <div class="post-meta"><time class="post-date">2025-10-07</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/nginx/">Nginx</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/webserver/">Webserver</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/ssl/">SSL</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/http/">HTTP</a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="what-is-a-loadbalancer">What is a Loadbalancer?</h1>
+<p>In situations where we have a single server and multiple clients, our server can be overwhelmed making it unable to serve webpages as expected. In a technical fashion, its is recommended to have multiple servers to distribute the request load. Having multiple severs is good but its all useless unless there&rsquo;s a tool that handles how the logic of how the load is balanced through the servers.
+A load balancer basically accepts request form users on behalf of severs and then routes traffic to the servers depending on the algorithm used. The algorithm could require the loadbalancer to either forward traffic to a server that&rsquo;s alive or just any sever. The main goal is to recduce the load on the severs. This reduces cases such as DDOS attacks as no single sever will have to handle all traffic.
+As discussed earlie, nginx can also be used as a Loadbalancer</p>
+          
+        </div>
+
+        
+           <div>
+            <a class="read-more button inline" href="/posts/nginx-as-a-loadbalancer/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/nginx-as-a-webserver/">Using Nginx as a Web server</a>
+        </h2>
+        <div class="post-meta"><time class="post-date">2025-10-07</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/nginx/">Nginx</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/webserver/">Webserver</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/ssl/">SSL</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/http/">HTTP</a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <p>A mentioned earlier, Nginx can be used  in a number of ways. One of them is as a webserver.
+A webserver is a software that sends webpages stored in webservers to users on request. By default, the web uses HTTP protocol on port 80 which sends data in unencrypted format. Nginx supports both HTTP and HTTPS meaning that we can send data securely.
+Nginx configuration files are found in the <code>/etc/nginx</code> directory. We majourly make changes to the <code>sites-available</code> directory which can be structured to house multiple sites each described as a configuration file with the <code>.conf</code> extension
+After creating a site configuration file, we are supposed to publish the site to the <code>sites-enabled</code>. This is done by creating a symbolic link with the command
+<code>ln -s ~/etc/nginx/sites-available/default ~/etc/nginx/sites-enabled/default</code>
+The command above basically links the <code>site-enbaled/default</code> and for the changes to take place, we need to restart nginx using the command <code>sudo nginx -s reload</code></p>
+          
+        </div>
+
+        
+           <div>
+            <a class="read-more button inline" href="/posts/nginx-as-a-webserver/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
+          <a href="http://localhost:1313/posts/nginx-intro/">What is Nginx?</a>
+        </h2>
+        <div class="post-meta"><time class="post-date">2025-10-07</time><span class="post-author">Alex Kinyanjui</span></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="http://localhost:1313/tags/nginx/">Nginx</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/webserver/">Webserver</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/ssl/">SSL</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/http/">HTTP</a>&nbsp;
+            
+          </span>
+        
+
+        
+
+
+        <div class="post-content">
+          
+            <h1 id="what-is-nginx">What is Nginx?</h1>
+<p>This is a software used to &lsquo;serve&rsquo; web content to our browser. It is an intermediary between a client and a server. In this instance, it acts as a reverse proxy where it receives client&rsquo;s requests on behalf of a server.
+Nginx can either be used as:
+- HTTP Server
+- Revers proxy
+- Mail Proxy
+- Generic TCP/UDP proxy server
+Feautures in Nginx are activated using modules. This feature allows admins to only use the features they need. This means that you could install nginx and only use it as a HTTP server only</p>
+          
+        </div>
+
+        
+           <div>
+            <a class="read-more button inline" href="/posts/nginx-intro/"></a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h2 class="post-title">
           <a href="http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/">How  to create a 3-node kubernetes cluster using kubeadm</a>
         </h2>
         <div class="post-meta"><time class="post-date">2025-09-03</time><span class="post-author">Alex Kinyanjui</span></div>
@@ -203,7 +415,8 @@
 
         <div class="post-content">
           
-            <h1 id="how--to-create-a-3-node-kubernetes-cluster-using-kubeadm">How  to create a 3-node kubernetes cluster using kubeadm</h1>
+            <p><a href="https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh">setup script</a></p>
+<h1 id="how--to-create-a-3-node-kubernetes-cluster-using-kubeadm">How  to create a 3-node kubernetes cluster using kubeadm</h1>
 <ul>
 <li>In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a <code>Control plane</code> that does all the administrative operations and the <code>Nodes</code> whichs are responsible for housing the <code>pods</code>.</li>
 </ul>
@@ -407,212 +620,6 @@ The main role of a <code>kube-controller manager</code> is to check the health o
         
            <div>
             <a class="read-more button inline" href="/posts/troubleshooting-misconfigured-kube-controller-manager/"></a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/troubleshooting-misconfigured-kublete/">Troubleshooting a misconfigured kublete</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2024-12-03</time><span class="post-author">Alex Kinyanjui</span></div>
-
-        
-          <span class="post-tags">
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-          </span>
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="troubleshooting-a-misconfigured-kublete">Troubleshooting a misconfigured kublete</h1>
-<p><a href="https://killercoda.com/killer-shell-cka/scenario/kube-controller-manager-misconfigured">Lab</a></p>
-<ul>
-<li>A <code>Kublete</code> is the agent that runs in the nodes that directly communicates with the <code>Apiserver</code> receiving instructions from the control node as a <code>podspec</code>.</li>
-<li>The kubelet receives a  podspec which is a YAML file from the apiserver that describes how the containers should be running. The kublet makes sure that the nodes are healthy and ready t</li>
-</ul>
-<h2 id="context">context</h2>
-<ul>
-<li>In this lab, the <code>kublete</code> in <em>node01</em> is not working and you can confirm that by getting to the node01 and checking the kubelet service status</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ssh node01
-</span></span><span style="display:flex;"><span>$ systemctl status kubelet
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># for older systems</span>
-</span></span><span style="display:flex;"><span>$ service status kubelet
-</span></span></code></pre></div><ul>
-<li>With the kubelet down, this means that we are unable to know the state of our node. This makes it impossible to schedule any pod on it.</li>
-<li>Get the logs to see any issues raised</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ cat /var/log syslog | grep -i kubelet
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ journalctl -xe | kubelet
-</span></span></code></pre></div><p>This should give all logs related to the kubelet and why it failed</p>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/troubleshooting-misconfigured-kublete/"></a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/what-is-kubernetes/">What is Kubernetes ?</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2024-12-03</time><span class="post-author">Alex Kinyanjui</span></div>
-
-        
-          <span class="post-tags">
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-          </span>
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="what-is-kubernetes">What is kubernetes?</h1>
-<p>This is a container ochestration tool that was initialy developed by Google for use as an internal tool. It was later on made open source and donated to the Cloud Native Foundation(CNCF).
-This sounds like a lot of tech words to throw around in a single sentence. Lets go to the very basics. What is a container?</p>
-<p>A <a href="https://alexnduta.netlify.app/posts/containerrisation/">container</a> is a package that contains an application and all the dependencies it needs to run.
-This makes it easy to share around applications and run them in different enviroment. This is all fun an games until you have to work with multiple containers.
-For multiple containerised applications, we use docker compose which is a IaaC used to define multiple container environments.
-This gets the job done but has limitations. We have to manualy manage and control the containers. This gets harder to scale or fix a falling container.
-A failing container could be a business critical service that could mean the ultimate death of the business due to frustrations faced by the customer accessing the service.</p>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/what-is-kubernetes/"></a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/url-road-trip/">The exciting Roadtrip of a URL</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2024-11-30</time><span class="post-author">Alex Kinyanjui</span></div>
-
-        
-          <span class="post-tags">
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-          </span>
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="the-exciting-roadtrip-of-a-url">The exciting Roadtrip of a URL</h1>
-<p>Have you ever wondered what happens behind the scenes when you type “https://www.google.com&quot; into your browser and press Enter? The seemingly instant appearance of Google’s homepage is the result of a complex and highly organised series of steps involving various technologies and systems.</p>
-<p>In this blog post, we’ll take a deep dive into the route taken by a URL, exploring the role of DNS requests, TCP/IP, firewalls, HTTPS/SSL, load-balancers, web servers, application servers, and databases.</p>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/url-road-trip/"></a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/intro/">Intro: DevOps Zero to hero</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2024-11-30</time><span class="post-author">Alex Kinyajui</span></div>
-
-        
-          <span class="post-tags">
-            
-            #<a href="http://localhost:1313/tags/"></a>&nbsp;
-            
-          </span>
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="devops-zero-to-hero">DevOps Zero to hero</h1>
-<p>This will be a series of articles showcasing the skills I pick up along the way.</p>
-<h3 id="backstory">Backstory</h3>
-<p>I&rsquo;ve been a Network Support Technician for two years and recently got promoted to Network Security Engineer at the same organization. This role is more of a hybrid, as I&rsquo;m responsible for the institution&rsquo;s IT infrastructure.</p>
-<p>Our current setup is quite complex, and I&rsquo;ll draw an architectural diagram in future articles to illustrate the issues. Our infrastructure has many unnecessary connections and devices. For example, we host a Windows server as a VM on one PC and our Unifi controller on another.</p>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/intro/"></a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/budgetlify/">Budgetlify</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2024-01-25</time><span class="post-author">Alex Kinyanjui</span></div>
-
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <ul>
-<li><a href="https://docs.google.com/presentation/d/1uk3WBFevD6KB6ZKzvk_lvbsDPVDola6dTf7MqW_O09Q/edit?usp=sharing">presentatation</a></li>
-<li><a href="https://github.com/AlexNduta/Budgetlify-API-SQL-">Source code</a>
-This was a personal budgeting application to help me counter my poor budgeting and financial habits.</li>
-</ul>
-<h2 id="technologies">Technologies</h2>
-<p><code>Python</code>
-<code>FastAPI</code>
-<code>MySQL</code>
-<code>Linux</code></p>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/oi7WxT6WvN8?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-     </div>
-
-<ul>
-<li>This is a budgeting app that enables you to create an account and track your regular spending, savings</li>
-</ul>
-<p>Dir:
-<code>API</code>: This is the backend section of the app
-- Queries the DB(currently using file storage) for data
-- Currently only accepts <code>Category</code>, <code>Date</code>, <code>Amount</code> and <code>Description</code>. The ID is auto generated</p>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/budgetlify/"></a>
           </div>
         
       </article>

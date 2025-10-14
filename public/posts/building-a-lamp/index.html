@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Building A LAMP :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LAMP LAMP stands for Linux, Apache, Mysql, Php
+Scenario &gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task: a. Install httpd, php and its dependencies on all app hosts. b. Apache should serve on port 6200 within the apps. c. Install/Configure MariaDB server on DB Server. d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. Further make sure this newly created user is able to perform all operation on the database you created. e. Finally you should be able to access the website on LBR link,by clicking on the App button on the top bar. You should see a message like App is able to connect to the database using user kodekloud_top solution considering that I am working on CentOs, all commands will apply ot all RHEL flavours
+" />
+<meta name="keywords" content="LAMP, Linux, Apache, #DevOps, #SysAdmin" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="http://localhost:1313/posts/building-a-lamp/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Building A LAMP">
+<meta property="og:description" content="LAMP LAMP stands for Linux, Apache, Mysql, Php
+Scenario &gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter. They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task: a. Install httpd, php and its dependencies on all app hosts. b. Apache should serve on port 6200 within the apps. c. Install/Configure MariaDB server on DB Server. d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. Further make sure this newly created user is able to perform all operation on the database you created. e. Finally you should be able to access the website on LBR link,by clicking on the App button on the top bar. You should see a message like App is able to connect to the database using user kodekloud_top solution considering that I am working on CentOs, all commands will apply ot all RHEL flavours
+" />
+<meta property="og:url" content="http://localhost:1313/posts/building-a-lamp/" />
+<meta property="og:site_name" content="Terminal" />
+
+  
+  
+  <meta property="og:image" content="http://localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-10-14 12:42:47 &#43;0300 EAT" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Alex Nduta
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/articles">Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase">CV</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/articles" >Articles</a></li>
+        
+      
+        
+          <li><a href="/showcase" >CV</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/building-a-lamp/">Building A LAMP</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-10-14</time><span class="post-author">Alex Kinyanjui</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="http://localhost:1313/tags/lamp/">LAMP</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/linux/">Linux</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/apache/">Apache</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/#devops/">#DevOps</a>&nbsp;
+      
+      #<a href="http://localhost:1313/tags/#sysadmin/">#SysAdmin</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="lamp">LAMP<a href="#lamp" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<p>LAMP stands for Linux, Apache, Mysql, Php</p>
+<h1 id="scenario">Scenario<a href="#scenario" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<pre><code>&gt;X-FusionCorp Industries is planning to host a WordPress website on their infra in Stratos Datacenter.
+They have already done infrastructure configuration—for example, 
+on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. 
+Please perform the following steps to accomplish the task:
+
+
+
+a. Install httpd, php and its dependencies on all app hosts.
+
+
+b. Apache should serve on port 6200 within the apps.
+
+
+c. Install/Configure MariaDB server on DB Server.
+
+
+d. Create a database named kodekloud_db5 and create a database user named kodekloud_top identified as password YchZHRcLkL. 
+Further make sure this newly created user is able to perform all operation on the database you created.
+
+
+e. Finally you should be able to access the website on LBR link,by clicking on the App button on the top bar. 
+You should see a message like App is able to connect to the database using user kodekloud_top
+</code></pre>
+<h2 id="solution">solution<a href="#solution" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><em>considering that I am working on CentOs, all commands will apply ot all RHEL flavours</em></p>
+<ol>
+<li>install http and mysql in all the servers</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> $ sudo dnf install httpd php php-mysqlnd -y
+</span></span></code></pre></div><ol start="2">
+<li>change the listening port to 6200 as speciifed</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># /etc/http/conf/httpd.conf</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># change the line</span>
+</span></span><span style="display:flex;"><span>Listen <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># to </span>
+</span></span><span style="display:flex;"><span>Listen <span style="color:#ae81ff">6200</span>
+</span></span></code></pre></div><ol start="3">
+<li>Restart the httpd server</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ systemctl restart http
+</span></span><span style="display:flex;"><span>$ sysstemctl enable htttpd
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># confirm which port the httpd server is listening on</span>
+</span></span><span style="display:flex;"><span>$ sudo ss -tunlp | grep -i httpd
+</span></span></code></pre></div><ol start="3">
+<li>install <code>mariadb</code> in the DB Server</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ sudo dnf install mariadb-sever
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># restart the server and make it persistent over reboots</span>
+</span></span><span style="display:flex;"><span>$ systemctl restart mariadb-server
+</span></span><span style="display:flex;"><span>$ systemctl enable mariadb-server
+</span></span></code></pre></div><ol start="4">
+<li>Create mysql database specified and the user and grant the user all the privileges of our table</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ mysql
+</span></span><span style="display:flex;"><span>$ CREATE DATABASE kodekloud_db5;
+</span></span><span style="display:flex;"><span>$ CREATE USER <span style="color:#e6db74">&#39;kodekloud_top&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;YchZHRcLkL&#39;</span>;
+</span></span><span style="display:flex;"><span>$ GRANT AL PRIVILEGES ON kodekloud_db5.* TO kodekloud_top;
+</span></span><span style="display:flex;"><span>$ FLUSH PRIVILEGES;
+</span></span><span style="display:flex;"><span>$ EXIT;
+</span></span></code></pre></div><p>5 Setup a loadbalancer to distribute traffic all through our three servers</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ sudo dnf install haproxy
+</span></span><span style="display:flex;"><span>$ systemctl restart haproxy
+</span></span><span style="display:flex;"><span>$ systemctl enable haproxy
+</span></span></code></pre></div><ol start="6">
+<li>setup the config file of the haproxy</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cfg" data-lang="cfg"><span style="display:flex;"><span><span style="color:#75715e"># /etc/haproxy/haproxy.cfg</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">global</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">maxconn 4096</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">pidfile /var/run/haproxy.pid</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">defaults</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mode http</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">retries 3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">option redispatch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">maxconn 2000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">timeout connect 5000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">timeout check 5000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">timeout client 30000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">timeout server 30000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">frontend myAppFrontEnd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">bind *:${BIND_PORT}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">use_backend webservers</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">backend webservers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">balance roundrobin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">server web1 ${WEB_APP1}:${WEB_APP1_PORT} check</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">server web2 ${WEB_APP2}:${WEB_APP2_PORT} check</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">server web3 ${WEB_APP3}:${WEB_APP3_PORT} check</span>
+</span></span></code></pre></div><p>Using the URL of the loadbalancer, we will be able to get contents of each web-server</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h"></span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+    
+    
+      <a href="http://localhost:1313/posts/install-and-configure-a-web-application/" class="button inline next">
+        Install and configure a web application(Apache)
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

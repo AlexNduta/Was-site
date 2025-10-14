@@ -13,10 +13,12 @@
       <pubDate>Wed, 03 Sep 2025 12:42:47 +0300</pubDate>
       
       <guid>http://localhost:1313/posts/how-to-create-a-kubenetes-cluster/</guid>
-      <description>&lt;ul&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh&#34;&gt;setup script&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
+&lt;ul&gt;
 &lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;h2 id=&#34;control-plane&#34;&gt;Control plane&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The control plane contains the following:
@@ -29,7 +31,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;h3 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
 &lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
@@ -38,13 +40,15 @@
 &lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;h2 id=&#34;the-setup&#34;&gt;The setup&lt;/h2&gt;
 &lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
 the main intention is to create a kubentes cluster&lt;/p&gt;</description>
-      <content>&lt;ul&gt;
+      <content>&lt;p&gt;&lt;a href=&#34;https://github.com/AlexNduta/HomeLab/blob/main/setupscript.sh&#34;&gt;setup script&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;how--to-create-a-3-node-kubernetes-cluster-using-kubeadm&#34;&gt;How  to create a 3-node kubernetes cluster using kubeadm&lt;/h1&gt;
+&lt;ul&gt;
 &lt;li&gt;In kubernetes, a cluster is basicaly a collection of nodes. We majorly have a &lt;code&gt;Control plane&lt;/code&gt; that does all the administrative operations and the &lt;code&gt;Nodes&lt;/code&gt; whichs are responsible for housing the &lt;code&gt;pods&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;control-plane&#34;&gt;Control plane&lt;/h1&gt;
+&lt;h2 id=&#34;control-plane&#34;&gt;Control plane&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the brains of the whole sytem, processes instrictions and sends them to the nodes via the &lt;code&gt;kubelet&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The control plane contains the following:
@@ -57,7 +61,7 @@ the main intention is to create a kubentes cluster&lt;/p&gt;</description>
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h2&gt;
+&lt;h3 id=&#34;apiserver&#34;&gt;Apiserver&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;This is the tool that receives requests from users and redirects it to different components within the controlplane&lt;/li&gt;
 &lt;li&gt;It acts as a gateway to the outside world and receives requests from the user using the &lt;code&gt;kubectl&lt;/code&gt; client&lt;/li&gt;
@@ -66,10 +70,10 @@ the main intention is to create a kubentes cluster&lt;/p&gt;</description>
 &lt;li&gt;It keeps regular watch for any instructions coming from the apiserver which is sent as a &lt;code&gt;podspec&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The kubelet checks the podspec to see if the pods are in the described state, if not so, it communictaes with the &lt;code&gt;container runtime&lt;/code&gt; to crate pods so as to meet the desired state.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;the-setup&#34;&gt;The setup&lt;/h1&gt;
+&lt;h2 id=&#34;the-setup&#34;&gt;The setup&lt;/h2&gt;
 &lt;p&gt;This is a basic setup running on a proxmox server. I have three VMs &lt;code&gt;control&lt;/code&gt;, &lt;code&gt;Node0&lt;/code&gt; and &lt;code&gt;Node1&lt;/code&gt;
 the main intention is to create a kubentes cluster&lt;/p&gt;
-&lt;h1 id=&#34;the-process&#34;&gt;The process&lt;/h1&gt;
+&lt;h2 id=&#34;the-process&#34;&gt;The process&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;There are four phases to this process:
 &lt;ul&gt;

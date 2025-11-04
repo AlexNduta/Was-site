@@ -14,7 +14,7 @@ Experience spans infrastructure automation, SRE practices, backend development, 
 ## Professional Experience
 ## Network Security Engineer / Lead Infrastructure Engineer
 **St Christopher's International School** | *Oct 2024 - Present*
-*Promoted from Systems Administrator to lead infrastructure engineering*
+*Promoted from Systems Administrator to lead infrastructure engineer*
 
 -  Automated security patching with Terraform and Ansible—cut manual work by 80%.
 - Deployed and managed on-premise Intrusion Detection System (Snort) for proactive
@@ -88,6 +88,12 @@ by 50%
 - **Traffic Analysis and Optimization**
 - **Odoo Development**: Custom module development, Python/Odoo framework, multi-tenant SaaS
 # Projects
+
+## [Twender Deoployment](https://alex.hostnoma.one/posts/twender-deploy/)
+*stack*: Kubernetes, Docker, Linux
+### [Twender](https://alex.hostnoma.one/posts/twender/)
+- A matatu hailing application that goes beyond the hailing to automate a regular tout activity
+*stack*: Django, Postgress
 ### [Odoo-project setup script](https://github.com/AlexNduta/Odoo-Setup/blob/main/README.md)
 *Technologies* : Docker, Odoo, Python, Bash, Postgres
 ### [Dev-Ops Playground](https://github.com/AlexNduta/DevOps-playground)

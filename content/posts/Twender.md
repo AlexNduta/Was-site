@@ -1,8 +1,11 @@
 
 # Twender
-    - [presentation](https://docs.google.com/presentation/d/1W8wUs0bUqKhZYc2ARwsxevkH3hzyMRJ93z3C47h44b4/edit?usp=sharing)
 
-    - [source code](https://github.com/AlexNduta/Twender)
+{{< youtube Vx3OBWs-2gY>}}
+
+- [presentation](https://docs.google.com/presentation/d/1W8wUs0bUqKhZYc2ARwsxevkH3hzyMRJ93z3C47h44b4/edit?usp=sharing)
+
+- [source code](https://github.com/AlexNduta/Twender)
 - A Django REST framework API designed to act as a virtual matatu(public transport system) conductor by managing payments and passenger trips.
 - The application features role-based access for passengers and condutors
 

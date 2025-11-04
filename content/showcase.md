@@ -8,15 +8,15 @@
 - [*Blog*](https://alexnduta.netlify.app/)
 
 ## Professional Summary
-Highly motivated IT security professional with 3+ years of combined experience in IT operations and
-cybersecurity, specializing in implementing and maintaining robust security controls, vulnerability
-management, and system hardening. Proven track record in deploying and managing security
-technologies while ensuring compliance with industry standards and best practices.
+DevOps and Systems Engineer with 3+ years building and securing infrastructure in production. 
+I automate everything I can, design systems that stay up, and bridge the gap between development and operations. 
+Experience spans infrastructure automation, SRE practices, backend development, and Odoo ERP implementation.
 ## Professional Experience
 ## Network Security Engineer / Lead Infrastructure Engineer
 **St Christopher's International School** | *Oct 2024 - Present*
-- Automated security patches and updates using Terraform and Ansible, improving efficiency and
-consistency by 80%.
+*Promoted from Systems Administrator to lead infrastructure engineering*
+
+-  Automated security patching with Terraform and Ansible—cut manual work by 80%.
 - Deployed and managed on-premise Intrusion Detection System (Snort) for proactive
 threat detection
 -  Led infrastructure security initiatives and incident response protocols
@@ -24,26 +24,27 @@ threat detection
 - Collaborated with cross-functional teams to enhance overall security posture.
 ## Network Support / Systems Administrator
 **St Christopher's International School** | *Feb 2022 - Sept 2024*
--  Led implementation of Proxmox-based private cloud infrastructure(PC hosted)[blog](https://alexnduta.netlify.app/)
--  Reduced network issue resolution time by 80% through Nagios monitoring
-implementation
--  Automated routine tasks using Bash and Python scripts, improving operational efficiency
--  Successfully migrated 700 users to Windows Server domain environment
+- Built private cloud infrastructure on Proxmox (bare metal, self-hosted).
+- Reduced network incident response time by 80% with Nagios monitoring
+- Migrated 700 users to Windows Server domain with zero downtime
+- Automated operational tasks with Python and Bash—eliminated hours of toil.
+-  Successfully migrated 700 users to Windows Server domain environment 
 - Deployed self-hosted ticketing system, reducing resolution time by 15%
 -  Architected and deployed RAG LLM system for staff onboarding, reducing process time
 by 50%
 
 ## Odoo ERP SaaS Provider/Freelance Odoo Developer
 **HostNoma (Freelance/Self-Employed)** | *Jan 2024 -persent*
-- *SaaS Provisioning*:
-    Developed and managed a cloud-based Odoo ERP SaaS platform, providing businesses with accessible and scalable ERP solutions. Implemented and maintained secure and         reliable Odoo hosting environments, ensuring optimal performance and uptime. Managed customer Odoo instances, including upgrades and maintenance. 
-- *Implementation & Setup*:
-      Conducted thorough business analysis to understand client requirements and tailored Odoo configurations accordingly.Successfully implemented and configured Odoo modules       for various industries, including POS, Inverntory, HR, Manufacturing and Accounting.Migrated data from legacy systems to Odoo, ensuring data integrity and accuracy.
+- **SaaS & Infrastructure:**
+        - Built and operate cloud-based Odoo SaaS platform—manage deployments, updates, and uptime
+        - Automated provisioning and deployments with Docker and Kubernetes
+        - Manage multi-tenant infrastructure with focus on performance and cost optimization
 
-- *Custom Module Development*:
-        Designed and developed custom Odoo modules to meet specific client needs, enhancing functionality and automating processes.
-        Utilized Python and Odoo framework to create efficient and scalable custom solutions.
-        Maintained and updated custom modules, ensuring compatibility with new Odoo versions.
+- **Development & Implementation:**
+        - Developed custom Odoo modules (Python/Odoo framework) for POS, Inventory, HR, Manufacturing, Accounting
+        - Migrated data from legacy systems—ensured integrity and minimal downtime
+        - Conducted business analysis and configured Odoo for client-specific workflows
+
 
 - *Training & Support*:
         Provided comprehensive Odoo training to end-users, empowering them to effectively utilize the system.
@@ -51,10 +52,9 @@ by 50%
         Created and maintained documentation for Odoo configurations and custom modules.
 
 - *DevOps*:
-        Implemented DevOps practices to automate deployments, testing, and monitoring of Odoo instances.
-        Utilized containerization and orchestration tools (e.g., Docker, Kubernetes) to ensure consistent and scalable deployments.
-        Managed server infrastructure and cloud resources, optimizing performance and cost-effectiveness.
-
+        - Implemented CI/CD pipelines for testing and deploying Odoo instances
+        - Containerized deployments for consistency across environments
+        - Managed cloud infrastructure (AWS, GCP) and optimized resource usage
 - *Business Development*:
         Acquired and managed client relationships, understanding their needs and creating solutions.
         Developed and maintained the HostNoma brand and online presence.
@@ -63,6 +63,7 @@ by 50%
 **Mentor Me Collective** | *Oct 2024 - Present*
 - Led team of mentors in developing cyber security training materials
 - Provided guidance on cloud platforms (AWS, GCP) and security best practices
+
 # Technical Skills
 ## Infrastructure & Cloud
 - **Cloud Platforms**: `AWS`, `GCP`, `Proxmox`
@@ -70,10 +71,10 @@ by 50%
 - **Infrastructure Management**: `Type 1 hypervisors`, `Linux administration`
 ## DevOps & Automation
 
-- **Version Control**: `Git`, `GitHub`, `GitLab`
+- **Version Control**: `Git`, `GitHub`,
 - **CI/CD**: `GitHub Actions`, `Jenkins`
-- **Configuration Management*:* `Ansible`, `Puppet`, `Terraform`
-- **Scripting**: `Python`, `Bash`, `Powershell`
+- **Configuration Management**: `Ansible`, `Puppet`, `Terraform`
+- **Languages and Scripting**: `Python`, `Bash`, `Powershell`
 ## Monitoring & Security*
 - **Network Monitoring**: `Nagios`, `Wireshark`
 - **Security Tools**: `Snort`, `Suricata`, `Kismet`
@@ -85,7 +86,7 @@ by 50%
 - **Networking**: `DNS`, `DHCP`, `Routing/Switching`, `VLANs`, `Software Defined Networking`
 - **VPN Configuration and Management**
 - **Traffic Analysis and Optimization**
-
+- **Odoo Development**: Custom module development, Python/Odoo framework, multi-tenant SaaS
 # Projects
 ### [Odoo-project setup script](https://github.com/AlexNduta/Odoo-Setup/blob/main/README.md)
 *Technologies* : Docker, Odoo, Python, Bash, Postgres
@@ -100,7 +101,8 @@ Built API for expense tracking and budget management
 Developed web scraping API for price comparison
 *Technologies*: `Python(Flask), MySQL, Redis, Beautiful Soup, GCP`
 # Certifications
-- **AWS Certified Cloud Practitioner (CLF-201)** 
+- **Kubernetes Cloud Native Associate(KCNA)**
+- **AWS Certified Cloud Practitioner (CLF-201)**
 - **Google Certified Cyber Security professional**
 - **API Design - API Academy (Broadcom)**
 - **Cisco Certified Network Associate (CCNA)**
